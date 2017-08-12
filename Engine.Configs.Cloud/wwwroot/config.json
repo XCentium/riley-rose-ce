@@ -1,0 +1,39 @@
+﻿{
+  "AppSettings": {
+    "SiteTitle": "PlaceholderForSiteTitle",
+    "BootStrapFile": "Global",
+    "DeploymentId": "PlaceholderForDeploymentId",
+    "EnvironmentName": "PlaceholderForEnvironmentName",
+    "EncryptionProtectionType": "Machine",
+    "EncryptionCertificateHash": "Enter a valid certificate thumbprint for a PXF file. X-509 not supported yet",
+    "EncryptionSID": "Enter a valid SID for a domain registered user",
+    "EncryptionKeyStorageLocation": ""
+  },
+  "ApplicationInsights": {
+    "InstrumentationKey": "PlaceholderForApplicationInsightsKey",
+    "MinimumLevel": "Information"
+  },
+  "Logging": {
+    "IncludeScopes": false,
+    "LogLevel": {
+      "Default": "Information",
+      "System": "Warning",
+      "Microsoft": "Warning"
+    },
+    "ApplicationInsightsLoggingEnabled": true,
+    "SerilogLoggingEnabled": true
+  },
+  "Serilog": {
+    "MinimumLevel": "Information"
+  },
+  "Certificates": {
+    "Certificates": [
+      {
+        "Subject": "PlaceholderForCertificateSubject",
+        "IssuerCN": "PlaceholderForCertificateIssuer",
+        "Thumbprint": "PlaceholderForCertificateThumbprint"
+      }
+    ],
+    "ValidationEnabled": false 
+  } 
+}

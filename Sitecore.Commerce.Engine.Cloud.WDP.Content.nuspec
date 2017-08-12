@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Sitecore.Commerce.Engine.Cloud.WDP.Content</id>
+    <version>0.0.0</version>
+    <title>Sitecore Commerce Engine Cloud Web Deploy Package</title>
+    <authors>Sitecore</authors>
+    <owners>Sitecore</owners>
+    <projectUrl>http://www.sitecore.net</projectUrl>
+    <copyright></copyright>
+    <releaseNotes></releaseNotes>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Sitecore Commerce Engine Dotnet Publish zip WDP package for cloud deployments</description>
+    <summary>Sitecore Commerce Engine Dotnet Publish zip WDP package for cloud deployments</summary>
+    <language>en-US</language>
+    <tags>Sitecore Commerce Engine Cloud scwdp WDP Zip</tags>
+  </metadata>
+  <files>
+    <file src="..\CommerceEngine\artifacts\scwdp\Sitecore.Commerce.Engine.Cloud*.zip" target="content" />
+  </files>
+</package>

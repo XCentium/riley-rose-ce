@@ -1,0 +1,53 @@
+{
+	"id": "952d8702-f898-5f20-661e-fe2ea483c0f9",
+	"name": "ShopsAPISamples",
+	"description": "",
+	"order": [],
+	"folders": [
+		{
+			"id": "802e72e5-8ae3-6e03-f558-aab1dfa19dd5",
+			"name": "API",
+			"description": "",
+			"order": [
+				"df93aa5a-3339-0a01-63fc-fb1888065ba3",
+				"b4ba5f0b-a6b7-caa3-3cf7-9d585d442580"
+			],
+			"owner": "195787"
+		}
+	],
+	"timestamp": 1479825762246,
+	"owner": "195787",
+	"public": false,
+	"requests": [
+		{
+			"id": "b4ba5f0b-a6b7-caa3-3cf7-9d585d442580",
+			"name": "Get Shops",
+			"collectionId": "952d8702-f898-5f20-661e-fe2ea483c0f9",
+			"method": "GET",
+			"headers": "Content-Type: application/json\nShopName: {{ShopName}}\nShopperId: {{ShopperId}}\nLanguage: {{Language}}\nCurrency: {{Currency}}\nEnvironment: {{Environment}}\nGeoLocation: {{GeoLocation}}\nCustomerId: {{CustomerId}}\nRoles: {{Roles}}",
+			"dataMode": "params",
+			"data": [],
+			"rawModeData": "",
+			"url": "http://{{ServiceHost}}/{{ShopsApi}}/Shops",
+			"responses": [],
+			"folder": "802e72e5-8ae3-6e03-f558-aab1dfa19dd5",
+			"preRequestScript": "",
+			"tests": ""
+		},
+		{
+			"id": "df93aa5a-3339-0a01-63fc-fb1888065ba3",
+			"name": "Get Shop {{ShopName}}",
+			"collectionId": "952d8702-f898-5f20-661e-fe2ea483c0f9",
+			"method": "GET",
+			"headers": "Content-Type: application/json\nShopName: {{ShopName}}\nShopperId: {{ShopperId}}\nLanguage: {{Language}}\nCurrency: {{Currency}}\nEnvironment: {{Environment}}\nGeoLocation: {{GeoLocation}}\nCustomerId: {{CustomerId}}\nRoles: {{Roles}}",
+			"dataMode": "params",
+			"data": [],
+			"rawModeData": "",
+			"url": "http://{{ServiceHost}}/{{ShopsApi}}/Shops('{{ShopName}}')?$expand=Components",
+			"responses": [],
+			"folder": "802e72e5-8ae3-6e03-f558-aab1dfa19dd5",
+			"preRequestScript": "",
+			"tests": ""
+		}
+	]
+}

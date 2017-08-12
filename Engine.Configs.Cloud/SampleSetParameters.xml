@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<parameters>
+<setParameter name="IIS Web Application Name" value="Sitecore.Commerce.CommerceEngine" /> 
+  <setParameter name="Application Pool" value="DefaultAppPool" />
+  <setParameter name="Commerce Server Connection String" value="BTH1" />
+  <setParameter name="siteName" value="BTH2" />
+  <setParameter name="Commerce Server Connection String in ExeConfig" value="BTH3" />
+  <setParameter name="SiteTitle" value="BTH4" />
+  <setParameter name="DeploymentId" value="BTH5" />
+  <setParameter name="EnvironmentName" value="BTH6" />
+  <setParameter name="ApplicationInsightsKey" value="BTH7" />
+  <setParameter name="CertificateSubject" value="BTH8" />
+  <setParameter name="CertificateIssuer" value="BTH9" />
+  <setParameter name="CertificateThumbprint" value="BTH10" />
+
+  <setParameter name="GlobalDatabaseName" value="BTH11" />
+  <setParameter name="GlobalDatabaseUserName" value="BTH12" />
+  <setParameter name="GlobalDatabasePassword" value="BTH13" />
+  <setParameter name="GlobalDatabaseServer" value="BTH14" />
+  
+  <setParameter name="ProfilesDatabaseName" value="BTH15" />
+  <setParameter name="ProfilesDatabaseUserName" value="BTH16" />
+  <setParameter name="ProfilesDatabasePassword" value="BTH17" />
+  <setParameter name="ProfilesDatabaseServer" value="BTH18" />
+  <setParameter name="SharedDatabaseName" value="BTH19" />
+  <setParameter name="SharedDatabaseUserName" value="BTH20" />
+  <setParameter name="SharedDatabasePassword" value="BTH21" />
+  <setParameter name="SharedDatabaseServer" value="BTH22" />
+  <setParameter name="CatalogDatabaseName" value="BTH23" />
+  <setParameter name="CatalogDatabaseUserName" value="BTH24" />
+  <setParameter name="CatalogDatabasePassword" value="BTH25" />
+  <setParameter name="CatalogDatabaseServer" value="BTH26" />
+  
+  <!-- Braintree -->
+  <setParameter name="BraintreeMerchantId" value="BTH27" />
+  <setParameter name="BraintreePublicKey" value="BTH28" />
+  <setParameter name="BraintreePrivateKey" value="BTH29" />
+  <setParameter name="BraintreeEnvironment" value="BTH30" />
+  <setParameter name="ProfilePublicKey" value="BTH31" />
+  <setParameter name="ProfilePrivateKey" value="BTH32" />
+  <setParameter name="CommerceSiteName" value="BTH33" />
+  <setParameter name="SitecoreHost" value="BTH34" />
+  <setParameter name="SitecoreUsername" value="BTH35" />
+  <setParameter name="SitecoreDomain" value="BTH36" />
+  <setParameter name="SitecorePassword" value="BTH37" />
+</parameters>

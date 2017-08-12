@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
+  <assemblyIdentity version="1.0.0.0" name="Sitecore.Commerce.Assemblies.Common.app"/>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="stdretcomp" version="1.0.0.0" type="win32" publicKeyToken="f5c79cb11734af7a"></assemblyIdentity>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="MSCSAspHelp" version="1.0.0.0" type="win32" publicKeyToken="f5c79cb11734af7a"></assemblyIdentity>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="CommerceServer.Core.Configuration" type="MSIL" version="10.0.0.0" publicKeyToken="f5c79cb11734af7a" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="CommerceServer.Core.Interop" type="MSIL" version="10.0.0.0" publicKeyToken="f5c79cb11734af7a" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="MscsCore" version="1.0.0.0" type="win32" publicKeyToken="f5c79cb11734af7a"></assemblyIdentity>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="mscsadmin" version="1.0.0.0" type="win32" publicKeyToken="f5c79cb11734af7a"></assemblyIdentity>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="mscsups" version="1.0.0.0" type="win32" publicKeyToken="f5c79cb11734af7a" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="mscsresource" version="1.0.0.0" type="win32" publicKeyToken="f5c79cb11734af7a" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="CommerceServer.Core.Internal.ContentListHelper" type="MSIL" version="10.0.0.0" publicKeyToken="f5c79cb11734af7a" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="CommerceServer.Core.Runtime" version="10.0.0.0" type="MSIL" publicKeyToken="f5c79cb11734af7a"></assemblyIdentity>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="CommerceServer.Core.Shared" version="10.0.0.0" type="MSIL" publicKeyToken="f5c79cb11734af7a"></assemblyIdentity>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ExprArch" version="1.0.0.0" type="win32" publicKeyToken="f5c79cb11734af7a"></assemblyIdentity>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="mscscache" version="1.0.0.0" type="win32" publicKeyToken="f5c79cb11734af7a"></assemblyIdentity>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="CSFComp" version="1.0.0.0" type="win32" publicKeyToken="f5c79cb11734af7a"></assemblyIdentity>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="pipeline" version="1.0.0.0" type="win32" publicKeyToken="f5c79cb11734af7a"></assemblyIdentity>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="pipecompps" version="1.0.0.0" type="win32" publicKeyToken="f5c79cb11734af7a"></assemblyIdentity>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="cslkrhash" version="1.0.0.0" type="win32" publicKeyToken="f5c79cb11734af7a" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="csrockall" version="1.0.0.0" type="win32" publicKeyToken="f5c79cb11734af7a" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="CSOLEDBProvider" version="1.0.0.0" type="win32" publicKeyToken="f5c79cb11734af7a"></assemblyIdentity>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="csperfcounters" version="1.0.0.0" type="win32" publicKeyToken="f5c79cb11734af7a"></assemblyIdentity>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="dsdb3" version="1.0.0.0" type="win32" publicKeyToken="f5c79cb11734af7a" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="activedslib" version="10.0.0.0" type="MSIL" publicKeyToken="f5c79cb11734af7a"></assemblyIdentity>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="csdwctlg" version="1.0.0.0" type="win32" publicKeyToken="f5c79cb11734af7a" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="csdwsrvrdll" version="1.0.0.0" type="win32" publicKeyToken="f5c79cb11734af7a" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="AspIntrinsics" version="10.0.0.0" type="MSIL" publicKeyToken="f5c79cb11734af7a"></assemblyIdentity>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="CommerceServer.Core.CatalogServer" version="10.0.0.0" type="MSIL" publicKeyToken="f5c79cb11734af7a"></assemblyIdentity>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="CommerceServer.Core.Profiles.CrossTier" version="10.0.0.0" type="MSIL" publicKeyToken="f5c79cb11734af7a"></assemblyIdentity>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="CommerceServer.Core.Profiles" version="10.0.0.0" type="MSIL" publicKeyToken="f5c79cb11734af7a"></assemblyIdentity>
+    </dependentAssembly>
+  </dependency>
+</assembly>

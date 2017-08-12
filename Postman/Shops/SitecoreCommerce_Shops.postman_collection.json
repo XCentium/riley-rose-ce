@@ -1,0 +1,135 @@
+{
+	"id": "e0f59f90-edc5-f168-3dd1-b4922280e7f0",
+	"name": "SitecoreCommerce_Shops",
+	"description": "",
+	"order": [],
+	"folders": [
+		{
+			"id": "25040672-d9c7-ce44-e25d-be47edf5cf68",
+			"name": "Caching",
+			"description": "",
+			"order": [
+				"18719636-adca-7a1e-cfb8-fa5f9f761b25"
+			],
+			"owner": "195787"
+		},
+		{
+			"id": "3826ae7d-20f4-dff1-b730-c0dbb95cadf5",
+			"name": "Environments",
+			"description": "",
+			"order": [
+				"6c429a5d-aecc-e32f-3b9a-2b5d4b0454ae"
+			],
+			"owner": "195787"
+		},
+		{
+			"id": "2e5be5f9-c9e5-d10a-03ba-c135d0fa13c0",
+			"name": "Policies",
+			"description": "",
+			"order": [
+				"842e1762-6334-5d42-70a8-aa85aa67c507",
+				"f5b12cb3-b531-3310-75c0-338fef1c7d4b",
+				"98be9df5-ac78-e8b5-4039-80abb99bd69e"
+			],
+			"owner": "195787"
+		}
+	],
+	"timestamp": 1485189424227,
+	"owner": "195787",
+	"public": false,
+	"requests": [
+		{
+			"id": "18719636-adca-7a1e-cfb8-fa5f9f761b25",
+			"headers": "Content-Type: application/json\nShopName: {{ShopName}}\nEnvironment: {{Environment}}\nRoles: {{Roles}}\n",
+			"url": "http://{{ServiceHost}}/{{ShopsApi}}/ClearEnvironmentCache()",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "PUT",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1489071804104,
+			"name": "Clear environment cache",
+			"description": "",
+			"collectionId": "e0f59f90-edc5-f168-3dd1-b4922280e7f0",
+			"responses": [],
+			"rawModeData": "{\n  \"environmentName\": \"\"\n}\n"
+		},
+		{
+			"id": "6c429a5d-aecc-e32f-3b9a-2b5d4b0454ae",
+			"headers": "Content-Type: application/json\nShopName: {{ShopName}}\nEnvironment: {{Environment}}\n",
+			"url": "http://{{ServiceHost}}/{{ShopsApi}}/GetEnvironmentArtifactStoreId()",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1485440495648,
+			"name": "Get Environment ArtifactStoreId",
+			"description": "",
+			"collectionId": "e0f59f90-edc5-f168-3dd1-b4922280e7f0",
+			"responses": [],
+			"folder": "3826ae7d-20f4-dff1-b730-c0dbb95cadf5"
+		},
+		{
+			"id": "842e1762-6334-5d42-70a8-aa85aa67c507",
+			"headers": "Content-Type: application/json\nRoles: {{Roles}}\nEnvironment: {{Environment}}\nShopName: {{ShopName}}\n",
+			"url": "http://{{OpsApiHost}}/{{ShopsApi}}/PolicySets('GlobalCartPolicies')",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1489071765460,
+			"name": "Get Policy Set",
+			"collectionId": "e0f59f90-edc5-f168-3dd1-b4922280e7f0",
+			"responses": []
+		},
+		{
+			"id": "98be9df5-ac78-e8b5-4039-80abb99bd69e",
+			"headers": "Content-Type: application/json\nRoles: {{Roles}}\nShopName: {{ShopName}}\nEnvironment: {{Environment}}\n",
+			"url": "http://{{OpsApiHost}}/{{ShopsApi}}/RemovePolicy()",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "PUT",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1489156777422,
+			"name": "Remove policy",
+			"description": "",
+			"collectionId": "e0f59f90-edc5-f168-3dd1-b4922280e7f0",
+			"responses": [],
+			"rawModeData": "{\n    \"policyType\": \"Sitecore.Commerce.Plugin.Preorderable.GlobalPreorderablePolicy, Sitecore.Commerce.Plugin.Preorderable\",\n    \"entityId\": \"Entity-PolicySet-GlobalCartPolicies\",\n    \"policyId\": \"2bf7a46e853243aeb06124c7851de158\"\n}\n"
+		},
+		{
+			"id": "f5b12cb3-b531-3310-75c0-338fef1c7d4b",
+			"headers": "Content-Type: application/json\nRoles: {{Roles}}\nShopName: {{ShopName}}\nEnvironment: {{Environment}}\n",
+			"url": "http://{{OpsApiHost}}/{{ShopsApi}}/AddPolicy()",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "PUT",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1489156739352,
+			"name": "Add policy",
+			"description": "",
+			"collectionId": "e0f59f90-edc5-f168-3dd1-b4922280e7f0",
+			"responses": [],
+			"rawModeData": "{\n    \"policy\": {\n    \t\"PolicyId\": \"2bf7a46e853243aeb06124c7851de158\",\n    \t\"PreorderableAvailabilityExpires\": 8\n    },\n    \"policyType\": \"Sitecore.Commerce.Plugin.Preorderable.GlobalPreorderablePolicy, Sitecore.Commerce.Plugin.Preorderable\",\n    \"entityId\": \"Entity-PolicySet-GlobalCartPolicies\"\n}\n"
+		}
+	]
+}
