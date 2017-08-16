@@ -5,11 +5,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Sitecore.Commerce.Engine", "Sitecore.Commerce.Engine\Sitecore.Commerce.Engine.xproj", "{3E68F9A9-396C-487C-BEB9-C24E47721E2F}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Sitecore.Commerce.Plugin.AdventureWorks", "Sitecore.Commerce.Plugin.AdventureWorks\Sitecore.Commerce.Plugin.AdventureWorks.xproj", "{45E1A5F7-861D-4929-A4C4-E3FD9D898F23}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Plugin.Sample.Payments.Braintree", "PluginSamples\Plugin.Sample.Payments.Braintree\Plugin.Sample.Payments.Braintree.xproj", "{0296F347-F76D-4A81-9FB1-AE9CA0F0C064}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Plugin.Sample.Habitat", "PluginSamples\Plugin.Sample.Habitat\Plugin.Sample.Habitat.xproj", "{72203E4B-DA74-405C-9D33-193B38A0AA33}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Plugin.Xcentium.RileyRose", "Plugin.Xcentium.RileyRose\Plugin.Xcentium.RileyRose.xproj", "{72203E4B-DA74-405C-9D33-193B38A0AA33}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,12 +17,6 @@ Global
 		{3E68F9A9-396C-487C-BEB9-C24E47721E2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E68F9A9-396C-487C-BEB9-C24E47721E2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E68F9A9-396C-487C-BEB9-C24E47721E2F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{45E1A5F7-861D-4929-A4C4-E3FD9D898F23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{45E1A5F7-861D-4929-A4C4-E3FD9D898F23}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{45E1A5F7-861D-4929-A4C4-E3FD9D898F23}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0296F347-F76D-4A81-9FB1-AE9CA0F0C064}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0296F347-F76D-4A81-9FB1-AE9CA0F0C064}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0296F347-F76D-4A81-9FB1-AE9CA0F0C064}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72203E4B-DA74-405C-9D33-193B38A0AA33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{72203E4B-DA74-405C-9D33-193B38A0AA33}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72203E4B-DA74-405C-9D33-193B38A0AA33}.Release|Any CPU.ActiveCfg = Release|Any CPU
