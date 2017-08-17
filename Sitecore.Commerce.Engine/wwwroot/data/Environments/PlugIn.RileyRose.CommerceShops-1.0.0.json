@@ -70,14 +70,14 @@
         "UserTypePath": "/sitecore/Commerce/Commerce Control Panel/Commerce Engine Settings/Commerce Terms/CS User Site Terms/User Type",
         "AllLanguagesPath": "/sitecore/Commerce/Commerce Control Panel/Shared Settings/Language Sets/All Languages"
       },
-      {
-        "$type": "Plugin.Sample.Payments.Braintree.BraintreeClientPolicy, Plugin.Sample.Payments.Braintree",
-        "Environment": "sandbox",
-        "MerchantId": 0,
-        "PublicKey": 0,
-        "PrivateKey": 0,
-        "ConnectTimeout": 120000
-      },
+      //{
+      //  "$type": "Plugin.Sample.Payments.Braintree.BraintreeClientPolicy, Plugin.Sample.Payments.Braintree",
+      //  "Environment": "sandbox",
+      //  "MerchantId": 0,
+      //  "PublicKey": 0,
+      //  "PrivateKey": 0,
+      //  "ConnectTimeout": 120000
+      //},
       {
         "$type": "Sitecore.Commerce.EntityViews.ActionsRolesPolicy, Sitecore.Commerce.Plugin.Views",
         "Roles": {
