@@ -1,0 +1,1 @@
+C:\Windows\system32\inetsrv\appcmd.exe stop apppool /CommerceAuthoring
