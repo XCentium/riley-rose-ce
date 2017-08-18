@@ -1,1 +1,1 @@
-C:\Windows\system32\inetsrv\appcmd.exe stop apppool /CommerceAuthoring
+C:\Windows\system32\inetsrv\appcmd.exe stop apppool /apppool.name:CommerceAuthoring
