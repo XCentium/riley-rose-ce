@@ -1,4 +1,4 @@
-﻿{
+{
   "version": "1.2.159",
   "description": "The Forever-21 Riley Rose Plugin.",
   "copyright": "Â© 2017 XCentium.",
@@ -40,7 +40,8 @@
     "Sitecore.Commerce.Plugin.Returns": "1.2.159",
     "Sitecore.Commerce.Plugin.Shops": "1.2.159",
     "Sitecore.Commerce.Plugin.SQL": "1.2.159",
-    "Sitecore.Commerce.Plugin.Tax": "1.2.159"
+    "Sitecore.Commerce.Plugin.Tax": "1.2.159",
+    "OctoPack": "3.6.1"
   },
   "frameworks": {
     "net461": {
