@@ -1,0 +1,58 @@
+﻿{
+  "version": "1.0.2301",
+  "description": "Xcentium Riley Rose Tax Plugin.",
+  "copyright": "Â 2017 Xcentium. All rights reserved.",
+  "authors": [
+    "Xcentium"
+  ],
+  "packOptions": {
+    "summary": "This package contains the Tax plugin for the Avalara API.",
+    "tags": [
+      "Sitecore",
+      "Commerce",
+      "Plugin",
+      "Tax",
+      "RileyRose"
+    ],
+    "owners": [
+      "Xcentium"
+    ],
+    "releaseNotes": "release notes",
+    "iconUrl": "http://www.xcentium.com/favicon.ico",
+    "projectUrl": "http://www.xcentium.com/contact",
+    "licenseUrl": "http://www.xcentium.com/company"
+  },
+  "dependencies": {
+    "Sitecore.Commerce.Plugin.Fulfillment": "1.2.159",
+    "Sitecore.Commerce.Plugin.Management": "1.2.159",
+    "Sitecore.Commerce.Plugin.Tax": "1.2.159"
+  },
+  "frameworks": {
+    "net461": {
+      "frameworkAssemblies": {
+        "System.Data": "4.0.0.0",
+        "System.ServiceModel": "4.0.0.0",
+        "System.Web.Services": "4.0.0.0",
+        "System.Xml": "4.0.0",
+        "System.Runtime.Serialization": "4.0.0"
+      }
+
+
+    }
+  },
+  "configurations": {
+    "Release": {
+      "buildOptions": {
+        "compile": "../../build/VersionInfo.cs",
+        "xmlDoc": true,
+        "warningsAsErrors": true,
+        "optimize": true
+      }
+    },
+    "Debug": {
+      "buildOptions": {
+        "warningsAsErrors": true
+      }
+    }
+  }
+}
