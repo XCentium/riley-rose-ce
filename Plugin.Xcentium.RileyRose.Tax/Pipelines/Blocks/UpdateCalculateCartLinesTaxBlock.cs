@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using Sitecore.Commerce.Core;
 using Sitecore.Commerce.Plugin.Carts;
 using Sitecore.Commerce.Plugin.Fulfillment;
@@ -51,7 +47,6 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
                 return await Task.FromResult(arg);
             }
 
-            var language = context.CommerceContext.CurrentLanguage();
             var currencyCode = context.CommerceContext.CurrentCurrency();
             var globalTaxPolicy = context.GetPolicy<GlobalTaxPolicy>();
             var defaultItemTaxRate = globalTaxPolicy.DefaultCartTaxRate;
@@ -139,8 +134,6 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
                     //Date
                     var taxDate = DateTime.Now;
 
-
-
                     //Items
                     var reqLineItems = new LineItemISIType[2];
 
@@ -210,23 +203,24 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
                     envelope.Login = login;
                     envelope.Item = reqInvoice;
 
-                    var resInvoice = new InvoiceResponseType();
 
-                    using (CalculateTaxWS60Client client = new CalculateTaxWS60Client())
+
+                    using (var client = new CalculateTaxWS60Client())
                     {
                         client.calculateTax60(ref envelope);
-
-                        resInvoice = envelope.Item as InvoiceResponseType;
-
+                        
+                        var resInvoice = envelope.Item as InvoiceResponseType;
 
                         if (resInvoice != null) taxRate = resInvoice.TotalTax.Value;
 
                         context.Logger.LogDebug($"{(object) this.Name} - Vertex Item Tax Rate:{(object) taxRate}", Array.Empty<object>());
 
+                        resInvoice = null;
+
                         client.Close();
                     }
 
-                    reqLineItems = null; envelope = null; reqInvoice = null; resInvoice = null; customerCode = null; seller = null; sellerLocation = null; buyerLocation = null; login = null; customer = null; currency = null;
+                    reqLineItems = null; envelope = null; reqInvoice = null;  customerCode = null; seller = null; sellerLocation = null; buyerLocation = null; login = null; customer = null; currency = null;
 
                 }
 

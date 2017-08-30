@@ -41,7 +41,7 @@
     "Sitecore.Commerce.Plugin.Shops": "1.2.159",
     "Sitecore.Commerce.Plugin.SQL": "1.2.159",
     "Sitecore.Commerce.Plugin.Tax": "1.2.159",
-    "OctoPack": "3.6.1"
+  //  "OctoPack": "3.6.1"
   },
   "frameworks": {
     "net461": {
