@@ -56,7 +56,7 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
 
             context.Logger.LogDebug($"{(object) this.Name} - Policy:{(object) globalTaxPolicy.TaxCalculationEnabled}", Array.Empty<object>());
             context.Logger.LogDebug($"{(object) this.Name} - Item Tax Rate:{(object) defaultItemTaxRate}", Array.Empty<object>());
-            foreach (CartLineComponent cartLineComponent in list)
+            foreach (var cartLineComponent in list)
             {
                 if (globalTaxPolicy.TaxExemptTagsEnabled && cartLineComponent.HasComponent<CartProductComponent>())
                 {
