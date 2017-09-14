@@ -109,7 +109,6 @@ namespace Plugin.Xcentium.RileyRose
             await this.CreateCartFreeShippingPromotion(book, context);
             await this.CreateCartExclusive5PctOffCouponPromotion(book, context);
             await this.CreateCartExclusive5OffCouponPromotion(book, context);
-            await this.CreateCartExclusiveOptixCameraPromotion(book, context);
             await this.CreateCart15PctOffCouponPromotion(book, context);
             await this.CreateDisabledPromotion(book, context);
 
@@ -118,9 +117,6 @@ namespace Plugin.Xcentium.RileyRose
             System.Threading.Thread.Sleep(1); //// TO ENSURE CREATING DATE IS DIFFERENT BETWEEN THESE TWO PROMOTIONS
             await this.CreateCart10OffCouponPromotion(book, context, date);
 
-            await this.CreateLineTouchScreenPromotion(book, context);
-            await this.CreateLineTouchScreen5OffPromotion(book, context);
-            await this.CreateLineExclusiveMiraLaptopPromotion(book, context);
             await this.CreateLineExclusive20PctOffCouponPromotion(book, context);
             await this.CreateLineExclusive20OffCouponPromotion(book, context);
             await this.CreateLine5PctOffCouponPromotion(book, context);
@@ -305,49 +301,6 @@ namespace Plugin.Xcentium.RileyRose
                     context);
 
             promotion = await this._addPublicCouponPipeline.Run(new AddPublicCouponArgument(promotion, "HABRTRNEC5A"), context);
-            promotion.SetComponent(new ApprovalComponent(context.GetPolicy<ApprovalStatusPolicy>().Approved));
-            await this._persistEntityPipeline.Run(new PersistEntityArgument(promotion), context);
-        }
-
-        /// <summary>
-        /// Creates cart exclusive optix camera promotion.
-        /// </summary>
-        /// <param name="book">The book.</param>
-        /// <param name="context">The context.</param>
-        /// <returns>A <see cref="Task"/></returns>
-        private async Task CreateCartExclusiveOptixCameraPromotion(PromotionBook book, CommercePipelineExecutionContext context)
-        {
-            var promotion =
-             await this._addPromotionPipeline.Run(
-                 new AddPromotionArgument(book, "CartOptixCameraExclusivePromotion", DateTimeOffset.UtcNow.AddDays(-4), DateTimeOffset.UtcNow.AddYears(1), "Optix Camera 50% Off Cart (Exclusive)", "Optix Camera 50% Off Cart (Exclusive)")
-                 {
-                     IsExclusive = true,
-                     DisplayName = "Optix Camera 50% Off Cart (Exclusive)",
-                     Description = "50% off Cart when buying Optix Camera (Exclusive)"
-                 },
-                 context);
-
-            promotion = await this._addPromotionItemPipeline.Run(
-                   new PromotionItemArgument(
-                       promotion,
-                      "RileyRose_Master|7042071|"),
-                   context);
-
-            await this._addBenefitPipeline.Run(
-                   new PromotionActionModelArgument(
-                       promotion,
-                       new ActionModel
-                       {
-                           Id = Guid.NewGuid().ToString(),
-                           LibraryId = CartsConstants.Actions.CartSubtotalPercentOffAction,
-                           Name = CartsConstants.Actions.CartSubtotalPercentOffAction,
-                           Properties = new List<PropertyModel>
-                                            {
-                                                  new PropertyModel { Name = "PercentOff", Value = "50", IsOperator = false, DisplayType = "System.Decimal" }
-                                            }
-                       }),
-                   context);
-
             promotion.SetComponent(new ApprovalComponent(context.GetPolicy<ApprovalStatusPolicy>().Approved));
             await this._persistEntityPipeline.Run(new PersistEntityArgument(promotion), context);
         }
@@ -582,135 +535,6 @@ namespace Plugin.Xcentium.RileyRose
 
         #region Line Promotions
 
-        /// <summary>
-        /// Creates line Touch Screen promotion.
-        /// </summary>
-        /// <param name="book">The book.</param>
-        /// <param name="context">The context.</param>
-        /// <returns>A <see cref="Task"/></returns>
-        private async Task CreateLineTouchScreenPromotion(PromotionBook book, CommercePipelineExecutionContext context)
-        {
-            var promotion =
-             await this._addPromotionPipeline.Run(
-                 new AddPromotionArgument(book, "LineRileyRose34withTouchScreenPromotion", DateTimeOffset.UtcNow.AddDays(-1), DateTimeOffset.UtcNow.AddYears(1), "RileyRose Touch Screen 50% Off", "RileyRose Touch Screen 50% Off")
-                 {
-                     DisplayName = "RileyRose Touch Screen 50% Off",
-                     Description = "50% off the RileyRose 34.0 Cubic Refrigerator with Touchscreen item"
-                 },
-                 context);
-
-            promotion = await this._addPromotionItemPipeline.Run(
-                   new PromotionItemArgument(
-                       promotion,
-                       "RileyRose_Master|6042588|"),
-                   context);
-
-            await this._addBenefitPipeline.Run(
-                   new PromotionActionModelArgument(
-                       promotion,
-                       new ActionModel
-                       {
-                           Id = Guid.NewGuid().ToString(),
-                           LibraryId = CartsConstants.Actions.CartItemSubtotalPercentOffAction,
-                           Name = CartsConstants.Actions.CartItemSubtotalPercentOffAction,
-                           Properties = new List<PropertyModel>
-                                            {
-                                                  new PropertyModel { Name = "PercentOff", Value = "50", IsOperator = false, DisplayType = "System.Decimal" },
-                                                  new PropertyModel { Name = "TargetItemId", Value = "RileyRose_Master|6042588|", IsOperator = false, DisplayType = "System.String" }
-                                            }
-                       }),
-                   context);
-
-            promotion.SetComponent(new ApprovalComponent(context.GetPolicy<ApprovalStatusPolicy>().Approved));
-            await this._persistEntityPipeline.Run(new PersistEntityArgument(promotion), context);
-        }
-
-        /// <summary>
-        /// Creates the line TOuch Screen 5 off promotion.
-        /// </summary>
-        /// <param name="book">The book.</param>
-        /// <param name="context">The context.</param>
-        /// <returns>A <see cref="Task"/></returns>
-        private async Task CreateLineTouchScreen5OffPromotion(PromotionBook book, CommercePipelineExecutionContext context)
-        {
-            var promotion =
-             await this._addPromotionPipeline.Run(
-                 new AddPromotionArgument(book, "LineRileyRose34withTouchScreen5OffPromotion", DateTimeOffset.UtcNow.AddDays(-2), DateTimeOffset.UtcNow.AddYears(1), "RileyRose Touch Screen $5 Off Item", "RileyRose Touch Screen $5 Off Item")
-                 {
-                     DisplayName = "RileyRose Touch Screen $5 Off",
-                     Description = "$5 off the RileyRose 34.0 Cubic Refrigerator with Touchscreen item"
-                 },
-                 context);
-
-            promotion = await this._addPromotionItemPipeline.Run(
-                   new PromotionItemArgument(
-                       promotion,
-                       "RileyRose_Master|6042588|"),
-                   context);
-
-            await this._addBenefitPipeline.Run(
-                   new PromotionActionModelArgument(
-                       promotion,
-                       new ActionModel
-                       {
-                           Id = Guid.NewGuid().ToString(),
-                           LibraryId = CartsConstants.Actions.CartItemSubtotalAmountOffAction,
-                           Name = CartsConstants.Actions.CartItemSubtotalAmountOffAction,
-                           Properties = new List<PropertyModel>
-                                            {
-                                                  new PropertyModel { Name = "AmountOff", Value = "5", IsOperator = false, DisplayType = "System.Decimal" },
-                                                  new PropertyModel { Name = "TargetItemId", Value = "RileyRose_Master|6042588|", IsOperator = false, DisplayType = "System.String" }
-                                            }
-                       }),
-                   context);
-
-            promotion.SetComponent(new ApprovalComponent(context.GetPolicy<ApprovalStatusPolicy>().Approved));
-            await this._persistEntityPipeline.Run(new PersistEntityArgument(promotion), context);
-        }
-
-        /// <summary>
-        /// Creates the line exclusive mira laptop promotion.
-        /// </summary>
-        /// <param name="book">The book.</param>
-        /// <param name="context">The context.</param>
-        /// <returns>A <see cref="Task"/></returns>
-        private async Task CreateLineExclusiveMiraLaptopPromotion(PromotionBook book, CommercePipelineExecutionContext context)
-        {
-            var promotion =
-             await this._addPromotionPipeline.Run(
-                 new AddPromotionArgument(book, "LineMiraLaptopExclusivePromotion", DateTimeOffset.UtcNow.AddDays(-2), DateTimeOffset.UtcNow.AddYears(1), "Mira Laptop 50% Off Item (Exclusive)", "Mira Laptop 50% Off Item (Exclusive)")
-                 {
-                     DisplayName = "Mira Laptop 50% Off Item (Exclusive)",
-                     Description = "50% off the Mira Laptop item (Exclusive)",
-                     IsExclusive = true
-                 },
-                 context);
-
-            promotion = await this._addPromotionItemPipeline.Run(
-                   new PromotionItemArgument(
-                       promotion,
-                       "RileyRose_Master|6042179|"),
-                   context);
-
-            await this._addBenefitPipeline.Run(
-                   new PromotionActionModelArgument(
-                       promotion,
-                       new ActionModel
-                       {
-                           Id = Guid.NewGuid().ToString(),
-                           LibraryId = CartsConstants.Actions.CartItemSubtotalPercentOffAction,
-                           Name = CartsConstants.Actions.CartItemSubtotalPercentOffAction,
-                           Properties = new List<PropertyModel>
-                                            {
-                                                  new PropertyModel { Name = "PercentOff", Value = "50", IsOperator = false, DisplayType = "System.Decimal" },
-                                                  new PropertyModel { Name = "TargetItemId", Value = "RileyRose_Master|6042179|", IsOperator = false, DisplayType = "System.String" }
-                                            }
-                       }),
-                   context);
-
-            promotion.SetComponent(new ApprovalComponent(context.GetPolicy<ApprovalStatusPolicy>().Approved));
-            await this._persistEntityPipeline.Run(new PersistEntityArgument(promotion), context);
-        }
 
         /// <summary>
         /// Creates line exclusive 20 percent off coupon promotion.
