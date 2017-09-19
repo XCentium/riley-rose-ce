@@ -13,7 +13,7 @@
         {
 
             /// <summary>
-            /// 
+            /// CartNullText
             /// </summary>
             public const string CartNullText = "The cart cannot be null.";
 
