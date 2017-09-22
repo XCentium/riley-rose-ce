@@ -22,15 +22,10 @@ namespace Plugin.Xcentium.RileyRose.Shipping
 
             /// <summary>
             /// 
-            /// </summary>
-            ///public const string ShippingChargePath = "/sitecore/Commerce/Commerce Control Panel/Shared Settings/Shipping Charge";
-            // public const string ShippingChargePath = "/sitecore/Commerce/Commerce Control Panel/Shared Settings/Shipping Options";
-            // public const string ShippingChargePath = "/sitecore/Commerce/Commerce Control Panel/Shared Settings/Shipping Options";
-            // /sitecore/Commerce/Commerce Control Panel/Shared Settings/Shipping Options/Standard Ground
-            // /sitecore/Commerce/Commerce Control Panel/Shared Settings/Shipping Options/Standard Ground/0
+            /// </summary> 
             public const string ShippingChargePath = "/sitecore/Commerce/Commerce Control Panel/Shared Settings/Shipping Options";
             public const string ShippingFolderItemId = "{0B05F214-3652-4D63-ABC8-40E59FE5330E}";
-
+            public const string IsHazardous = "IsHazardous";
 
             /// <summary>
             /// 

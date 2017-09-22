@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Plugin.Xcentium.RileyRose.Shipping.Components;
 
 namespace Plugin.Xcentium.RileyRose.Shipping.Util
 {

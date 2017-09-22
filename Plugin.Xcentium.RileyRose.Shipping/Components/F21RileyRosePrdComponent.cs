@@ -7,16 +7,15 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Plugin.Xcentium.RileyRose.Shipping
-{
-    using Sitecore.Commerce.Core;
+using Sitecore.Commerce.Core;
 
+namespace Plugin.Xcentium.RileyRose.Shipping.Components
+{
     /// <summary>
     /// The SampleComponent.
     /// </summary>
     public class F21RileyRosePrdComponent : Component
-    {
-
+    { 
         public bool IsHazardous { get; set; }
 
         /// <summary>

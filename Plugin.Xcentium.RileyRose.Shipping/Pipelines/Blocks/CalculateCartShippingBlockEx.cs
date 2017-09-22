@@ -1,6 +1,7 @@
-﻿
-
-using Microsoft.Extensions.Logging;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Plugin.Xcentium.RileyRose.Shipping.Models;
 using Plugin.Xcentium.RileyRose.Shipping.Util;
 using Sitecore.Commerce.Core;
@@ -11,27 +12,16 @@ using Sitecore.Commerce.Plugin.Management;
 using Sitecore.Commerce.Plugin.Pricing;
 using Sitecore.Framework.Conditions;
 using Sitecore.Framework.Pipelines;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Plugin.Xcentium.RileyRose.Shipping
+namespace Plugin.Xcentium.RileyRose.Shipping.Pipelines.Blocks
 {
-    [PipelineDisplayName("Fulfillment.block.CalculateCartShippingBlockEx")]
+    [PipelineDisplayName("Plugin.Xcentium.RileyRose.Shipping.Pipelines.Blocks.CalculateCartShippingBlockEx")]
     public class CalculateCartShippingBlockEx : PipelineBlock<Cart, Cart, CommercePipelineExecutionContext>
     {
         private readonly IGetSellableItemPipeline _getSellableItemPipeline;
         private readonly IGetItemByPathPipeline _getItemByPathPipeline;
         private readonly IGetItemChildrenPipeline _getItemChildrenByPathPipeline;
-
-        /*
-        public CalculateCartShippingBlockEx()
-          : base((string)null)
-        {
-
-        }
-        */
+ 
         public CalculateCartShippingBlockEx(IGetItemByPathPipeline getItemByPathPipeline, IGetItemChildrenPipeline getItemChildrenByPathPipeline,
           IGetSellableItemPipeline getSellableItemPipeline) : base(null)
         {
@@ -74,57 +64,7 @@ namespace Plugin.Xcentium.RileyRose.Shipping
 
             //Create new GlobalPhysicalFulfillment Policy
             GlobalPhysicalFulfillmentPolicy policy = context.GetPolicy<GlobalPhysicalFulfillmentPolicy>();
-
-
-            /*
-            //Get Default Fee Amount
-            Decimal amount = policy.DefaultCartFulfillmentFee.Amount;
-            if (policy.DefaultCartFulfillmentFees.Any<Money>((Func<Money, bool>)(p => p.CurrencyCode.Equals(currency, StringComparison.OrdinalIgnoreCase))))
-                amount = policy.DefaultCartFulfillmentFees.First<Money>((Func<Money, bool>)(p => p.CurrencyCode.Equals(currency, StringComparison.OrdinalIgnoreCase))).Amount;
-            context.Logger.LogDebug(string.Format("{0} - Default Fulfillment Fee:{1} {2}", (object)this.Name, (object)currency, (object)amount), Array.Empty<object>());
-
-            //Check for ElectronicFulfillment or SplitFulfillment
-            if (fulfillmentComponent is ElectronicFulfillmentComponent || fulfillmentComponent is SplitFulfillmentComponent)
-                return await Task.FromResult<Cart>(arg);
-
-            //Check for FulfilmentFees - return if exist
-            context.Logger.LogDebug(string.Format("{0} - Fulfillment Method:{1}", (object)this.Name, (object)fulfillmentComponent.FulfillmentMethod.Name), Array.Empty<object>());
-            if (policy.FulfillmentFees.Any<FulfillmentFee>((Func<FulfillmentFee, bool>)(p =>
-            {
-                if (p.Name.Equals(fulfillmentComponent.FulfillmentMethod.Name, StringComparison.OrdinalIgnoreCase))
-                    return p.Fee.CurrencyCode.Equals(context.CommerceContext.CurrentCurrency(), StringComparison.OrdinalIgnoreCase);
-                return false;
-            })))
-            {
-                amount = policy.FulfillmentFees.First<FulfillmentFee>((Func<FulfillmentFee, bool>)(p => p.Name.Equals(fulfillmentComponent.FulfillmentMethod.Name, StringComparison.OrdinalIgnoreCase))).Fee.Amount;
-                context.Logger.LogDebug(string.Format("{0} - Specific fee:{1}", (object)this.Name, (object)fulfillmentComponent.FulfillmentMethod.Name), Array.Empty<object>());
-            }
-
-            //Get the existing AwardedAdjustments
-            IList<AwardedAdjustment> adjustments = arg.Adjustments;
-
-            //Set the CartLevelAwardedAdjustments
-            CartLevelAwardedAdjustment awardedAdjustment = new CartLevelAwardedAdjustment();
-            string str1 = "FulfillmentFee";
-            awardedAdjustment.Name = str1;
-            string str2 = "FulfillmentFee";
-            awardedAdjustment.DisplayName = str2;
-            Money money = new Money(currency, amount);
-            awardedAdjustment.Adjustment = money;
-
-            //Set the Adjustment Fulfillment property
-            string fulfillment = context.GetPolicy<KnownCartAdjustmentTypesPolicy>().Fulfillment;
-            awardedAdjustment.AdjustmentType = fulfillment;
-            int num = 0;
-            awardedAdjustment.IsTaxable = num != 0;
-            string name = this.Name;
-
-            //Set the Adjustment AwardingBlock
-            awardedAdjustment.AwardingBlock = name;
-
-
-            */
-
+             
             //Set the CartLevelAwardedAdjustments
             CartLevelAwardedAdjustment awardedAdjustment = new CartLevelAwardedAdjustment();
 
@@ -135,11 +75,11 @@ namespace Plugin.Xcentium.RileyRose.Shipping
             var shippingOptions = await ShippingOptionsModel.GetData(_getItemByPathPipeline, _getItemChildrenByPathPipeline, context); 
 
             //Calculate Custom Shipping Charges
-            var ShippingAwardedAdjustment = ShippingCalculator.GetShippingAdjustment(arg, shippingOptions, context);
+            var shippingAwardedAdjustment = ShippingCalculator.GetShippingAdjustment(arg, shippingOptions, context);
 
             //Add All Adjustments to the Cart
             //adjustments.Add((AwardedAdjustment)awardedAdjustment);
-            adjustments.Add((AwardedAdjustment)ShippingAwardedAdjustment);
+            adjustments.Add((AwardedAdjustment)shippingAwardedAdjustment);
             return await Task.FromResult<Cart>(arg);
         }
     }

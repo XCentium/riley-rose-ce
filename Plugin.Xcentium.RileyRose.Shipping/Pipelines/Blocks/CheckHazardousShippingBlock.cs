@@ -11,8 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace Plugin.Xcentium.RileyRose.Shipping.Pipelines.Blocks
-{
-    // public class CheckHazardousShipping
+{ 
     [PipelineDisplayName("Plugin.Xcentium.RileyRose.Shipping.Pipelines.Blocks.CheckHazardousShipping")]
     public class CheckHazardousShippingBlock : PipelineBlock<Cart, Cart, CommercePipelineExecutionContext>
     {

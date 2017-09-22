@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Plugin.Xcentium.RileyRose.Shipping.Pipelines.Blocks
 {
 
-    [PipelineDisplayName("Carts.CalculateCartTotalsBlock")]
+    [PipelineDisplayName("Plugin.Xcentium.RileyRose.Shipping.Pipelines.Blocks.CalculateCartTotalsBlock")]
     public class CalculateCartTotalsBlockEx : PipelineBlock<Cart, Cart, CommercePipelineExecutionContext>
     {
         public CalculateCartTotalsBlockEx()

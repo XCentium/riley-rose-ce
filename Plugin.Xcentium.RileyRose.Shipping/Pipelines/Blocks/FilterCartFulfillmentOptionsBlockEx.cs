@@ -26,7 +26,7 @@ namespace Plugin.Xcentium.RileyRose.Shipping.Pipelines.Blocks
 {
     // public class FilterCartFulfillmentOptionsBlockEx
 
-    [PipelineDisplayName("Fulfillment.block.FilterCartFulfillmentOptionsBlockEx")]
+    [PipelineDisplayName("Plugin.Xcentium.RileyRose.Shipping.Pipelines.Blocks.FilterCartFulfillmentOptionsBlockEx")]
     public class FilterCartFulfillmentOptionsBlockEx : PipelineBlock<CartArgument, IEnumerable<FulfillmentOption>, CommercePipelineExecutionContext>
     {
         private readonly IGetFulfillmentOptionsPipeline _getOptions;

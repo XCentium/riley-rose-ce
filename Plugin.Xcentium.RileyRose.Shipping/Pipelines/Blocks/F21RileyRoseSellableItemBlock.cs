@@ -13,11 +13,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Plugin.Xcentium.RileyRose.Shipping.Components;
 
 namespace Plugin.Xcentium.RileyRose.Shipping.Pipelines.Blocks
 {
 
-    [PipelineDisplayName("SellableItemF21RileyRoseBlock")]
+    [PipelineDisplayName("Plugin.Xcentium.RileyRose.Shipping.Pipelines.Blocks.SellableItemF21RileyRoseBlock")]
     public class F21RileyRoseSellableItemBlock : PipelineBlock<SellableItem, SellableItem, CommercePipelineExecutionContext>
     {
         private readonly IGetSellableItemPipeline _getSellableItemPipeline;
@@ -47,24 +48,22 @@ namespace Plugin.Xcentium.RileyRose.Shipping.Pipelines.Blocks
                 var product = context.CommerceContext.GetObjects<Product>().FirstOrDefault(p => p.ProductId.Equals(sellableItem.FriendlyId, StringComparison.OrdinalIgnoreCase));
 
                 //new System.Linq.SystemCore_EnumerableDebugView(new System.Linq.SystemCore_EnumerableDebugView<CommerceServer.Core.Catalog.CatalogItemsDataSet.CatalogItem>(product.Information.CatalogItems).Items[0]._columns).Items[70]
-                var testVal = product["IsHazardous"];
+                var testVal = product[Constants.Shipping.IsHazardous];
 
-                if (product["IsHazardous"] == null)
+                if (product[Constants.Shipping.IsHazardous] == null)
                 {
                     sellableItem.GetComponent<F21RileyRosePrdComponent>().IsHazardous = false;
                     //var test2 = sellableItem.GetComponent<F21RileyRosePrdComponent>().IsHazardous;
                 }
                 else
                 {
-                    sellableItem.GetComponent<F21RileyRosePrdComponent>().IsHazardous = (bool)product["IsHazardous"];
-                }  
-                 
-                
-                return await Task.FromResult<SellableItem>(sellableItem); 
-
+                    sellableItem.GetComponent<F21RileyRosePrdComponent>().IsHazardous = (bool)product[Constants.Shipping.IsHazardous];
+                }   
+                return await Task.FromResult<SellableItem>(sellableItem);  
             }
             catch(Exception ex)
             {
+                //Todo: Logging
                 var myMessage = ex.Message;
                 return null;
             }

@@ -38,30 +38,11 @@ namespace Plugin.Xcentium.RileyRose.Shipping
             services.RegisterAllPipelineBlocks(assembly);
 
             services.Sitecore().Pipelines(config => config
-               /*
-                .ConfigurePipeline<ICalculateCartPipeline>(d =>
-               {
-                   d.Replace<CalculateCartFulfillmentBlock, CalculateCartFulfillmentBlockEx>();
-               })
-               */
+               
                 .ConfigurePipeline<IGetSellableItemPipeline>(d =>
                {
                    d.Add<F21RileyRoseSellableItemBlock>().After<TranslateProductBlock>();
-               })
-
-                /*
-                 .ConfigurePipeline<ISetCartFulfillmentPipeline>(d =>
-                {
-                    d.Add<F21RileyRoseSetCartFulfillmentBlock>().After<SetCartFulfillmentBlock>();
-                })
-
-                 .ConfigurePipeline<ICalculateCartPipeline>(d =>
-                {
-                    d.Add< CalculateCartShippingBlockEx>().After<CalculateCartFulfillmentBlock>();
-                })
-
-
-                */
+               }) 
                 .ConfigurePipeline<ISetCartFulfillmentPipeline>(d =>
                 {
                     d.Replace<SetCartFulfillmentBlock,F21RileyRoseSetCartFulfillmentBlock>() ;
@@ -91,11 +72,7 @@ namespace Plugin.Xcentium.RileyRose.Shipping
                {
                    d.Replace<FilterCartFulfillmentOptionsBlock,FilterCartFulfillmentOptionsBlockEx>();
                })
-
-                .ConfigurePipeline<IGetFulfillmentOptionsPipeline>(d =>
-               {
-                   //d.Replace<BasePipelineBlockRunner, BasePipelineBlockRunnerEx>();
-               })
+                
 
                );
 
