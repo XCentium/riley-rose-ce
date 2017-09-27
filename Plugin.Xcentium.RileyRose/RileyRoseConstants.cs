@@ -12,6 +12,22 @@ namespace Plugin.Xcentium.RileyRose
     public static class RileyRoseConstants
     {
         /// <summary>
+        /// 
+        /// </summary>
+        public struct Field
+        {
+            /// <summary>
+            /// 
+            /// </summary>
+            public const string BasePrice = "Sale Price";
+
+            /// <summary>
+            /// 
+            /// </summary>
+            public const string ListPrice = "ListPrice";
+        }
+
+        /// <summary>
         /// The name of the RileyRose pipelines.
         /// </summary>
         public static class Pipelines
@@ -41,6 +57,8 @@ namespace Plugin.Xcentium.RileyRose
                 /// </summary>
                 public const string InitializeEnvironmentEnsureCatalogBlock = "RileyRose.block.InitializeEnvironmentEnsureCatalog";
             }
+
+
         }
     }
 }

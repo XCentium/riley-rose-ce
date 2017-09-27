@@ -4,6 +4,8 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using Plugin.Xcentium.RileyRose.Pipelines.Blocks;
+
 namespace Plugin.Xcentium.RileyRose
 {
     using Microsoft.Extensions.DependencyInjection;
@@ -55,8 +57,17 @@ namespace Plugin.Xcentium.RileyRose
                     .Add<CalculateCartTaxBlock>()
                     .Add<CalculateCartTotalsBlock>()
                     .Add<CalculateCartPaymentsBlock>())
-                    
+
+                .ConfigurePipeline<ICalculateSellableItemSellPricePipeline>(builder => builder
+                        .Add<SetSalesPriceBlock>().After<CalculateSellableItemSellPriceBlock>()
+                )
+
+                .ConfigurePipeline<ICalculateVariationsSellPricePipeline>(builder => builder
+                    .Add<SetVariantSalePriceBlock>().After<CalculateVariationsSellPriceBlock>())
+
+
               .ConfigurePipeline<IAddPaymentsPipeline>(builder => builder.Add<ValidateCartHasFulfillmentBlock>().After<ValidateCartAndPaymentsBlock>()));
+
 
             return services;
         }

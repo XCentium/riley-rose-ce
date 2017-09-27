@@ -203,6 +203,9 @@ namespace F21Vertax.VertexO {
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         /// <summary>
@@ -7734,8 +7737,15 @@ namespace F21Vertax.VertexO {
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -7809,9 +7819,15 @@ namespace F21Vertax.VertexO {
                 this.RaisePropertyChanged("EndTimeSpecified");
             }
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -7870,8 +7886,15 @@ namespace F21Vertax.VertexO {
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -8715,8 +8738,15 @@ namespace F21Vertax.VertexO {
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -9378,8 +9408,15 @@ namespace F21Vertax.VertexO {
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -9517,8 +9554,15 @@ namespace F21Vertax.VertexO {
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -9563,8 +9607,15 @@ namespace F21Vertax.VertexO {
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -9651,8 +9702,15 @@ namespace F21Vertax.VertexO {
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -9697,8 +9755,15 @@ namespace F21Vertax.VertexO {
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -9813,8 +9878,15 @@ namespace F21Vertax.VertexO {
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -9873,8 +9945,15 @@ namespace F21Vertax.VertexO {
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -10799,8 +10878,15 @@ namespace F21Vertax.VertexO {
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -11420,8 +11506,15 @@ namespace F21Vertax.VertexO {
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -12223,8 +12316,15 @@ namespace F21Vertax.VertexO {
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -12970,8 +13070,15 @@ namespace F21Vertax.VertexO {
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -12999,8 +13106,15 @@ namespace F21Vertax.VertexO {
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:vertexinc:o-series:tps:6:0")]
     public partial class TaxTransactionResponseType : object, System.ComponentModel.INotifyPropertyChanged {
         
+        /// <summary>
+        /// 
+        /// </summary>
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -13079,6 +13193,9 @@ namespace F21Vertax.VertexO {
         
         private bool postToJournalField;
         
+        /// <summary>
+        /// 
+        /// </summary>
         public AccrualResponseType() {
             this.postToJournalField = true;
         }
@@ -13507,8 +13624,15 @@ namespace F21Vertax.VertexO {
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -13967,47 +14091,88 @@ namespace F21Vertax.VertexO {
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:vertexinc:o-series:tps:6:0")]
     public partial class BuyerInputTaxResponseType : TaxTransactionResponseType {
-        
+        /// <summary>
+        /// 
+        /// </summary>
         private CurrencyType currencyField;
-        
+        /// <summary>
+        /// 
+        /// </summary>
         private CurrencyType originalCurrencyField;
-        
+        /// <summary>
+        /// 
+        /// </summary>        
         private BuyerType buyerField;
-        
+        /// <summary>
+        /// 
+        /// </summary>        
         private VendorType vendorField;
-        
+        /// <summary>
+        /// 
+        /// </summary>        
         private LineItemBITOType[] lineItemField;
-        
+        /// <summary>
+        /// 
+        /// </summary>      
         private string documentNumberField;
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         private System.DateTime postingDateField;
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         private bool postingDateFieldSpecified;
-        
+        /// <summary>
+        /// 
+        /// </summary>        
         private string locationCodeField;
-        
+        /// <summary>
+        /// 
+        /// </summary>        
         private bool returnAssistedParametersIndicatorField;
-        
+        /// <summary>
+        /// 
+        /// </summary>        
         private bool returnAssistedParametersIndicatorFieldSpecified;
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         private bool returnGeneratedLineItemsIndicatorField;
-        
+        /// <summary>
+        /// 
+        /// </summary>        
         private bool returnGeneratedLineItemsIndicatorFieldSpecified;
         
         private DeliveryTermCodeType deliveryTermField;
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         private bool deliveryTermFieldSpecified;
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         private System.DateTime documentDateField;
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         private string transactionIdField;
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         private System.DateTime recoverableDateField;
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         private bool recoverableDateFieldSpecified;
-        
+        /// <summary>
+        /// 
+        /// </summary>        
         private bool postToJournalField;
         
+        /// <summary>
+        /// 
+        /// </summary>
         public BuyerInputTaxResponseType() {
             this.postToJournalField = true;
         }
@@ -14718,7 +14883,9 @@ namespace F21Vertax.VertexO {
         private System.DateTime recoverableDateField;
         
         private bool recoverableDateFieldSpecified;
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         public AssetMovementResponseType() {
             this.postToJournalField = true;
         }
@@ -15134,7 +15301,9 @@ namespace F21Vertax.VertexO {
         private bool calculateSelfAccrualIndicatorFieldSpecified;
         
         private bool postToJournalField;
-        
+        /// <summary>
+        /// 
+        /// </summary>        
         public ERSResponseType() {
             this.postToJournalField = true;
         }
@@ -16357,9 +16526,13 @@ namespace F21Vertax.VertexO {
                 this.RaisePropertyChanged("chainTransactionPhaseSpecified");
             }
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -16441,7 +16614,9 @@ namespace F21Vertax.VertexO {
         private bool isTaxOnlyAdjustmentIndicatorField;
         
         private bool isTaxOnlyAdjustmentIndicatorFieldSpecified;
-        
+        /// <summary>
+        /// 
+        /// </summary>        
         public DistributeTaxProcurementResponseType() {
             this.postToJournalField = true;
         }
@@ -17706,9 +17881,13 @@ namespace F21Vertax.VertexO {
                 this.RaisePropertyChanged("chainTransactionPhaseSpecified");
             }
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+        /// <summary>
+        /// 
+        /// </summary>        
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -17794,7 +17973,9 @@ namespace F21Vertax.VertexO {
         private bool recoverableDateFieldSpecified;
         
         private bool postToJournalField;
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         public InvoiceVerificationResponseType() {
             this.postToJournalField = true;
         }
@@ -19097,9 +19278,13 @@ namespace F21Vertax.VertexO {
                 this.RaisePropertyChanged("chainTransactionPhaseSpecified");
             }
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+        /// <summary>
+        /// 
+        /// </summary>      
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -19163,7 +19348,9 @@ namespace F21Vertax.VertexO {
         private string transactionIdField;
         
         private bool postToJournalField;
-        
+        /// <summary>
+        /// 
+        /// </summary>        
         public InventoryRemovalResponseType() {
             this.postToJournalField = true;
         }
@@ -20096,9 +20283,13 @@ namespace F21Vertax.VertexO {
                 this.RaisePropertyChanged("lineItemId");
             }
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -21300,9 +21491,13 @@ namespace F21Vertax.VertexO {
                 this.RaisePropertyChanged("chainTransactionPhaseSpecified");
             }
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -21380,7 +21575,9 @@ namespace F21Vertax.VertexO {
         private bool isTaxOnlyAdjustmentIndicatorFieldSpecified;
         
         private bool postToJournalField;
-        
+        /// <summary>
+        /// 
+        /// </summary>        
         public DistributeTaxResponseType() {
             this.postToJournalField = true;
         }
@@ -22565,9 +22762,13 @@ namespace F21Vertax.VertexO {
                 this.RaisePropertyChanged("chainTransactionPhaseSpecified");
             }
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -23368,9 +23569,13 @@ namespace F21Vertax.VertexO {
                 this.RaisePropertyChanged("syncTypeSpecified");
             }
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+        /// <summary>
+        /// 
+        /// </summary>      
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -24257,9 +24462,13 @@ namespace F21Vertax.VertexO {
                 this.RaisePropertyChanged("syncTypeSpecified");
             }
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -24282,9 +24491,13 @@ namespace F21Vertax.VertexO {
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:vertexinc:o-series:tps:6:0")]
     public partial class TaxSynchronizationResponseType : object, System.ComponentModel.INotifyPropertyChanged {
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -26651,9 +26864,13 @@ namespace F21Vertax.VertexO {
                 this.RaisePropertyChanged("syncTypeSpecified");
             }
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+        /// <summary>
+        /// 
+        /// </summary>      
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -27485,9 +27702,13 @@ namespace F21Vertax.VertexO {
                 this.RaisePropertyChanged("syncType");
             }
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -28329,9 +28550,13 @@ namespace F21Vertax.VertexO {
                 this.RaisePropertyChanged("syncType");
             }
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -28354,9 +28579,13 @@ namespace F21Vertax.VertexO {
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:vertexinc:o-series:tps:6:0")]
     public partial class TaxSynchronizationRequestType : object, System.ComponentModel.INotifyPropertyChanged {
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+        /// <summary>
+        /// 
+        /// </summary>      
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -30447,9 +30676,13 @@ namespace F21Vertax.VertexO {
                 this.RaisePropertyChanged("syncType");
             }
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -30553,9 +30786,13 @@ namespace F21Vertax.VertexO {
                 this.RaisePropertyChanged("lookupId");
             }
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -30669,9 +30906,13 @@ namespace F21Vertax.VertexO {
                 this.RaisePropertyChanged("confidenceIndicator");
             }
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -30715,9 +30956,13 @@ namespace F21Vertax.VertexO {
                 this.RaisePropertyChanged("Value");
             }
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+        /// <summary>
+        /// 
+        /// </summary>        
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -30795,9 +31040,13 @@ namespace F21Vertax.VertexO {
                 this.RaisePropertyChanged("RootCause");
             }
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -30817,9 +31066,13 @@ namespace F21Vertax.VertexO {
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:vertexinc:o-series:tps:6:0")]
     public partial class TaxgisResponseType : object, System.ComponentModel.INotifyPropertyChanged {
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+        /// <summary>
+        /// 
+        /// </summary>        
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -30860,7 +31113,9 @@ namespace F21Vertax.VertexO {
     public partial class IsTaxAreaChangedResponseType : TaxgisResponseType {
         
         private bool isChangedField;
-        
+        /// <summary>
+        /// 
+        /// </summary>        
         public IsTaxAreaChangedResponseType() {
             this.isChangedField = false;
         }
@@ -30973,9 +31228,13 @@ namespace F21Vertax.VertexO {
                 this.RaisePropertyChanged("EndDateSpecified");
             }
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -30995,9 +31254,13 @@ namespace F21Vertax.VertexO {
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:vertexinc:o-series:tps:6:0")]
     public partial class TaxgisRequestType : object, System.ComponentModel.INotifyPropertyChanged {
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -31172,9 +31435,13 @@ namespace F21Vertax.VertexO {
                 this.RaisePropertyChanged("lookupId");
             }
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -31218,9 +31485,13 @@ namespace F21Vertax.VertexO {
                 this.RaisePropertyChanged("Country");
             }
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -32043,9 +32314,13 @@ namespace F21Vertax.VertexO {
                 this.RaisePropertyChanged("chainTransactionPhaseSpecified");
             }
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -32901,9 +33176,13 @@ namespace F21Vertax.VertexO {
                 this.RaisePropertyChanged("chainTransactionPhaseSpecified");
             }
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+        /// <summary>
+        /// 
+        /// </summary>      
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -33717,9 +33996,13 @@ namespace F21Vertax.VertexO {
                 this.RaisePropertyChanged("chainTransactionPhaseSpecified");
             }
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -34323,9 +34606,13 @@ namespace F21Vertax.VertexO {
                 this.RaisePropertyChanged("lineItemId");
             }
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+        /// <summary>
+        /// 
+        /// </summary>      
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -35111,9 +35398,13 @@ namespace F21Vertax.VertexO {
                 this.RaisePropertyChanged("chainTransactionPhaseSpecified");
             }
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -35213,9 +35504,13 @@ namespace F21Vertax.VertexO {
                 this.RaisePropertyChanged("className");
             }
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+        /// <summary>
+        /// 
+        /// </summary>      
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -36057,9 +36352,13 @@ namespace F21Vertax.VertexO {
                 this.RaisePropertyChanged("chainTransactionPhaseSpecified");
             }
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -36086,9 +36385,13 @@ namespace F21Vertax.VertexO {
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:vertexinc:o-series:tps:6:0")]
     public partial class TaxTransactionRequestType : object, System.ComponentModel.INotifyPropertyChanged {
-        
+        /// <summary>
+        /// 
+        /// </summary>        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+        /// <summary>
+        /// 
+        /// </summary>        
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -36160,7 +36463,9 @@ namespace F21Vertax.VertexO {
         private bool recoverableDateFieldSpecified;
         
         private bool postToJournalField;
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         public AccrualRequestType() {
             this.postToJournalField = true;
         }
@@ -36951,7 +37256,9 @@ namespace F21Vertax.VertexO {
         private bool recoverableDateFieldSpecified;
         
         private bool postToJournalField;
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         public BuyerInputTaxRequestType() {
             this.postToJournalField = true;
         }
@@ -37623,7 +37930,9 @@ namespace F21Vertax.VertexO {
         private System.DateTime recoverableDateField;
         
         private bool recoverableDateFieldSpecified;
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         public AssetMovementRequestType() {
             this.postToJournalField = true;
         }
@@ -38004,7 +38313,9 @@ namespace F21Vertax.VertexO {
         private bool calculateSelfAccrualIndicatorFieldSpecified;
         
         private bool postToJournalField;
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         public ERSRequestType() {
             this.postToJournalField = true;
         }
@@ -38426,7 +38737,9 @@ namespace F21Vertax.VertexO {
         private bool isTaxOnlyAdjustmentIndicatorField;
         
         private bool isTaxOnlyAdjustmentIndicatorFieldSpecified;
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         public DistributeTaxProcurementRequestType() {
             this.postToJournalField = true;
         }
@@ -38856,7 +39169,9 @@ namespace F21Vertax.VertexO {
         private bool recoverableDateFieldSpecified;
         
         private bool postToJournalField;
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         public InvoiceVerificationRequestType() {
             this.postToJournalField = true;
         }
@@ -39248,7 +39563,9 @@ namespace F21Vertax.VertexO {
         private string transactionIdField;
         
         private bool postToJournalField;
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         public InventoryRemovalRequestType() {
             this.postToJournalField = true;
         }
@@ -39929,7 +40246,9 @@ namespace F21Vertax.VertexO {
         private bool isTaxOnlyAdjustmentIndicatorFieldSpecified;
         
         private bool postToJournalField;
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         public DistributeTaxRequestType() {
             this.postToJournalField = true;
         }
@@ -40349,9 +40668,13 @@ namespace F21Vertax.VertexO {
                 this.RaisePropertyChanged("ResponseTimeMSSpecified");
             }
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -40409,9 +40732,14 @@ namespace F21Vertax.VertexO {
                 this.RaisePropertyChanged("returnLogEntriesSpecified");
             }
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -40455,9 +40783,14 @@ namespace F21Vertax.VertexO {
                 this.RaisePropertyChanged("Value");
             }
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>       
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
         protected void RaisePropertyChanged(string propertyName) {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
@@ -40466,63 +40799,103 @@ namespace F21Vertax.VertexO {
         }
     }
     
+    /// <summary>
+    /// 
+    /// </summary>
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class calculateTaxRequest {
-        
+        /// <summary>
+        /// 
+        /// </summary>
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:vertexinc:o-series:tps:6:0", Order=0)]
         public F21Vertax.VertexO.VertexEnvelope VertexEnvelope;
-        
+        /// <summary>
+        /// 
+        /// </summary>        
         public calculateTaxRequest() {
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="VertexEnvelope"></param>
         public calculateTaxRequest(F21Vertax.VertexO.VertexEnvelope VertexEnvelope) {
             this.VertexEnvelope = VertexEnvelope;
         }
     }
-    
+    /// <summary>
+    /// 
+    /// </summary>
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class calculateTaxResponse {
-        
+        /// <summary>
+        /// 
+        /// </summary>
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:vertexinc:o-series:tps:6:0", Order=0)]
         public F21Vertax.VertexO.VertexEnvelope VertexEnvelope;
-        
+        /// <summary>
+        /// 
+        /// </summary>
         public calculateTaxResponse() {
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="VertexEnvelope"></param>
         public calculateTaxResponse(F21Vertax.VertexO.VertexEnvelope VertexEnvelope) {
             this.VertexEnvelope = VertexEnvelope;
         }
     }
-    
+    /// <summary>
+    /// 
+    /// </summary>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface CalculateTaxWS60Channel : F21Vertax.VertexO.CalculateTaxWS60, System.ServiceModel.IClientChannel {
     }
-    
+    /// <summary>
+    /// 
+    /// </summary>
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class CalculateTaxWS60Client : System.ServiceModel.ClientBase<F21Vertax.VertexO.CalculateTaxWS60>, F21Vertax.VertexO.CalculateTaxWS60 {
-        
+        /// <summary>
+        /// 
+        /// </summary>
         public CalculateTaxWS60Client() {
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="endpointConfigurationName"></param>
         public CalculateTaxWS60Client(string endpointConfigurationName) : 
                 base(endpointConfigurationName) {
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="endpointConfigurationName"></param>
+        /// <param name="remoteAddress"></param>
         public CalculateTaxWS60Client(string endpointConfigurationName, string remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="endpointConfigurationName"></param>
+        /// <param name="remoteAddress"></param>
         public CalculateTaxWS60Client(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="binding"></param>
+        /// <param name="remoteAddress"></param>
         public CalculateTaxWS60Client(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
@@ -40531,7 +40904,10 @@ namespace F21Vertax.VertexO {
         F21Vertax.VertexO.calculateTaxResponse F21Vertax.VertexO.CalculateTaxWS60.calculateTax60(F21Vertax.VertexO.calculateTaxRequest request) {
             return base.Channel.calculateTax60(request);
         }
-        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="VertexEnvelope"></param>
         public void calculateTax60(ref F21Vertax.VertexO.VertexEnvelope VertexEnvelope) {
             F21Vertax.VertexO.calculateTaxRequest inValue = new F21Vertax.VertexO.calculateTaxRequest();
             inValue.VertexEnvelope = VertexEnvelope;

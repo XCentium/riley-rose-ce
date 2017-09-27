@@ -69,7 +69,10 @@ namespace Plugin.Xcentium.RileyRose.Payment.Pipelines.Blocks
                 return arg;
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public int GenerateRandomNo()
         {
             const int min = 1001;

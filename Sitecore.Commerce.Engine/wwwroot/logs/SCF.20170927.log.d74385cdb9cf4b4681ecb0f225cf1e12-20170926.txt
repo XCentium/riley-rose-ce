@@ -1,0 +1,103 @@
+4 18:48:51 DEBUG Request starting HTTP/1.1 GET http://localhost:5000/api/Carts('Default12a6fe00-af12-48a8-8f17-ff1499a8b270RileyRose')?$expand=Lines($expand=CartLineComponents),Components  
+11 18:48:53 INFO GetEnvironmentCommand.AccessUnloadedEnvironment: Environment=Entity-CommerceEnvironment-RileyRoseAuthoring
+11 18:48:53 INFO Connecting to SQL Server using string: Server=.;Database=SitecoreCommerce_Global;Trusted_Connection=True;Connect Timeout=120000;Enlist=false;MultipleActiveResultSets=True
+16 18:48:53 INFO [EnvironmentStartup] Environment='RileyRoseAuthoring'
+16 18:48:53 INFO Creating Memory cache store '"RileyRoseAuthoring"'
+4 18:48:53 INFO Connecting to SQL Server using string: Server=.;Database=SitecoreCommerce_SharedEnvironments;Trusted_Connection=True;Connect Timeout=120000;Enlist=false;MultipleActiveResultSets=True
+4 18:48:53 INFO MemCache.CreateCache.RileyRoseAuthoring.Items
+4 18:48:53 INFO Management.GetItemByPath.GetItem./sitecore/Commerce/Commerce Control Panel/Storefront Settings/Storefronts/RileyRose|en-US
+4 18:48:53 INFO Management.GetItemByPath./sitecore/Commerce/Commerce Control Panel/Storefront Settings/Storefronts/RileyRose: Language=en-US
+4 18:48:54 INFO MemCache.CreateCache.RileyRoseAuthoring.ItemsCollection
+4 18:48:54 INFO Management.GetItemsByPath./sitecore/Commerce/Commerce Control Panel/Storefront Settings/Storefronts/RileyRose|en-US
+4 18:48:54 INFO Management.GetItemByPath.GetItem./sitecore/Commerce/Commerce Control Panel/Storefront Settings/Storefronts/RileyRose/Language Configuration|en-US
+4 18:48:54 INFO Management.GetItemByPath./sitecore/Commerce/Commerce Control Panel/Storefront Settings/Storefronts/RileyRose/Language Configuration: Language=en-US
+4 18:48:54 INFO Management.GetItemByPath.GetItem./sitecore/Commerce/Commerce Control Panel/Shared Settings/Language Sets/{DA122580-69B3-4C1F-B533-E35B8F015514}|en-US
+4 18:48:54 INFO Management.GetItemByPath./sitecore/Commerce/Commerce Control Panel/Shared Settings/Language Sets/{DA122580-69B3-4C1F-B533-E35B8F015514}: Language=en-US
+16 18:48:54 INFO Management.GetItemByPath.GetItem./sitecore/Commerce/Commerce Control Panel/Storefront Settings/Storefronts/RileyRose/Currency Configuration|en-US
+16 18:48:54 INFO Management.GetItemByPath./sitecore/Commerce/Commerce Control Panel/Storefront Settings/Storefronts/RileyRose/Currency Configuration: Language=en-US
+4 18:48:54 INFO Management.GetItemByPath.GetItem./sitecore/Commerce/Commerce Control Panel/Shared Settings/Currency Settings/Currency Sets/{4B494292-598E-4A61-A156-D7501F7953ED}|en-US
+4 18:48:54 INFO Management.GetItemByPath./sitecore/Commerce/Commerce Control Panel/Shared Settings/Currency Settings/Currency Sets/{4B494292-598E-4A61-A156-D7501F7953ED}: Language=en-US
+16 18:48:54 INFO Management.GetItemByPath.GetItem./sitecore/Commerce/Commerce Control Panel/Storefront Settings/Storefronts/RileyRose/Fulfillment Configuration|en-US
+16 18:48:54 INFO Management.GetItemByPath./sitecore/Commerce/Commerce Control Panel/Storefront Settings/Storefronts/RileyRose/Fulfillment Configuration: Language=en-US
+4 18:48:55 INFO Management.GetItemById.{EBB03ABA-0A90-4D4E-9FD8-DD3E5461D9DD}: Language=en-US
+20 18:48:55 INFO Management.GetItemChildren.{EBB03ABA-0A90-4D4E-9FD8-DD3E5461D9DD}|en-US
+5 18:48:55 INFO Management.GetItemByPath.GetItem./sitecore/Commerce/Commerce Control Panel/Storefront Settings/Storefronts/RileyRose/Payment Configuration|en-US
+5 18:48:55 INFO Management.GetItemByPath./sitecore/Commerce/Commerce Control Panel/Storefront Settings/Storefronts/RileyRose/Payment Configuration: Language=en-US
+20 18:48:55 INFO Management.GetItemById.{3C86B4A2-7D72-4110-A697-82D6CD0B6619}: Language=en-US
+20 18:48:55 INFO Management.GetItemById.{C6E45321-A7CD-4992-AAE7-95A5F04F8BC0}: Language=en-US
+20 18:48:55 DEBUG Executing action method "Sitecore.Commerce.Plugin.Carts.CartsController.Get (Sitecore.Commerce.Plugin.Carts)" with arguments (["Default12a6fe00-af12-48a8-8f17-ff1499a8b270RileyRose"]) - ModelState is Valid
+5 18:48:56 INFO MemCache.CreateCache.RileyRoseAuthoring.CsProducts
+20 18:48:56 INFO MemCache.CreateCache.RileyRoseAuthoring.CsContexts
+20 18:48:56 INFO CsCatalog.GetCatalogContext.Load.CFSolutionStorefrontSite
+20 18:48:56 INFO CS.GetProduct.00112935: Catalog=Forever21US, Language:en-US
+5 18:48:57 INFO CsCatalog.TranslateVar.LoadedVariations
+5 18:48:57 INFO MemCache.CreateCache.RileyRoseAuthoring.CsCatalogs
+24 18:50:00 DEBUG Request starting HTTP/1.1 GET http://localhost:5000/api/GetList(id='OrdersIndex',type='Sitecore.Commerce.Plugin.Orders.Order,%20Sitecore.Commerce.Plugin.Orders',skip=0,take=10)?$expand=Items($expand=Components)  
+24 18:50:27 INFO MemCache.CreateCache.RileyRoseAuthoring.InventoryItems
+24 18:50:27 INFO MemCache.GetInventoryItem.Miss: ItemKey=Forever21US|00112935|03|Expiration=300000|Environment=RileyRoseAuthoring
+24 18:50:27 DEBUG Executing action method "Sitecore.Commerce.Plugin.ManagedLists.ManagedListsController.GetList (Sitecore.Commerce.Plugin.ManagedLists)" with arguments (["OrdersIndex", "Sitecore.Commerce.Plugin.Orders.Order, Sitecore.Commerce.Plugin.Orders", "0", "10"]) - ModelState is Valid
+20 18:50:27 INFO Connecting to SQL Server using string: Server=.;Database=SitecoreCommerce_SharedEnvironments;Trusted_Connection=True;Connect Timeout=120000;Enlist=false;MultipleActiveResultSets=True
+21 18:50:27 INFO GetInventoryCatalogBlock.Forever21US
+20 18:50:27 DEBUG Executing ObjectResult, writing value "Microsoft.AspNetCore.Mvc.ControllerContext".
+16 18:50:28 INFO CsInventory.GetInvSku.Loaded.00112935-03
+21 18:50:30 DEBUG Executed action "Sitecore.Commerce.Plugin.ManagedLists.ManagedListsController.GetList (Sitecore.Commerce.Plugin.ManagedLists)" in 3666.1601ms
+21 18:50:31 DEBUG Request finished in 31111.9961ms 200 application/json;odata.metadata=minimal; charset=utf-8
+21 18:50:31 DEBUG Request starting HTTP/1.1 GET http://localhost:5000/api/GetList(id='DeletedPromotionsIndex',type='Sitecore.Commerce.Core.Tombstone,%20Sitecore.Commerce.Core',skip=0,take=10)?$expand=Items($expand=Components)  
+20 18:50:31 DEBUG Executing action method "Sitecore.Commerce.Plugin.ManagedLists.ManagedListsController.GetList (Sitecore.Commerce.Plugin.ManagedLists)" with arguments (["DeletedPromotionsIndex", "Sitecore.Commerce.Core.Tombstone, Sitecore.Commerce.Core", "0", "10"]) - ModelState is Valid
+21 18:50:31 DEBUG Executing ObjectResult, writing value "Microsoft.AspNetCore.Mvc.ControllerContext".
+11 18:50:31 DEBUG Executed action "Sitecore.Commerce.Plugin.ManagedLists.ManagedListsController.GetList (Sitecore.Commerce.Plugin.ManagedLists)" in 36.2908ms
+11 18:50:31 DEBUG Request finished in 62.4989ms 200 application/json;odata.metadata=minimal; charset=utf-8
+11 18:50:31 DEBUG Request starting HTTP/1.1 GET http://localhost:5000/api/GetList(id='PromotionsIndex',type='Sitecore.Commerce.Plugin.Promotions.Promotion,%20Sitecore.Commerce.Plugin.Promotions',skip=0,take=10)?$expand=Items($expand=Components)  
+24 18:50:31 INFO Promotions.block.SearchForPromotions.LoadPromotions
+11 18:50:31 DEBUG Executing action method "Sitecore.Commerce.Plugin.ManagedLists.ManagedListsController.GetList (Sitecore.Commerce.Plugin.ManagedLists)" with arguments (["PromotionsIndex", "Sitecore.Commerce.Plugin.Promotions.Promotion, Sitecore.Commerce.Plugin.Promotions", "0", "10"]) - ModelState is Valid
+18 18:50:32 DEBUG Executing ObjectResult, writing value "Microsoft.AspNetCore.Mvc.ControllerContext".
+18 18:50:32 DEBUG Executed action "Sitecore.Commerce.Plugin.ManagedLists.ManagedListsController.GetList (Sitecore.Commerce.Plugin.ManagedLists)" in 58.908ms
+18 18:50:32 DEBUG Request finished in 64.5461ms 200 application/json;odata.metadata=minimal; charset=utf-8
+18 18:50:32 INFO Promotions.block.SearchForPromotions.PromotionsLoaded
+21 18:50:32 INFO Promotions.block.SearchForPromotions.LoadPromotions
+5 18:50:32 INFO Promotions.block.SearchForPromotions.PromotionsLoaded
+5 18:50:32 DEBUG Executing ObjectResult, writing value "Microsoft.AspNetCore.Mvc.ControllerContext".
+21 18:50:32 DEBUG Executed action "Sitecore.Commerce.Plugin.Carts.CartsController.Get (Sitecore.Commerce.Plugin.Carts)" in 99941.4476ms
+21 18:50:32 DEBUG Request finished in 101050.8341ms 200 application/json;odata.metadata=minimal; charset=utf-8
+20 18:51:05 DEBUG Request starting HTTP/1.1 GET http://localhost:5000/api/Carts('Default12a6fe00-af12-48a8-8f17-ff1499a8b270RileyRose')?$expand=Lines($expand=CartLineComponents),Components  
+5 18:51:05 DEBUG Executing action method "Sitecore.Commerce.Plugin.Carts.CartsController.Get (Sitecore.Commerce.Plugin.Carts)" with arguments (["Default12a6fe00-af12-48a8-8f17-ff1499a8b270RileyRose"]) - ModelState is Valid
+18 18:51:08 INFO MemCache.GetInventoryItem.Hit: ItemKey=Forever21US|00112935|03
+18 18:51:09 INFO Promotions.block.SearchForPromotions.LoadPromotions
+24 18:51:09 INFO Promotions.block.SearchForPromotions.PromotionsLoaded
+5 18:51:09 INFO Promotions.block.SearchForPromotions.LoadPromotions
+5 18:51:09 INFO Promotions.block.SearchForPromotions.PromotionsLoaded
+21 18:51:09 DEBUG Executing ObjectResult, writing value "Microsoft.AspNetCore.Mvc.ControllerContext".
+21 18:51:09 DEBUG Executed action "Sitecore.Commerce.Plugin.Carts.CartsController.Get (Sitecore.Commerce.Plugin.Carts)" in 4857.1883ms
+21 18:51:09 DEBUG Request finished in 4866.5728ms 200 application/json;odata.metadata=minimal; charset=utf-8
+21 18:51:09 DEBUG Request starting HTTP/1.1 POST http://localhost:5000/api/AddCartLine application/json;odata.metadata=minimal 113
+20 18:51:10 DEBUG Executing action method "Sitecore.Commerce.Plugin.Carts.CommandsController.AddCartLine (Sitecore.Commerce.Plugin.Carts)" with arguments (["System.Web.Http.OData.ODataActionParameters"]) - ModelState is Valid
+20 18:51:10 INFO CS.GetProduct.00091624: Catalog=Forever21US, Language:en-US
+20 18:51:10 INFO CsCatalog.TranslateVar.LoadedVariations
+25 18:51:12 INFO MemCache.GetInventoryItem.Miss: ItemKey=Forever21US|00091624|01|Expiration=300000|Environment=RileyRoseAuthoring
+21 18:51:12 INFO CsInventory.GetInvSku.Loaded.00091624-01
+21 18:51:12 WARN PopulateItemAvailability.NotAvailable.Forever21US|00091624|01
+24 18:51:14 INFO MemCache.GetInventoryItem.Hit: ItemKey=Forever21US|00112935|03
+25 18:51:14 INFO PopulateLineItemAvailability.ComponentUpdated.Forever21US|00091624|01: Count=0
+5 18:51:20 WARN PopulateItemAvailability.NotAvailable.Forever21US|00091624|01
+5 18:51:20 INFO Promotions.block.SearchForPromotions.LoadPromotions
+24 18:51:20 INFO Promotions.block.SearchForPromotions.PromotionsLoaded
+24 18:51:20 INFO Promotions.block.SearchForPromotions.LoadPromotions
+22 18:51:20 INFO Promotions.block.SearchForPromotions.PromotionsLoaded
+26 18:51:20 INFO Connecting to SQL Server using string: Server=.;Database=SitecoreCommerce_SharedEnvironments;Trusted_Connection=True;Connect Timeout=120000;MultipleActiveResultSets=True
+20 18:51:21 INFO SQL:block:persistentity.Cart: EntityId=Default12a6fe00-af12-48a8-8f17-ff1499a8b270RileyRose
+20 18:51:21 DEBUG Executing ObjectResult, writing value "Microsoft.AspNetCore.Mvc.ControllerContext".
+5 18:51:21 DEBUG Executed action "Sitecore.Commerce.Plugin.Carts.CommandsController.AddCartLine (Sitecore.Commerce.Plugin.Carts)" in 11726.6464ms
+5 18:51:21 DEBUG Request finished in 11748.318ms 200 application/json;odata.metadata=minimal; charset=utf-8
+20 18:51:21 DEBUG Request starting HTTP/1.1 GET http://localhost:5000/api/Carts('Default12a6fe00-af12-48a8-8f17-ff1499a8b270RileyRose')?$expand=Lines($expand=CartLineComponents),Components  
+5 18:51:21 DEBUG Executing action method "Sitecore.Commerce.Plugin.Carts.CartsController.Get (Sitecore.Commerce.Plugin.Carts)" with arguments (["Default12a6fe00-af12-48a8-8f17-ff1499a8b270RileyRose"]) - ModelState is Valid
+26 18:51:23 INFO MemCache.GetInventoryItem.Hit: ItemKey=Forever21US|00112935|03
+26 18:51:26 INFO MemCache.GetInventoryItem.Hit: ItemKey=Forever21US|00091624|01
+26 18:51:26 WARN PopulateItemAvailability.NotAvailable.Forever21US|00091624|01
+25 18:51:31 WARN PopulateItemAvailability.NotAvailable.Forever21US|00091624|01
+25 18:51:31 INFO Promotions.block.SearchForPromotions.LoadPromotions
+5 18:51:31 INFO Promotions.block.SearchForPromotions.PromotionsLoaded
+5 18:51:31 INFO Promotions.block.SearchForPromotions.LoadPromotions
+5 18:51:31 INFO Promotions.block.SearchForPromotions.PromotionsLoaded
+25 18:51:31 DEBUG Executing ObjectResult, writing value "Microsoft.AspNetCore.Mvc.ControllerContext".
+25 18:51:31 DEBUG Executed action "Sitecore.Commerce.Plugin.Carts.CartsController.Get (Sitecore.Commerce.Plugin.Carts)" in 9840.3335ms
+25 18:51:31 DEBUG Request finished in 9881.0206ms 200 application/json;odata.metadata=minimal; charset=utf-8
