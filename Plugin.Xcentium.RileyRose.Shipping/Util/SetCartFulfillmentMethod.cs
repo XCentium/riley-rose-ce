@@ -75,7 +75,7 @@ namespace Plugin.Xcentium.RileyRose.Shipping.Util
                     cart.SetComponent(origFulfillmentComponent);
                 }else
                 {
-                    cart.SetComponent(existingFulfillmentComponent);
+                    if(existingFulfillmentComponent!=null) cart.SetComponent(existingFulfillmentComponent);
                 }  
             }
             return await Task.FromResult<Cart>(cart);
