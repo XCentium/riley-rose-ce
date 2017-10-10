@@ -4,6 +4,8 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using Plugin.Xcentium.RileyRose.Pipelines.Blocks;
+
 namespace Plugin.Xcentium.RileyRose
 {
     using System.Reflection;
@@ -43,7 +45,13 @@ namespace Plugin.Xcentium.RileyRose
                                     .Add<InitializeEnvironmentPromotionsBlock>();
                             })
 
-               //     .ConfigurePipeline<IBootstrapPipeline>(d => { d.Add<InitializeEnvironmentEnsureCatalogBlock>(); })
+                   .ConfigurePipeline<IBootstrapPipeline>(
+                    d => 
+                        {
+                            d
+                            //.Add<InitializeEnvironmentEnsureCatalogBlock>()
+                            .Add<ChangeFulfillmentOptionsBlock>();
+                        })
 
                     .ConfigurePipeline<IAddCartLinePipeline>(configure => configure.Add<AddCartLineGiftCardBlock>().Before<PersistCartBlock>())
 

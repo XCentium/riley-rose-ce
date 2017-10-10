@@ -4,7 +4,9 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Plugin.Xcentium.RileyRose.Pipelines.Blocks;
+using Plugin.Xcentium.RileyRose.Shipping.Pipelines.Blocks;
+
+
 
 namespace Plugin.Xcentium.RileyRose
 {
@@ -45,6 +47,7 @@ namespace Plugin.Xcentium.RileyRose
                     .Add<ValidateCartLinesPriceBlock>()
                     .Add<CalculateCartLinesSubTotalsBlock>()
                     .Add<CalculateCartLinesFulfillmentBlock>()
+                    .Add<CalculateCartLinesFulfillmentBlockEx>().After<CalculateCartLinesFulfillmentBlock>()
                     .Add<ValidateCartCouponsBlock>()
                     .Add<CalculateCartLinesPromotionsBlock>()
                     .Add<CalculateCartLinesTaxBlock>()
@@ -53,17 +56,18 @@ namespace Plugin.Xcentium.RileyRose
                .ConfigurePipeline<ICalculateCartPipeline>(builder => builder
                     .Add<CalculateCartSubTotalsBlock>()
                     .Add<CalculateCartFulfillmentBlock>()
+                    .Add<CalculateCartFulfillmentBlockEx>().After<CalculateCartFulfillmentBlock>()
                     .Add<CalculateCartPromotionsBlock>()
                     .Add<CalculateCartTaxBlock>()
                     .Add<CalculateCartTotalsBlock>()
                     .Add<CalculateCartPaymentsBlock>())
 
                 .ConfigurePipeline<ICalculateSellableItemSellPricePipeline>(builder => builder
-                        .Add<SetSalesPriceBlock>().After<CalculateSellableItemSellPriceBlock>()
+                        .Add<Plugin.Xcentium.RileyRose.Pipelines.Blocks.SetSalesPriceBlock>().After<CalculateSellableItemSellPriceBlock>()
                 )
 
                 .ConfigurePipeline<ICalculateVariationsSellPricePipeline>(builder => builder
-                    .Add<SetVariantSalePriceBlock>().After<CalculateVariationsSellPriceBlock>())
+                    .Add<Plugin.Xcentium.RileyRose.Pipelines.Blocks.SetVariantSalePriceBlock>().After<CalculateVariationsSellPriceBlock>())
 
 
               .ConfigurePipeline<IAddPaymentsPipeline>(builder => builder.Add<ValidateCartHasFulfillmentBlock>().After<ValidateCartAndPaymentsBlock>()));

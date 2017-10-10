@@ -70,14 +70,6 @@
         "UserTypePath": "/sitecore/Commerce/Commerce Control Panel/Commerce Engine Settings/Commerce Terms/CS User Site Terms/User Type",
         "AllLanguagesPath": "/sitecore/Commerce/Commerce Control Panel/Shared Settings/Language Sets/All Languages"
       },
-      //{
-      //  "$type": "Plugin.Sample.Payments.Braintree.BraintreeClientPolicy, Plugin.Sample.Payments.Braintree",
-      //  "Environment": "sandbox",
-      //  "MerchantId": 0,
-      //  "PublicKey": 0,
-      //  "PrivateKey": 0,
-      //  "ConnectTimeout": 120000
-      //},
       {
         "$type": "Sitecore.Commerce.EntityViews.ActionsRolesPolicy, Sitecore.Commerce.Plugin.Views",
         "Roles": {
@@ -1009,7 +1001,7 @@
                 "CurrencyCode": "USD",
                 "Amount": 2.0
               },
-              "Name": "Standard",
+              "Name": "Standard Ground",
               "Policies": {
                 "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
                 "$values": [
@@ -1024,7 +1016,7 @@
                 "CurrencyCode": "USD",
                 "Amount": 5.0
               },
-              "Name": "Next Day Air",
+              "Name": "Express",
               "Policies": {
                 "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
                 "$values": [
@@ -1039,7 +1031,7 @@
                 "CurrencyCode": "USD",
                 "Amount": 10.0
               },
-              "Name": "Standard Overnight",
+              "Name": "Next Day",
               "Policies": {
                 "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
                 "$values": [
@@ -1069,7 +1061,7 @@
                 "CurrencyCode": "CAD",
                 "Amount": 2.0
               },
-              "Name": "Standard",
+              "Name": "Standard Ground",
               "Policies": {
                 "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
                 "$values": [
@@ -1084,7 +1076,7 @@
                 "CurrencyCode": "CAD",
                 "Amount": 5.0
               },
-              "Name": "Next Day Air",
+              "Name": "Express",
               "Policies": {
                 "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
                 "$values": [
@@ -1099,7 +1091,7 @@
                 "CurrencyCode": "CAD",
                 "Amount": 10.0
               },
-              "Name": "Standard Overnight",
+              "Name": "Next Day",
               "Policies": {
                 "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
                 "$values": [
@@ -1162,6 +1154,17 @@
 
             ]
           }
+        }
+      },
+      {
+        "$type": "Plugin.Xcentium.RileyRose.RemotePricePolicy, Plugin.Xcentium.RileyRose",
+        "PostagePriceRequestUrl": "http://rileyrose.xcentium.net/rileyroseapi/checkout/RemoteGetShippingPrice",
+        "DefaultPostagePrice": "0",
+        "PolicyId": "RemotePricePolicy",
+        "Models": {
+          "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+          "$values": [
+          ]
         }
       },
       {
