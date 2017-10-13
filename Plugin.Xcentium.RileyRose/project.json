@@ -41,7 +41,8 @@
     "Sitecore.Commerce.Plugin.Shops": "1.2.159",
     "Sitecore.Commerce.Plugin.SQL": "1.2.159",
     "Sitecore.Commerce.Plugin.Tax": "1.2.159",
-    "Plugin.Xcentium.RileyRose.Shipping": "0.0.1"
+    "Plugin.Xcentium.RileyRose.Shipping": "0.0.1",
+    "Plugin.Xcentium.RileyRose.Payment": "1.0.0"
     //  "OctoPack": "3.6.1"
   },
   "frameworks": {

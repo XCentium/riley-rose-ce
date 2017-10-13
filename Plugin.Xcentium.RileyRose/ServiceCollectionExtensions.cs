@@ -62,6 +62,10 @@ namespace Plugin.Xcentium.RileyRose
                     .Add<CalculateCartTotalsBlock>()
                     .Add<CalculateCartPaymentsBlock>())
 
+
+                //.Add<ApplyF21GiftCardBlock>().After<CalculateCartPaymentsBlock>()
+
+
                 .ConfigurePipeline<ICalculateSellableItemSellPricePipeline>(builder => builder
                         .Add<Plugin.Xcentium.RileyRose.Pipelines.Blocks.SetSalesPriceBlock>().After<CalculateSellableItemSellPriceBlock>()
                 )

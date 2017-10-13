@@ -78,7 +78,7 @@ namespace Plugin.Xcentium.RileyRose.Shipping.Pipelines.Blocks
             var shippingOptions = await ShippingOptionsModel.GetData(_getItemByPathPipeline, _getItemChildrenByPathPipeline, context);
 
             //Calculate Custom Shipping Charges
-            var shippingAwardedAdjustment = ShippingCalculator.GetShippingAdjustment(arg, shippingOptions, context);
+             var shippingAwardedAdjustment = ShippingCalculator.GetShippingAdjustment(arg, shippingOptions, context);
 
 
             arg.Adjustments[0].Adjustment = shippingAwardedAdjustment.Adjustment;

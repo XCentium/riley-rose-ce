@@ -1,4 +1,5 @@
 ﻿{
+  "title": "Plugin.Xcentium.RileyRose.Payment",
   "version": "1.2.159",
   "description": "Xcentium Payments Plugin for RileyRose Payment.",
   "copyright": "XCentium.",
@@ -22,7 +23,8 @@
   },
   "dependencies": {
     "Sitecore.Commerce.Plugin.Fulfillment": "1.2.159",
-    "Sitecore.Commerce.Plugin.Payments": "1.2.159"
+    "Sitecore.Commerce.Plugin.Payments": "1.2.159",
+    "Sitecore.Commerce.Plugin.GiftCards": "1.2.159"
   },
   "frameworks": {
     "net461": {
