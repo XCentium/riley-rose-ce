@@ -54,7 +54,9 @@ namespace Plugin.Xcentium.RileyRose.Payment.Pipelines.Blocks
             //Name = "Federated"
             //((Sitecore.Commerce.Plugin.Payments.PaymentComponent[])argument.Payments)[0].PaymentMethod.Name
 
-            if (argument.Payments.FirstOrDefault().PaymentMethod.Name != "Gift Card") return arg;
+           //if (argument.Payments.FirstOrDefault().PaymentMethod.Name != "Gift Card") return arg;
+            if (argument.Payments.FirstOrDefault() == null) return arg;
+            if (argument.Payments.FirstOrDefault().GetType() != typeof(GiftCardPaymentComponent)) return arg;
             //Get Submitted Gift Card Component
             var giftCardPaymentComponent = (GiftCardPaymentComponent)argument.Payments.FirstOrDefault();
             if (giftCardPaymentComponent == null) return arg;
