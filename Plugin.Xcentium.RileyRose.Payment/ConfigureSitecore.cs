@@ -60,7 +60,7 @@ namespace Plugin.Xcentium.RileyRose.Payment
                 })
                 .ConfigurePipeline<ICalculateCartPipeline>(d =>
                 {
-                    //d.Add<ValidateGiftCardPaymentBlock>().Before<CalculateCartTotalsBlock>();
+                    d.Add<ValidateGiftCardPaymentBlock>().Before<CalculateCartTotalsBlock>();
 
                 })
              
