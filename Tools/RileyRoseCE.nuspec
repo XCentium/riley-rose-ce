@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>RileyRoseCE</id>
+        <authors>XCentium</authors>
+        <version>1.0.0.0</version>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Riley Rose CE</description>
+    </metadata>
+    <files>
+        <file src=".\**" target="" />		
+    </files>
+</package>
