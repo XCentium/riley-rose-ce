@@ -112,10 +112,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="CalculateTax60" contract="VertexO.CalculateTaxWS60" bindingType="basicHttpBinding" address="http://vha0230.vertexinc.com:80/vertex-ws/services/CalculateTax60" bindingConfiguration="CalculateTax60SoapBinding">
+    <endpoint name="CalculateTax60" contract="VertexO.CalculateTaxWS60" bindingType="basicHttpBinding" address="http://10.110.10.68:8095/vertex-ws/services/CalculateTax60" bindingConfiguration="CalculateTax60SoapBinding">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://vha0230.vertexinc.com:80/vertex-ws/services/CalculateTax60</serializedValue>
+          <serializedValue>http://10.110.10.68:8095/vertex-ws/services/CalculateTax60</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

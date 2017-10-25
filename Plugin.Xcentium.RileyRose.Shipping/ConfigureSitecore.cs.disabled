@@ -39,39 +39,39 @@ namespace Plugin.Xcentium.RileyRose.Shipping
 
             services.Sitecore().Pipelines(config => config
                
-                .ConfigurePipeline<IGetSellableItemPipeline>(d =>
-               {
-                   d.Add<F21RileyRoseSellableItemBlock>().After<TranslateProductBlock>();
-               }) 
-                .ConfigurePipeline<ISetCartFulfillmentPipeline>(d =>
-                {
-                    d.Replace<SetCartFulfillmentBlock,F21RileyRoseSetCartFulfillmentBlock>() ;
-                })
+               // .ConfigurePipeline<IGetSellableItemPipeline>(d =>
+               //{
+               //    d.Add<F21RileyRoseSellableItemBlock>().After<TranslateProductBlock>();
+               //}) 
+               // .ConfigurePipeline<ISetCartFulfillmentPipeline>(d =>
+               // {
+               //     d.Replace<SetCartFulfillmentBlock,F21RileyRoseSetCartFulfillmentBlock>() ;
+               // })
 
-                 .ConfigurePipeline<IAddCartLinePipeline>(d =>
-                 {
-                     d.Add<CheckHazardousShippingBlock>().Before<PersistCartBlock>();
-                 })  
+               //  .ConfigurePipeline<IAddCartLinePipeline>(d =>
+               //  {
+               //      d.Add<CheckHazardousShippingBlock>().Before<PersistCartBlock>();
+               //  })  
 
-                .ConfigurePipeline<ISetCartFulfillmentPipeline>(d =>
-                {
-                    d.Add<ValidateCartFulfillmentBlock>().After<ValidateCartFulfillmentBlockEx>();
-                })
+               // .ConfigurePipeline<ISetCartFulfillmentPipeline>(d =>
+               // {
+               //     d.Add<ValidateCartFulfillmentBlock>().After<ValidateCartFulfillmentBlockEx>();
+               // })
 
-                .ConfigurePipeline<ICalculateCartPipeline>(d =>
-                {
-                    d.Replace<CalculateCartTotalsBlock, CalculateCartTotalsBlockEx>();
-                })
+               // .ConfigurePipeline<ICalculateCartPipeline>(d =>
+               // {
+               //     d.Replace<CalculateCartTotalsBlock, CalculateCartTotalsBlockEx>();
+               // })
 
                 //.ConfigurePipeline<ICalculateCartPipeline>(d =>
                 //{
                 //    d.Replace<CalculateCartFulfillmentBlock, CalculateCartShippingBlockEx>(); 
                 //})
 
-                .ConfigurePipeline<IGetFulfillmentOptionsPipeline>(d =>
-               {
-                   d.Replace<FilterCartFulfillmentOptionsBlock,FilterCartFulfillmentOptionsBlockEx>();
-               })
+               // .ConfigurePipeline<IGetFulfillmentOptionsPipeline>(d =>
+               //{
+               //    d.Replace<FilterCartFulfillmentOptionsBlock,FilterCartFulfillmentOptionsBlockEx>();
+               //})
                 
 
                );
