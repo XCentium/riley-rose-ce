@@ -39,8 +39,8 @@
                            "Release":  {
                                            "buildOptions":  {
                                                                 "compile":  "../Shared/VersionInfo.cs",
-                                                                "xmlDoc":  true,
-                                                                "warningsAsErrors":  true,
+                                                                "xmlDoc":  false,
+                                                                "warningsAsErrors":  false,
                                                                 "optimize":  true
                                                             }
                                        },
