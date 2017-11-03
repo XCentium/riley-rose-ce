@@ -10,15 +10,26 @@ using System.Threading.Tasks;
 
 namespace Plugin.Xcentium.RileyRose.Shipping.Pipelines.Blocks
 {
-
+    /// <summary>
+    /// 
+    /// </summary>
     [PipelineDisplayName("Plugin.Xcentium.RileyRose.Shipping.Pipelines.Blocks.CalculateCartTotalsBlock")]
     public class CalculateCartTotalsBlockEx : PipelineBlock<Cart, Cart, CommercePipelineExecutionContext>
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public CalculateCartTotalsBlockEx()
           : base((string)null)
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="arg"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public override Task<Cart> Run(Cart arg, CommercePipelineExecutionContext context)
         {
             Condition.Requires<Cart>(arg).IsNotNull<Cart>(string.Format("{0}: The cart can not be null", (object)this.Name));

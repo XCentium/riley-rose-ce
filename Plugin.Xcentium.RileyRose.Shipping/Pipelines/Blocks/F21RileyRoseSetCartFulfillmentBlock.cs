@@ -15,7 +15,9 @@ using System.Threading.Tasks;
 
 namespace Plugin.Xcentium.RileyRose.Shipping.Pipelines.Blocks
 { 
-
+    /// <summary>
+    /// 
+    /// </summary>
     [PipelineDisplayName("Plugin.Xcentium.RileyRose.Shipping.F21RileyRoseSetCartFulfillmentBlock")]
     public class F21RileyRoseSetCartFulfillmentBlock : PipelineBlock<CartFulfillmentArgument, Cart, CommercePipelineExecutionContext>
     {
@@ -23,6 +25,11 @@ namespace Plugin.Xcentium.RileyRose.Shipping.Pipelines.Blocks
         private readonly GetFulfillmentMethodsCommand _getFulfillmentMethodsCommand;
         //private bool containsHazardousItems = false;
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="getSellableItemCommand"></param>
+            /// <param name="getFulfillmentMethodsCommand"></param>
         public F21RileyRoseSetCartFulfillmentBlock(GetSellableItemCommand getSellableItemCommand, GetFulfillmentMethodsCommand getFulfillmentMethodsCommand)
             : base((string)null)
         {
@@ -30,6 +37,12 @@ namespace Plugin.Xcentium.RileyRose.Shipping.Pipelines.Blocks
             this._getFulfillmentMethodsCommand = getFulfillmentMethodsCommand; 
         }
        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="arg"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public override async Task<Cart> Run(CartFulfillmentArgument arg, CommercePipelineExecutionContext context)
         {
             Condition.Requires<CartFulfillmentArgument>(arg).IsNotNull<CartFulfillmentArgument>(string.Format("{0}: The arg cannot be null", (object)this.Name));

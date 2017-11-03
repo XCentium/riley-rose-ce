@@ -10,11 +10,25 @@ using System.Threading.Tasks;
 
 namespace Plugin.Xcentium.RileyRose.Shipping.Models
 {
+
+    /// <summary>
+    /// 
+    /// </summary>
     public static class ShippingOptionsModel
     {
+
+        /// <summary>
+        /// 
+        /// </summary>
         public static List<ShippingOption> _shippingOptions = new List<ShippingOption>();
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="getItemByPathPipeline"></param>
+        /// <param name="getItemChildrenByPathPipeline"></param>
+        /// <param name="commercePipelineExecutionContext"></param>
+        /// <returns></returns>
         public static async Task<List<ShippingOption>> GetData(IGetItemByPathPipeline getItemByPathPipeline, IGetItemChildrenPipeline getItemChildrenByPathPipeline, CommercePipelineExecutionContext commercePipelineExecutionContext)
         {
             if(_shippingOptions.Any())

@@ -2,38 +2,42 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Sitecore.Commerce.Core;
 
-namespace Plugin.Xcentium.RileyRose.Shipping.Models
+namespace Plugin.Xcentium.RileyRose.Payment.Components
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public class ShippingPriceDefinition
+    public class F21GiftCard 
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        public string CardNumber { get; set; }
+
 
         /// <summary>
         /// 
         /// </summary>
-        public string Name { get; set; }
+        public string CouponCode { get; set; }
+
+
 
         /// <summary>
         /// 
         /// </summary>
-        public string DisplayName { get; set; }
+        public string PinNumber { get; set; }
+
+
 
         /// <summary>
         /// 
         /// </summary>
-        public decimal MinAmount { get; set; }
+        public Money OriginalBalance { get; set; }
+
+
 
         /// <summary>
         /// 
         /// </summary>
-        public decimal MaxAmount { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public decimal Cost { get; set; } 
+        public Money PaymentAmount { get; set; }
     }
 }

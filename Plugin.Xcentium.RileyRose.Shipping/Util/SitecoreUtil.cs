@@ -8,8 +8,18 @@ using System.Threading.Tasks;
 
 namespace Plugin.Xcentium.RileyRose.Shipping.Util
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class SitecoreUtil
     { 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="itemPath"></param>
+        /// <param name="getItemByPathPipeline"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public static async Task<ItemModel> GetSitecoreItemByPath(string itemPath, IGetItemByPathPipeline getItemByPathPipeline, CommercePipelineExecutionContext context)
         {
             var itemModelArgument =
@@ -21,7 +31,13 @@ namespace Plugin.Xcentium.RileyRose.Shipping.Util
             return sitecoreItem;
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="itemID"></param>
+        /// <param name="getItemChildrenByPathPipeline"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public static async Task<IEnumerable<ItemModel>> GetSitecoreItemChildrenByItemId(string itemID, IGetItemChildrenPipeline getItemChildrenByPathPipeline, CommercePipelineExecutionContext context)
         {
             var itemModelArgument =

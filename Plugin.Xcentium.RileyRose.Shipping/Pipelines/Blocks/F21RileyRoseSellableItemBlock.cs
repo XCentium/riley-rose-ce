@@ -17,7 +17,9 @@ using Plugin.Xcentium.RileyRose.Shipping.Components;
 
 namespace Plugin.Xcentium.RileyRose.Shipping.Pipelines.Blocks
 {
-
+    /// <summary>
+    /// 
+    /// </summary>
     [PipelineDisplayName("Plugin.Xcentium.RileyRose.Shipping.Pipelines.Blocks.SellableItemF21RileyRoseBlock")]
     public class F21RileyRoseSellableItemBlock : PipelineBlock<SellableItem, SellableItem, CommercePipelineExecutionContext>
     {
@@ -30,15 +32,22 @@ namespace Plugin.Xcentium.RileyRose.Shipping.Pipelines.Blocks
         /// 
         /// </summary>
         /// <param name="getItemByPathPipeline"></param>
+        /// <param name="getItemChildrenByPathPipeline"></param>
         /// <param name="getSellableItemPipeline"></param>
         public F21RileyRoseSellableItemBlock(IGetItemByPathPipeline getItemByPathPipeline, IGetItemChildrenPipeline getItemChildrenByPathPipeline,
             IGetSellableItemPipeline getSellableItemPipeline) : base(null)
         {
             _getItemByPathPipeline = getItemByPathPipeline;
             _getSellableItemPipeline = getSellableItemPipeline;
-            _getItemChildrenByPathPipeline = getItemChildrenByPathPipeline;
+            if (getItemChildrenByPathPipeline != null) _getItemChildrenByPathPipeline = getItemChildrenByPathPipeline;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sellableItem"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public override async Task<SellableItem> Run(SellableItem sellableItem, CommercePipelineExecutionContext context)
         {
             try

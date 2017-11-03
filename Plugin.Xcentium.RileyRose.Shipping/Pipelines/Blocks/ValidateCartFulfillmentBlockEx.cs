@@ -11,13 +11,20 @@ using Sitecore.Commerce.Plugin.Fulfillment;
 
 namespace Plugin.Xcentium.RileyRose.Shipping.Pipelines.Blocks
 {
-    //public class ValidateCartFulfillmentBlockEx
+    /// <summary>
+    /// 
+    /// </summary>
     [PipelineDisplayName("Fulfillment.block.ValidateCartFulfillmentBlockEx")]
     public class ValidateCartFulfillmentBlockEx : PipelineBlock<CartFulfillmentArgument, CartFulfillmentArgument, CommercePipelineExecutionContext>
     {
         private readonly IGetCartFulfillmentOptionsPipeline _getCartOptionsPipeline;
         private readonly IGetFulfillmentMethodsPipeline _getMethodsPipeline;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="getCartFulfillmentOptionsPipeline"></param>
+        /// <param name="getFulfillmentMethodsPipeline"></param>
         public ValidateCartFulfillmentBlockEx(IGetCartFulfillmentOptionsPipeline getCartFulfillmentOptionsPipeline, IGetFulfillmentMethodsPipeline getFulfillmentMethodsPipeline)
           : base((string)null)
         {
@@ -25,6 +32,12 @@ namespace Plugin.Xcentium.RileyRose.Shipping.Pipelines.Blocks
             this._getMethodsPipeline = getFulfillmentMethodsPipeline;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="arg"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public override async Task<CartFulfillmentArgument> Run(CartFulfillmentArgument arg, CommercePipelineExecutionContext context)
         {
             Condition.Requires<CartFulfillmentArgument>(arg).IsNotNull<CartFulfillmentArgument>(string.Format("{0}: The arg cannot be null", (object)this.Name));

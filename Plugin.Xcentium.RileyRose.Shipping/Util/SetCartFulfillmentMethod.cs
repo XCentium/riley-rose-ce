@@ -11,19 +11,33 @@ using Plugin.Xcentium.RileyRose.Shipping.Components;
 
 namespace Plugin.Xcentium.RileyRose.Shipping.Util
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class SetCartFulfillmentMethod
     {
         private readonly GetSellableItemCommand _getSellableItemCommand;
         private readonly GetFulfillmentMethodsCommand _getFulfillmentMethodsCommand;
         private bool containsHazardousItems = false;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="getSellableItemCommand"></param>
+        /// <param name="getFulfillmentMethodsCommand"></param>
         public SetCartFulfillmentMethod(GetSellableItemCommand getSellableItemCommand, GetFulfillmentMethodsCommand getFulfillmentMethodsCommand) 
         {
             this._getSellableItemCommand = getSellableItemCommand;
             this._getFulfillmentMethodsCommand = getFulfillmentMethodsCommand;
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cart"></param>
+        /// <param name="origFulfillmentComponent"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public async Task<Cart> SetFulfillment(Cart cart, FulfillmentComponent origFulfillmentComponent, CommercePipelineExecutionContext context)
         { 
             Component existingFulfillmentComponent = cart.Components.FirstOrDefault(c => c is FulfillmentComponent); 

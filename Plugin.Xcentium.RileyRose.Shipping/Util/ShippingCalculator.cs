@@ -10,8 +10,17 @@ using System.Threading.Tasks;
 
 namespace Plugin.Xcentium.RileyRose.Shipping.Util
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class ShippingCalculator
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cartTotal"></param>
+        /// <param name="selectedShippingOption"></param>
+        /// <returns></returns>
         public static Decimal CalculateShippingCost(decimal cartTotal, ShippingOption selectedShippingOption)
         {
             decimal definedCost = 0;
@@ -27,17 +36,36 @@ namespace Plugin.Xcentium.RileyRose.Shipping.Util
             return definedCost;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <param name="priceDef"></param>
+        /// <returns></returns>
         public static bool IsInPriceRange(decimal amount, ShippingPriceDefinition priceDef)
         { 
             return (amount >= priceDef.MinAmount && amount <= priceDef.MaxAmount); 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cart"></param>
+        /// <param name="shippingOptions"></param>
+        /// <returns></returns>
         public static ShippingOption GetSelectedShippingOption(Cart cart, List<ShippingOption> shippingOptions)
         {
             FulfillmentComponent fulfillmentComponent = cart.GetComponent<FulfillmentComponent>(); 
             return shippingOptions.FirstOrDefault(x => x.Name == fulfillmentComponent.FulfillmentMethod.Name); 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cart"></param>
+        /// <param name="shippingOptions"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public static CartLevelAwardedAdjustment GetShippingAdjustment(Cart cart, List<ShippingOption> shippingOptions, CommercePipelineExecutionContext context)
         {
 
@@ -59,6 +87,11 @@ namespace Plugin.Xcentium.RileyRose.Shipping.Util
             return awardedAdjustment;
         }  
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="inputVal"></param>
+        /// <returns></returns>
         public static decimal GetPriceValue(string inputVal)
         {
             decimal amount = 0;

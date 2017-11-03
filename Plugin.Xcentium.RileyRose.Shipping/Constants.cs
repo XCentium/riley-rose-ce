@@ -5,8 +5,14 @@ using System.Threading.Tasks;
 
 namespace Plugin.Xcentium.RileyRose.Shipping
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class Constants
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public struct Shipping
         {
 
@@ -24,7 +30,15 @@ namespace Plugin.Xcentium.RileyRose.Shipping
             /// 
             /// </summary>  
             public const string ShippingChargePath = "/sitecore/Commerce/Commerce Control Panel/Shared Settings/RileyRose Shipping Options";
+
+            /// <summary>
+            /// 
+            /// </summary>
             public const string ShippingFolderItemId = "{0B05F214-3652-4D63-ABC8-40E59FE5330E}";
+
+            /// <summary>
+            /// 
+            /// </summary>
             public const string IsHazardous = "IsHazardous";
 
             /// <summary>

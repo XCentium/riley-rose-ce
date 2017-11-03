@@ -22,7 +22,8 @@
   },
   "dependencies": {
     "Sitecore.Commerce.Plugin.Fulfillment": "1.2.159",
-    "Sitecore.Commerce.Plugin.Payments": "1.2.159"
+    "Sitecore.Commerce.Plugin.Payments": "1.2.159",
+    "Sitecore.Commerce.Plugin.GiftCards": "1.2.159"
   },
   "frameworks": {
     "net461": {

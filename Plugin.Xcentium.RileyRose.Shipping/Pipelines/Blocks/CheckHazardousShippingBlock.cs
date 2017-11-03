@@ -12,18 +12,32 @@ using System.Threading.Tasks;
 
 namespace Plugin.Xcentium.RileyRose.Shipping.Pipelines.Blocks
 { 
+    /// <summary>
+    /// 
+    /// </summary>
     [PipelineDisplayName("Plugin.Xcentium.RileyRose.Shipping.Pipelines.Blocks.CheckHazardousShipping")]
     public class CheckHazardousShippingBlock : PipelineBlock<Cart, Cart, CommercePipelineExecutionContext>
     {
         private readonly GetSellableItemCommand _getSellableItemCommand;
         private readonly GetFulfillmentMethodsCommand _getFulfillmentMethodsCommand;
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="getSellableItemCommand"></param>
+        /// <param name="getFulfillmentMethodsCommand"></param>
         public CheckHazardousShippingBlock(GetSellableItemCommand getSellableItemCommand, GetFulfillmentMethodsCommand getFulfillmentMethodsCommand)
             : base((string)null)
         {
             this._getSellableItemCommand = getSellableItemCommand;
             this._getFulfillmentMethodsCommand = getFulfillmentMethodsCommand;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="arg"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public override async Task<Cart> Run(Cart arg, CommercePipelineExecutionContext context)
         {
             Condition.Requires<Cart>(arg).IsNotNull<Cart>(string.Format("{0}: the cart can not be null.", (object)this.Name));

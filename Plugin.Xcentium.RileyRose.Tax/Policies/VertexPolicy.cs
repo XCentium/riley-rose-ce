@@ -20,7 +20,7 @@ namespace Plugin.Xcentium.RileyRose.Tax
             CompanyCode = "448120";
             AccountId = "2000196050";
             UserName = "wsapi";
-            Password = "wsapi@";
+            Password = "wsapi@!";
             ClassCode = "2002";
             CustomerCode = "2002";
             InProductionMode = false;

@@ -4,8 +4,9 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using Plugin.Xcentium.RileyRose.Pipelines.Blocks;
 using Plugin.Xcentium.RileyRose.Shipping.Pipelines.Blocks;
-
+using Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks;
 
 
 namespace Plugin.Xcentium.RileyRose
@@ -50,7 +51,8 @@ namespace Plugin.Xcentium.RileyRose
                     .Add<CalculateCartLinesFulfillmentBlockEx>().After<CalculateCartLinesFulfillmentBlock>()
                     .Add<ValidateCartCouponsBlock>()
                     .Add<CalculateCartLinesPromotionsBlock>()
-                    .Add<CalculateCartLinesTaxBlock>()
+                   // .Add<CalculateCartLinesTaxBlock>()
+                     .Add<UpdateCalculateCartLinesTaxBlock>()
                     .Add<CalculateCartLinesTotalsBlock>())
 
                .ConfigurePipeline<ICalculateCartPipeline>(builder => builder
@@ -58,13 +60,18 @@ namespace Plugin.Xcentium.RileyRose
                     .Add<CalculateCartFulfillmentBlock>()
                     .Add<CalculateCartFulfillmentBlockEx>().After<CalculateCartFulfillmentBlock>()
                     .Add<CalculateCartPromotionsBlock>()
-                    .Add<CalculateCartTaxBlock>()
+                   // .Add<CalculateCartTaxBlock>()
+                     .Add<UpdateCalculateCartTaxBlock>()
                     .Add<CalculateCartTotalsBlock>()
                     .Add<CalculateCartPaymentsBlock>())
 
                 .ConfigurePipeline<ICalculateSellableItemSellPricePipeline>(builder => builder
                         .Add<Plugin.Xcentium.RileyRose.Pipelines.Blocks.SetSalesPriceBlock>().After<CalculateSellableItemSellPriceBlock>()
                 )
+
+                .ConfigurePipeline<IOrderPlacedPipeline>(builder => builder
+                    .Replace<OrderPlacedAssignConfirmationIdBlock, CustomizeOrderNumber>())
+
 
                 .ConfigurePipeline<ICalculateVariationsSellPricePipeline>(builder => builder
                     .Add<Plugin.Xcentium.RileyRose.Pipelines.Blocks.SetVariantSalePriceBlock>().After<CalculateVariationsSellPriceBlock>())

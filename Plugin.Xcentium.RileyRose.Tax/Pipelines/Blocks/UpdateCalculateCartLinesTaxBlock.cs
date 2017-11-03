@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Sitecore.Commerce.Core;
@@ -47,12 +49,25 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
                 return await Task.FromResult(arg);
             }
 
+
             var currencyCode = context.CommerceContext.CurrentCurrency();
             var globalTaxPolicy = context.GetPolicy<GlobalTaxPolicy>();
             var defaultItemTaxRate = globalTaxPolicy.DefaultCartTaxRate;
             var taxRate = defaultItemTaxRate;
             var globalPricingPolicy = context.GetPolicy<GlobalPricingPolicy>();
             var vertexTaxPolicy = context.GetPolicy<VertexPolicy>();
+
+            context.Logger.LogInformation("Vertex Pass:" + vertexTaxPolicy.Password);
+
+            IPAddress[] localIPs = Dns.GetHostAddresses(Dns.GetHostName());
+            foreach (IPAddress addr in localIPs)
+            {
+                if (addr.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    Console.WriteLine(addr);
+                    context.Logger.LogInformation("IP:" + addr);
+                }
+            }
 
             context.Logger.LogDebug($"{(object) this.Name} - Policy:{(object) globalTaxPolicy.TaxCalculationEnabled}", Array.Empty<object>());
             context.Logger.LogDebug($"{(object) this.Name} - Item Tax Rate:{(object) defaultItemTaxRate}", Array.Empty<object>());
@@ -101,9 +116,10 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
                     //Login
                     var login = new LoginType
                     {
-                        UserName = vertexTaxPolicy.UserName,
-                        Password = vertexTaxPolicy.Password
+                        UserName = "wsapi_xc", //vertexTaxPolicy.UserName,
+                        Password = "wsapi_xc@!", //vertexTaxPolicy.Password
                     };
+                    context.Logger.LogInformation("Vertex Pass:" + login.Password);
 
                     //Customer
                     var customerCode =
@@ -203,22 +219,36 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
                     envelope.Login = login;
                     envelope.Item = reqInvoice;
 
-
-
-                    using (var client = new CalculateTaxWS60Client())
+                    try
                     {
-                        client.calculateTax60(ref envelope);
-                        
-                        var resInvoice = envelope.Item as InvoiceResponseType;
+                        var remoteAddress = new System.ServiceModel.EndpointAddress("http://10.110.10.68:8095/vertex-ws/services/CalculateTax60");
 
-                        if (resInvoice != null) taxRate = resInvoice.TotalTax.Value;
+                        using (CalculateTaxWS60Client client = new CalculateTaxWS60Client(new System.ServiceModel.BasicHttpBinding(), remoteAddress))
+                        {
+                            client.calculateTax60(ref envelope);
 
-                        context.Logger.LogDebug($"{(object) this.Name} - Vertex Item Tax Rate:{(object) taxRate}", Array.Empty<object>());
+                            var resInvoice = envelope.Item as InvoiceResponseType;
 
-                        resInvoice = null;
+                            if (resInvoice != null) taxRate = resInvoice.TotalTax.Value;
 
-                        client.Close();
+                            context.Logger.LogInformation($"{(object)this.Name} - Vertex Item Tax Rate: {(object)taxRate}", Array.Empty<object>());
+
+                            resInvoice = null;
+
+                            client.Close();
+                        }
                     }
+                    catch (Exception ex)
+                    {
+
+                        context.Logger.LogInformation($"{(object)this.Name} - Vertex Failed1 : {(object)ex.Message}", Array.Empty<object>());
+
+
+                        context.Logger.LogInformation("Vertex Failed1");
+
+                    }
+
+
 
                     reqLineItems = null; envelope = null; reqInvoice = null;  customerCode = null; seller = null; sellerLocation = null; buyerLocation = null; login = null; customer = null; currency = null;
 
@@ -250,6 +280,7 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
                 adjustments.Add(awardedAdjustment);
 
             }
+
             return await Task.FromResult(arg);
         }
     }

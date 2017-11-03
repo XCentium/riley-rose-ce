@@ -15,6 +15,9 @@ using Sitecore.Framework.Pipelines;
 
 namespace Plugin.Xcentium.RileyRose.Shipping.Pipelines.Blocks
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [PipelineDisplayName("Plugin.Xcentium.RileyRose.Shipping.Pipelines.Blocks.CalculateCartShippingBlockEx")]
     public class CalculateCartShippingBlockEx : PipelineBlock<Cart, Cart, CommercePipelineExecutionContext>
     {
@@ -22,6 +25,12 @@ namespace Plugin.Xcentium.RileyRose.Shipping.Pipelines.Blocks
         private readonly IGetItemByPathPipeline _getItemByPathPipeline;
         private readonly IGetItemChildrenPipeline _getItemChildrenByPathPipeline;
  
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="getItemByPathPipeline"></param>
+        /// <param name="getItemChildrenByPathPipeline"></param>
+        /// <param name="getSellableItemPipeline"></param>
         public CalculateCartShippingBlockEx(IGetItemByPathPipeline getItemByPathPipeline, IGetItemChildrenPipeline getItemChildrenByPathPipeline,
           IGetSellableItemPipeline getSellableItemPipeline) : base(null)
         {
@@ -30,6 +39,12 @@ namespace Plugin.Xcentium.RileyRose.Shipping.Pipelines.Blocks
             _getItemChildrenByPathPipeline = getItemChildrenByPathPipeline;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="arg"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public override async Task<Cart> Run(Cart arg, CommercePipelineExecutionContext context)
         {
             //Null check for cart

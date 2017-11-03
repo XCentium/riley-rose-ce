@@ -87,20 +87,6 @@ namespace Plugin.Xcentium.RileyRose.Pipelines.Blocks
 
                     existingEnvironment.SetPolicy(fulfillmentPolicy);
 
-                    //var pos = 0;
-                    //foreach (var environmentPolicy in existingEnvironment.Policies)
-                    //{
-                    //    if (environmentPolicy.PolicyId == typeof(GlobalPhysicalFulfillmentPolicy).Name)
-                    //        break;
-                    //    pos++;
-                    //}
-
-                    //if (pos > 0)
-                    //{
-                    //    existingEnvironment.Policies.RemoveAt(pos);
-                    //    existingEnvironment.Policies.Add(fulfillmentPolicy);
-                    //    existingEnvironment.IsPersisted = true;
-                    //}
                 }
                 catch (Exception ex)
                 {

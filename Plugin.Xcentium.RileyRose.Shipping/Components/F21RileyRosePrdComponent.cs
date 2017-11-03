@@ -16,6 +16,9 @@ namespace Plugin.Xcentium.RileyRose.Shipping.Components
     /// </summary>
     public class F21RileyRosePrdComponent : Component
     { 
+        /// <summary>
+        /// 
+        /// </summary>
         public bool IsHazardous { get; set; }
 
         /// <summary>

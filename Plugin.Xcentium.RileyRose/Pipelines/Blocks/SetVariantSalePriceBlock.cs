@@ -37,8 +37,15 @@ namespace Plugin.Xcentium.RileyRose.Pipelines.Blocks
             if (arg.HasComponent<PriceSnapshotComponent>())
                 arg.Components.Remove((Component)arg.GetComponent<PriceSnapshotComponent>());
 
-            var basePriceStr = arg.GetPolicy<PurchaseOptionMoneyPolicy>().SellPrice.Amount.ToString(CultureInfo.InvariantCulture);
+            var purchasePricePolicy = arg.GetPolicy<PurchaseOptionMoneyPolicy>();
 
+            var basePriceStr = product.ListPrice.ToString(CultureInfo.InvariantCulture);
+
+            if (purchasePricePolicy.SellPrice != null)
+            {
+                basePriceStr = purchasePricePolicy.SellPrice.Amount.ToString(CultureInfo.InvariantCulture);
+            }
+         
             if (basePriceStr == string.Empty)
             {
                 basePriceStr = product.ListPrice.ToString(CultureInfo.InvariantCulture);

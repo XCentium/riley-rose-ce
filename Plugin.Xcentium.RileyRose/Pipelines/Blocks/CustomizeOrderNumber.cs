@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Sitecore.Commerce.Core;
-using Sitecore.Framework.Pipelines;
-using Microsoft.Extensions.Logging;
-
-using Sitecore.Commerce.Core.Commands;
 using Sitecore.Commerce.Plugin.Orders;
+using Sitecore.Framework.Pipelines;
+
+using Microsoft.Extensions.Logging;
+using Plugin.Xcentium.RileyRose.Pipelines.Helper;
 using Sitecore.Framework.Conditions;
 
 
@@ -16,7 +16,7 @@ namespace Plugin.Xcentium.RileyRose.Pipelines.Blocks
     /// <summary>
     /// 
     /// </summary>
-    public class OrderNumberBlock : PipelineBlock<Order, Order, CommercePipelineExecutionContext>
+    public class CustomizeOrderNumber : PipelineBlock<Order, Order, CommercePipelineExecutionContext>
     {
         /// <summary>
         /// 
@@ -24,24 +24,23 @@ namespace Plugin.Xcentium.RileyRose.Pipelines.Blocks
         /// <param name="order"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        public override async Task<Order> Run(Order order, CommercePipelineExecutionContext context)
+        public override Task<Order> Run(Order order, CommercePipelineExecutionContext context)
         {
             Condition.Requires<Order>(order).IsNotNull<Order>("The order can not be null");
-            string uniqueCode = Guid.NewGuid().ToString("B");
-            await Task.Delay(10);
+            var uniqueCode = Guid.NewGuid().ToString("B");
             try
             {
-                // get all orders in the system
-                // add to order start and assign
-
-               // uniqueCode = "asdf";
+                var count = OrderNumberSingleton.Instance.GetOrderCount();
+                var code = 20000000 + count;
+                uniqueCode = code.ToString();
             }
             catch (Exception ex)
             {
                 context.Logger.LogError(string.Format("{0}-UniqueCodeException: UniqueCode={1}|Stack={2}", (object)this.Name, (object)ex.Message, (object)ex.StackTrace));
             }
             order.OrderConfirmationId = uniqueCode;
-            return order;
+
+            return Task.FromResult<Order>(order);
         }
     }
 }

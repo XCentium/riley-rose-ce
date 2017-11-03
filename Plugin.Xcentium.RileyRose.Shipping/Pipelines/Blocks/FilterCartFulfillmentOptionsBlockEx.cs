@@ -26,17 +26,30 @@ namespace Plugin.Xcentium.RileyRose.Shipping.Pipelines.Blocks
 {
     // public class FilterCartFulfillmentOptionsBlockEx
 
+        /// <summary>
+        /// 
+        /// </summary>
     [PipelineDisplayName("Plugin.Xcentium.RileyRose.Shipping.Pipelines.Blocks.FilterCartFulfillmentOptionsBlockEx")]
     public class FilterCartFulfillmentOptionsBlockEx : PipelineBlock<CartArgument, IEnumerable<FulfillmentOption>, CommercePipelineExecutionContext>
     {
         private readonly IGetFulfillmentOptionsPipeline _getOptions;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="getOptionsPipeline"></param>
         public FilterCartFulfillmentOptionsBlockEx(IGetFulfillmentOptionsPipeline getOptionsPipeline)
           : base((string)null)
         {
             this._getOptions = getOptionsPipeline;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="arg"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public override async Task<IEnumerable<FulfillmentOption>> Run(CartArgument arg, CommercePipelineExecutionContext context)
         {
             Condition.Requires<CartArgument>(arg).IsNotNull<CartArgument>("The arg can not be null");
