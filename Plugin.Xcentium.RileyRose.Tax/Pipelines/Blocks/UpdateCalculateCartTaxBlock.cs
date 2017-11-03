@@ -109,10 +109,23 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
             var defaultTaxRate = globalTaxPolicy.DefaultCartTaxRate;
             var taxRate = defaultTaxRate;
             var vertexTaxPolicy = context.GetPolicy<VertexPolicy>();
+            var isCm = false;
+            var isCd = false;
 
-            context.Logger.LogInformation("Vertex Pass:" + vertexTaxPolicy.Password);
+            var localIPs = Dns.GetHostAddresses(Dns.GetHostName()).ToList();
+            if (localIPs.Any())
+            {
+                foreach (IPAddress addr in localIPs)
+                {
+                    if (addr.AddressFamily == AddressFamily.InterNetwork)
+                    {
+                        if (addr.ToString() == "10.203.50.5") { isCm = true; }
+                        if (addr.ToString() == "10.203.60.5") { isCd = true; }
+                    }
+                }
+            }
 
-            if (arg.Lines.Any() && arg.HasComponent<PhysicalFulfillmentComponent>())
+            if (arg.Lines.Any() && arg.HasComponent<PhysicalFulfillmentComponent>() && (isCm || isCd))
             {
                 var cartComponent = arg.GetComponent<PhysicalFulfillmentComponent>();
                 ShippingParty = cartComponent?.ShippingParty;
@@ -150,16 +163,6 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
                     };
 
                     context.Logger.LogInformation("Vertex Pass:" + login.Password);
-
-                    IPAddress[] localIPs = Dns.GetHostAddresses(Dns.GetHostName());
-                    foreach (IPAddress addr in localIPs)
-                    {
-                        if (addr.AddressFamily == AddressFamily.InterNetwork)
-                        {
-                            Console.WriteLine(addr);
-                            context.Logger.LogInformation("IP:" + addr);
-                        }
-                    }
 
                     //Customer
                     var customerCode =
