@@ -7,7 +7,9 @@
     "EncryptionProtectionType": "Machine",
     "EncryptionCertificateHash": "Enter a valid certificate thumbprint for a PXF file. X-509 not supported yet",
     "EncryptionSID": "Enter a valid SID for a domain registered user",
-    "EncryptionKeyStorageLocation": "c:\\Encryption-Keys\\"
+    "EncryptionKeyStorageLocation": "c:\\Encryption-Keys\\",
+    "InitialOrderStatusCode": "0002",
+    "RileyRoseInterface": "Data Source=localhost;Initial Catalog=rileyroseinterface;Integrated Security=False;User ID=sa;Password=Srknth351986!"
   },
   "ApplicationInsights": {
     "InstrumentationKey": "",

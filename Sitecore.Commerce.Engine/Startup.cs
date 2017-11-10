@@ -134,7 +134,6 @@ namespace Sitecore.Commerce.Engine
             services.AddMvc();
 
             services.Configure<LoggingSettings>(options => this.Configuration.GetSection("Logging").Bind(options));
-
             services.AddApplicationInsightsTelemetry(this.Configuration);
             services.Configure<ApplicationInsightsSettings>(options => this.Configuration.GetSection("ApplicationInsights").Bind(options));
 
@@ -161,6 +160,7 @@ namespace Sitecore.Commerce.Engine
             services.AddSingleton(this._logger);
 
             services.Configure<CertificatesSettings>(this.Configuration.GetSection("Certificates"));
+            services.AddSingleton<IConfiguration>(Configuration);
         }
 
         /// <summary>
