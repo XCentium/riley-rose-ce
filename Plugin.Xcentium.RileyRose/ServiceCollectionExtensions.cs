@@ -4,9 +4,11 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using Plugin.Xcentium.RileyRose.Payment.Pipelines.Blocks;
 using Plugin.Xcentium.RileyRose.Pipelines.Blocks;
 using Plugin.Xcentium.RileyRose.Shipping.Pipelines.Blocks;
 using Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks;
+using Sitecore.Commerce.Plugin.GiftCards;
 
 
 namespace Plugin.Xcentium.RileyRose
@@ -75,6 +77,35 @@ namespace Plugin.Xcentium.RileyRose
 
                 .ConfigurePipeline<ICalculateVariationsSellPricePipeline>(builder => builder
                     .Add<Plugin.Xcentium.RileyRose.Pipelines.Blocks.SetVariantSalePriceBlock>().After<CalculateVariationsSellPriceBlock>())
+
+                .ConfigurePipeline<ICreateOrderPipeline>(d =>
+                {
+                    d.Add<CreateFederatedPaymentBlock>().Before<CreateOrderBlock>();
+                })
+
+                              //-----------------
+
+                .ConfigurePipeline<IAddPaymentsPipeline>(d =>
+                {
+                    d.Replace<AddPaymentsBlock, AddPaymentsBlockEx>();
+                })
+                .ConfigurePipeline<IAddPaymentsPipeline>(d =>
+                {
+                    d.Replace<ValidateGiftCardPaymentBlock, ValidateGiftCardPaymentBlockEx>();
+                })
+
+                .ConfigurePipeline<IAddPaymentsPipeline>(d =>
+                {
+                    d.Add<ValidateGiftCardPaymentBlock>().Before<CreateOrderBlock>();
+
+                })
+                .ConfigurePipeline<ICalculateCartPipeline>(d =>
+                {
+                    //d.Add<ValidateGiftCardPaymentBlock>().Before<CalculateCartTotalsBlock>();
+
+                })
+
+              //--------------------
 
 
               .ConfigurePipeline<IAddPaymentsPipeline>(builder => builder.Add<ValidateCartHasFulfillmentBlock>().After<ValidateCartAndPaymentsBlock>()));
