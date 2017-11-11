@@ -1,6 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Plugin.Xcentium.RileyRose.Payment.Helper;
 using Sitecore.Commerce.Core;
+using Sitecore.Commerce.Plugin.GiftCards;
 using Sitecore.Commerce.Plugin.Orders;
 using Sitecore.Commerce.Plugin.Payments;
 using Sitecore.Framework.Conditions;
@@ -26,49 +33,123 @@ namespace Plugin.Xcentium.RileyRose.Payment.Pipelines.Blocks
             Condition.Requires(arg).IsNotNull($"{this.Name}: The cart can not be null");
 
             var cart = arg.Cart;
+
+
             if (!cart.HasComponent<FederatedPaymentComponent>())
             {
                 return arg;
             }
 
-            var payment = cart.GetComponent<FederatedPaymentComponent>();
 
-            if (string.IsNullOrEmpty(payment.PaymentMethodNonce))
+            if (cart.HasComponent<FederatedPaymentComponent>())
             {
-                context.Abort(
-                    await context.CommerceContext.AddMessage(
-                    context.GetPolicy<KnownResultCodes>().Error,
-                    "InvalidOrMissingPropertyValue",
-                    new object[] { "PaymentMethodNonce" },
-                    $"Invalid or missing value for property 'PaymentMethodNonce'."), context);
+                var payment = cart.GetComponent<FederatedPaymentComponent>();
 
-                return arg;
+                if (string.IsNullOrEmpty(payment.PaymentMethodNonce))
+                {
+                    context.Abort(
+                        await context.CommerceContext.AddMessage(
+                            context.GetPolicy<KnownResultCodes>().Error,
+                            "InvalidOrMissingPropertyValue",
+                            new object[] { "PaymentMethodNonce" },
+                            $"Invalid or missing value for property 'PaymentMethodNonce'."), context);
+
+                    return arg;
+                }
+
+
+                try
+                {
+                    if (payment.PaymentMethodNonce.ToLower().Contains("c|") || payment.PaymentMethodNonce.ToLower().Contains("cg|"))
+                    {
+                        var strList = payment.PaymentMethodNonce.Split('|').ToList();
+
+                        var dicQueryString = GetChasePaymentDataList(strList[1]);
+                        if (dicQueryString != null)
+                        {
+                            payment.TransactionId = dicQueryString["TxnGUID"];
+                            payment.TransactionStatus = dicQueryString["message"];
+                            payment.MaskedNumber = dicQueryString["mPAN"];
+                            payment.ExpiresMonth = int.Parse(dicQueryString["exp"].Substring(0, 2));
+                            payment.ExpiresYear = int.Parse(dicQueryString["exp"]
+                                .Substring(dicQueryString["exp"].Length - 2, 2));
+                            payment.CardType = dicQueryString["type"];
+
+                            payment.PaymentMethodNonce = strList[0] + "|" + dicQueryString["type"] + "|" + dicQueryString["mPAN"] +
+                                                         "|" + dicQueryString["exp"] + "|" + dicQueryString["uID"];
+                        }
+                    }
+                    return arg;
+                }
+                catch (Exception ex)
+                {
+                    context.Abort(
+
+                        await context.CommerceContext.AddMessage(
+                            context.GetPolicy<KnownResultCodes>().Error,
+                            "InvalidClientPolicy",
+                            new object[] { "PaypalPayment" },
+                            $"{this.Name}. Invalid PaypalPayment { ex.Message }"), context);
+                    return arg;
+                }
             }
 
+            return arg;
 
-            try
-            {
-                payment.TransactionId = GenerateRandomNo().ToString();
-                payment.TransactionStatus = Constants.FederatedPayment.Success;
-
-                payment.MaskedNumber = Constants.FederatedPayment.MaskedNumber;
-                payment.ExpiresMonth = int.Parse(DateTime.Today.Month.ToString());
-                payment.ExpiresYear = int.Parse(DateTime.Today.Year.ToString());
-                payment.CardType = Constants.FederatedPayment.CardType;
-                return arg;
-            }
-            catch (Exception ex)
-            {
-                context.Abort(
-
-                 await context.CommerceContext.AddMessage(
-                    context.GetPolicy<KnownResultCodes>().Error,
-                    "InvalidClientPolicy",
-                    new object[] { "PaypalPayment" },
-                    $"{this.Name}. Invalid PaypalPayment { ex.Message }"), context);
-                return arg;
-            }
         }
+
+        private Dictionary<string,string> GetChasePaymentDataList(string uid)
+        {
+            var connStr = "http://cf.reference.storefront.com";
+            // http://cf.reference.storefront.com/rileyroseapi/checkout/GetPaymentInfo?uid=2C4465E2AC14ACA591D89E4C5EE8C1C4
+
+            var url = $"{connStr}/{"rileyroseapi/checkout/GetPaymentInfo"}?uid={uid}";
+
+            var request = (HttpWebRequest)WebRequest.Create(url);
+            var response = (HttpWebResponse)request.GetResponse();
+            using (var stream = response.GetResponseStream())
+            {
+                if (stream == null) return null;
+                using (var reader = new StreamReader(stream))
+                {
+                    var responseString = reader.ReadToEnd().Trim();
+                    if (!string.IsNullOrEmpty(responseString))
+                    {
+                        try
+                        {
+                            var orderCounterResponse =
+                                JsonConvert.DeserializeObject<GetPaymentResponse>(responseString);
+                            if (orderCounterResponse.Success)
+                            {
+
+                                var qstr = orderCounterResponse.Result;
+
+                                if (!string.IsNullOrEmpty(qstr) && qstr.Contains("="))
+                                {
+                                    var dicQueryString =
+                                        qstr.Split('&')
+                                            .ToDictionary(c => c.Split('=')[0],
+                                                c => Uri.UnescapeDataString(c.Split('=')[1]));
+
+                                    return dicQueryString;
+
+
+                                }
+
+
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex);
+                        }
+                    }
+                }
+            }
+
+            return null;
+        }
+
         /// <summary>
         /// 
         /// </summary>
