@@ -64,7 +64,6 @@ namespace Plugin.Xcentium.RileyRose.Pipelines.Blocks
                         sqlCommand.Parameters.Add(Constants.StoredProcedures.Parameters.PssTracking, SqlDbType.VarChar).Value = string.Empty;
                         sqlCommand.Parameters.Add(Constants.StoredProcedures.Parameters.RegDate, SqlDbType.DateTime).Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
                         sqlCommand.Parameters.Add(Constants.StoredProcedures.Parameters.Posted, SqlDbType.Bit).Value = true;
-                        sqlCommand.Parameters.Add(Constants.StoredProcedures.Parameters.PostDate, SqlDbType.DateTime).Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
                         sqlCommand.Parameters.Add(Constants.StoredProcedures.Parameters.MsReplicationVersion, SqlDbType.UniqueIdentifier).Value = Guid.NewGuid();
                         sqlCommand.Parameters.Add(Constants.StoredProcedures.Parameters.ShipCDompany, SqlDbType.VarChar).Value = string.Empty;
 
