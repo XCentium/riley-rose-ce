@@ -65,18 +65,32 @@ namespace Plugin.Xcentium.RileyRose.Payment.Pipelines.Blocks
                         var strList = payment.PaymentMethodNonce.Split('|').ToList();
 
                         var dicQueryString = GetChasePaymentDataList(strList[1]);
+
                         if (dicQueryString != null)
                         {
-                            payment.TransactionId = dicQueryString["TxnGUID"];
-                            payment.TransactionStatus = dicQueryString["message"];
-                            payment.MaskedNumber = dicQueryString["mPAN"];
-                            payment.ExpiresMonth = int.Parse(dicQueryString["exp"].Substring(0, 2));
-                            payment.ExpiresYear = int.Parse(dicQueryString["exp"]
-                                .Substring(dicQueryString["exp"].Length - 2, 2));
-                            payment.CardType = dicQueryString["type"];
+                            var txnGuid = dicQueryString.ContainsKey("TxnGUID") ? dicQueryString["TxnGUID"] : string.Empty;
+                            var message = dicQueryString.ContainsKey("message") ? dicQueryString["message"] : string.Empty;
+                            var maskedCreditCardNumber = dicQueryString.ContainsKey("mPAN") ? dicQueryString["mPAN"] : string.Empty;
+                            var expirationDate = dicQueryString.ContainsKey("exp") ? dicQueryString["exp"] : string.Empty;
+                            var type = dicQueryString.ContainsKey("type") ? dicQueryString["type"] : string.Empty;
+                            var uId = dicQueryString.ContainsKey("uID") ? dicQueryString["uID"] : string.Empty;
 
-                            payment.PaymentMethodNonce = strList[0] + "|" + dicQueryString["type"] + "|" + dicQueryString["mPAN"] +
-                                                         "|" + dicQueryString["exp"] + "|" + dicQueryString["uID"];
+                            payment.TransactionId = txnGuid;
+                            payment.TransactionStatus = message;
+                            payment.MaskedNumber = maskedCreditCardNumber;
+
+                            if (!string.IsNullOrEmpty(expirationDate))
+                            {
+                                payment.ExpiresMonth = int.Parse(expirationDate.Substring(0, 2));
+                                payment.ExpiresYear = int.Parse(expirationDate.Substring(expirationDate.Length - 2, 2));
+                            }
+
+                            payment.CardType = type;
+                            payment.PaymentMethodNonce = $"{strList[0]}|" +
+                                                         $"{type}|" +
+                                                         $"{maskedCreditCardNumber}|" +
+                                                         $"{expirationDate}|" +
+                                                         $"{uId}";
                         }
                     }
                     return arg;
@@ -84,12 +98,12 @@ namespace Plugin.Xcentium.RileyRose.Payment.Pipelines.Blocks
                 catch (Exception ex)
                 {
                     context.Abort(
-
                         await context.CommerceContext.AddMessage(
                             context.GetPolicy<KnownResultCodes>().Error,
                             "InvalidClientPolicy",
-                            new object[] { "PaypalPayment" },
-                            $"{this.Name}. Invalid PaypalPayment { ex.Message }"), context);
+                            new object[] { "CreditCardPayment" },
+                            $"{this.Name}. Invalid CreditCardPayment { ex.Message }"),
+                            context);
                     return arg;
                 }
             }
@@ -122,12 +136,12 @@ namespace Plugin.Xcentium.RileyRose.Payment.Pipelines.Blocks
                             if (orderCounterResponse.Success)
                             {
 
-                                var qstr = orderCounterResponse.Result;
+                                var queryResult = orderCounterResponse.Result;
 
-                                if (!string.IsNullOrEmpty(qstr) && qstr.Contains("="))
+                                if (!string.IsNullOrEmpty(queryResult) && queryResult.Contains("="))
                                 {
                                     var dicQueryString =
-                                        qstr.Split('&')
+                                        queryResult.Split('&')
                                             .ToDictionary(c => c.Split('=')[0],
                                                 c => Uri.UnescapeDataString(c.Split('=')[1]));
 
