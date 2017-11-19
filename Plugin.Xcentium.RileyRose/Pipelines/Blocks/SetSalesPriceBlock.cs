@@ -31,8 +31,10 @@ namespace Plugin.Xcentium.RileyRose.Pipelines.Blocks
                 return Task.FromResult<SellableItem>((SellableItem)null);
 
             var product = context.CommerceContext.Objects.OfType<Product>().FirstOrDefault<Product>((Func<Product, bool>)(p => p.ProductId.Equals(arg.FriendlyId, StringComparison.OrdinalIgnoreCase)));
-            if (product == null)
+            if (product == null || product.DefinitionName.ToLower() != "rileyroseproduct")
+            {
                 return Task.FromResult<SellableItem>(arg);
+            }
 
             if (arg.HasComponent<PriceSnapshotComponent>())
                 arg.Components.Remove((Component)arg.GetComponent<PriceSnapshotComponent>());

@@ -1,12 +1,12 @@
-{
-  "version": "1.2.159",
-  "description": "The Forever-21 Riley Rose Plugin.",
+﻿{
+  "version": "1.0.0",
+  "description": "Cart Custom Properties Plugin.",
   "copyright": "Â© 2017 XCentium.",
   "authors": [
-    "Sitecore"
+    "Xcentium"
   ],
   "packOptions": {
-    "summary": "This package contains the Riley Rose Plugin for the Sitecore Commerce Engine.",
+    "summary": "This package contains cart properties Plugin for the Sitecore Commerce Engine.",
     "tags": [
       "Sitecore",
       "Commerce",
@@ -15,7 +15,7 @@
       "Example"
     ],
     "owners": [
-      "Sitecore Corporation A/S"
+      "Xcentium"
     ],
     "releaseNotes": "release notes",
     "iconUrl": "http://www.sitecore.net/favicon.ico",
@@ -41,11 +41,6 @@
     "Sitecore.Commerce.Plugin.Shops": "1.2.159",
     "Sitecore.Commerce.Plugin.SQL": "1.2.159",
     "Sitecore.Commerce.Plugin.Tax": "1.2.159",
-    "Plugin.Xcentium.RileyRose.Shipping": "0.0.1",
-    "Plugin.Xcentium.RileyRose.Tax": "1.2.159",
-    "Plugin.Xcentium.RileyRose.Payment": "1.2.159",
-    "Plugin.Xcentium.CartProperties":  "1.0.0" 
-    //  "OctoPack": "3.6.1"
   },
   "frameworks": {
     "net461": {

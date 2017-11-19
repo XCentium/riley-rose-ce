@@ -55,10 +55,22 @@ namespace Plugin.Xcentium.RileyRose
 
                     .ConfigurePipeline<IAddCartLinePipeline>(configure => configure.Add<AddCartLineGiftCardBlock>().Before<PersistCartBlock>())
 
-                    .ConfigurePipeline<IUpdateCartLinePipeline>(configure => configure.Add<AddCartLineGiftCardBlock>().Before<ICalculateCartPipeline>()));
+                    .ConfigurePipeline<IUpdateCartLinePipeline>(configure => configure.Add<AddCartLineGiftCardBlock>().Before<ICalculateCartPipeline>())
+
+                     //// Registers the route for our custom command
+                     //.ConfigurePipeline<IConfigureServiceApiPipeline>(c => c.Add<CartProperties.Pipelines.Blocks.ConfigureServiceApiBlock>())
+
+                    
+                    
+                    
+                    );
 					
+
             services.ConfigureCartPipelines();
-            services.ConfigureOrdersPipelines();					
+            services.ConfigureOrdersPipelines();
+
+            // Register commands too.
+            //services.RegisterAllCommands(assembly);
         }
     }
 }
