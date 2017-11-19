@@ -31,10 +31,14 @@ namespace Plugin.Xcentium.RileyRose.Pipelines.Blocks
             if (!arg.HasComponent<ItemVariationsComponent>()) return Task.FromResult<SellableItem>(arg);
 
             var product = context.CommerceContext.Objects.OfType<Product>().FirstOrDefault<Product>((Func<Product, bool>)(p => p.ProductId.Equals(arg.FriendlyId, StringComparison.OrdinalIgnoreCase)));
-            if (product == null)
+            if (product == null || product.DefinitionName.ToLower() != "rileyroseproduct")
+            {
                 return Task.FromResult<SellableItem>(arg);
+            }
 
-            if (arg.HasComponent<PriceSnapshotComponent>())
+
+
+                if (arg.HasComponent<PriceSnapshotComponent>())
                 arg.Components.Remove((Component)arg.GetComponent<PriceSnapshotComponent>());
 
             var purchasePricePolicy = arg.GetPolicy<PurchaseOptionMoneyPolicy>();
