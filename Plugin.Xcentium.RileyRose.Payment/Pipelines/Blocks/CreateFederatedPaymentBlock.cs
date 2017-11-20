@@ -92,7 +92,7 @@ namespace Plugin.Xcentium.RileyRose.Payment.Pipelines.Blocks
                                                          $"{expirationDate}|" +
                                                          $"{uId}";
 
-                            if (null != strList[2])
+                            if (strList.Count > 2)
                             {
                                 payment.PaymentMethodNonce = $"{payment.PaymentMethodNonce}|{strList[2]}";
                             }
