@@ -99,7 +99,7 @@ namespace Plugin.Xcentium.RileyRose.Shipping.Util
 
             var cartShippingChargeableValue = cart.Totals.SubTotal.Amount - giftCardProductValue;
 
-            var amount = CalculateShippingCost(cartShippingChargeableValue, selectedShippingOption);
+            var amount = cartShippingChargeableValue > 0.00M ? CalculateShippingCost(cartShippingChargeableValue, selectedShippingOption) : 0.00M;
 
             var str1 = "ShippingFee";
             awardedAdjustment.Name = str1;
