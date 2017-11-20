@@ -69,18 +69,43 @@ namespace Plugin.Xcentium.RileyRose.Shipping.Util
         public static CartLevelAwardedAdjustment GetShippingAdjustment(Cart cart, List<ShippingOption> shippingOptions, CommercePipelineExecutionContext context)
         {
 
-            CartLevelAwardedAdjustment awardedAdjustment = new CartLevelAwardedAdjustment();
-            string currency = context.CommerceContext.CurrentCurrency();
-            string fulfillment = context.GetPolicy<KnownCartAdjustmentTypesPolicy>().Fulfillment;
+            var awardedAdjustment = new CartLevelAwardedAdjustment();
+            var currency = context.CommerceContext.CurrentCurrency();
+            var fulfillment = context.GetPolicy<KnownCartAdjustmentTypesPolicy>().Fulfillment;
 
             var selectedShippingOption = GetSelectedShippingOption(cart, shippingOptions);
-            decimal amount = CalculateShippingCost(cart.Totals.SubTotal.Amount, selectedShippingOption);
 
-            string str1 = "ShippingFee";
+            var giftCardProductValue = 0.00M;
+
+            if (cart.Lines != null && cart.Lines.Any())
+            {
+                var cartLines = cart.Lines.ToList();
+                foreach (var cartLineComponent in cartLines)
+                {
+                    if (cartLineComponent.HasComponent<CartProductComponent>())
+                    {
+                        var cartProductComponent = cartLineComponent.GetComponent<CartProductComponent>();
+                        if (string.Equals(cartProductComponent.ItemTemplate, "RileyRoseGiftCard",
+                            StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            giftCardProductValue += cartLineComponent.Quantity * cartLineComponent.UnitListPrice.Amount;
+                        }
+
+                    }
+                }
+            }
+            
+
+
+            var cartShippingChargeableValue = cart.Totals.SubTotal.Amount - giftCardProductValue;
+
+            var amount = CalculateShippingCost(cartShippingChargeableValue, selectedShippingOption);
+
+            var str1 = "ShippingFee";
             awardedAdjustment.Name = str1;
-            string str2 = "ShippingFee";
+            var str2 = "ShippingFee";
             awardedAdjustment.DisplayName = str2;
-            Money money = new Money(currency, amount);
+            var money = new Money(currency, amount);
             awardedAdjustment.Adjustment = money;
             awardedAdjustment.AdjustmentType = fulfillment;
             awardedAdjustment.AwardingBlock = "ShippingCalculator";

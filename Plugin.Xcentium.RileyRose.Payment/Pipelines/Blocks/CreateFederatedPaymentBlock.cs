@@ -91,6 +91,11 @@ namespace Plugin.Xcentium.RileyRose.Payment.Pipelines.Blocks
                                                          $"{maskedCreditCardNumber}|" +
                                                          $"{expirationDate}|" +
                                                          $"{uId}";
+
+                            if (null != strList[2])
+                            {
+                                payment.PaymentMethodNonce = $"{payment.PaymentMethodNonce}|{strList[2]}";
+                            }
                         }
                     }
                     return arg;
