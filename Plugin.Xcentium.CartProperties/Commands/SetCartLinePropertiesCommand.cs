@@ -33,12 +33,12 @@ namespace Plugin.Xcentium.CartProperties.Commands
             _persistEntityPipeline = persistEntityPipeline;
         }
 
-        public async Task<Cart> Process(CommerceContext commerceContext, string cartId, CartLineProperties lineProperties)
+        public async Task<Cart> Process(CommerceContext commerceContext, string cartId, CartLineProperties lineProperties, string baseUrl)
         {
             try
             {
 
-                var cart = GetCart(cartId, commerceContext);
+                var cart = GetCart(cartId, commerceContext, baseUrl);
                 if (cart == null)
                 {
                     return null;
@@ -58,8 +58,6 @@ namespace Plugin.Xcentium.CartProperties.Commands
                     }
                 }
 
-
-                // Save the cart here to make sure the new flag is set
                 var result = await this._persistEntityPipeline.Run(new PersistEntityArgument(cart), commerceContext.GetPipelineContextOptions());
 
                 return result.Entity as Cart;
@@ -70,7 +68,7 @@ namespace Plugin.Xcentium.CartProperties.Commands
             }
         }
 
-        private Cart GetCart(string cartId, CommerceContext commerceContext)
+        private Cart GetCart(string cartId, CommerceContext commerceContext, string baseUrl)
         {
             var shopName = commerceContext.CurrentShopName();
             var shopperId = commerceContext.CurrentShopperId();
@@ -78,7 +76,7 @@ namespace Plugin.Xcentium.CartProperties.Commands
             var environment = commerceContext.Environment.Name;
 
             var url =
-                $"http://localhost:5000/api/Carts('{cartId}')?$expand=Lines($expand=CartLineComponents($expand=ChildComponents)),Components($expand=ChildComponents)";
+                $"{baseUrl}/api/Carts('{cartId}')?$expand=Lines($expand=CartLineComponents($expand=ChildComponents)),Components($expand=ChildComponents)";
 
             var client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Clear();

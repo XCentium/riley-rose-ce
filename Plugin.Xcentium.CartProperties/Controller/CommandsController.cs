@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http.OData;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Plugin.Xcentium.CartProperties.Commands;
@@ -15,6 +16,7 @@ namespace Plugin.Xcentium.CartProperties.Controller
     /// </summary>
     public class CommandsController : CommerceController
     {
+
         /// <summary>
         /// 
         /// </summary>
@@ -54,7 +56,7 @@ namespace Plugin.Xcentium.CartProperties.Controller
 
             var command = this.Command<SetCartLinePropertiesCommand>();
             await Task.Delay(1);
-            var runCommand = await command.Process(this.CurrentContext, cartId, cartLineProperties);
+            var runCommand = await command.Process(this.CurrentContext, cartId, cartLineProperties, $"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}");
 
             return (IActionResult)new ObjectResult((object)runCommand);
         }
