@@ -3,30 +3,19 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Plugin.Xcentium.CartProperties.Components;
 using Plugin.Xcentium.CartProperties.Models;
 using Sitecore.Commerce.Core;
 using Sitecore.Commerce.Core.Commands;
 using Sitecore.Commerce.Plugin.Carts;
-using System.Net.Http.Headers;
-using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
 
 namespace Plugin.Xcentium.CartProperties.Commands
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public class SetCartPropertiesCommand : CommerceCommand
+    public class SetCartLinePropertiesCommand : CommerceCommand
     {
-        private readonly FindEntityPipeline _findEntityPipeline;
-        private readonly GetCartCommand _getCartCommand;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private readonly IGetCartPipeline _getCartPipeline;
 
         /// <summary>
         /// 
@@ -36,32 +25,18 @@ namespace Plugin.Xcentium.CartProperties.Commands
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="findEntityPipeline"></param>
-        /// <param name="getCartCommand"></param>
-        /// <param name="getCartPipeline"></param>
         /// <param name="serviceProvider"></param>
         /// <param name="persistEntityPipeline"></param>
-        public SetCartPropertiesCommand(FindEntityPipeline findEntityPipeline, GetCartCommand getCartCommand, IGetCartPipeline getCartPipeline,
-            IServiceProvider serviceProvider,
+        public SetCartLinePropertiesCommand(IServiceProvider serviceProvider,
             IPersistEntityPipeline persistEntityPipeline) : base(serviceProvider)
         {
-            _findEntityPipeline = findEntityPipeline;
-            _getCartCommand = getCartCommand;
-            _getCartPipeline = getCartPipeline;
             _persistEntityPipeline = persistEntityPipeline;
         }
 
-        public async Task<Cart> Process(CommerceContext commerceContext, string cartId, Models.CartProperties cartProperties, CartLineProperties lineProperties)
+        public async Task<Cart> Process(CommerceContext commerceContext, string cartId, CartLineProperties lineProperties)
         {
             try
             {
-
-                var resolveCartArgument = new ResolveCartArgument(
-                    commerceContext.CurrentShopName(),
-                    cartId,
-                    commerceContext.CurrentShopperId());
-
-                //var cart = await this._getCartPipeline.Run(resolveCartArgument, commerceContext.GetPipelineContextOptions());
 
                 var cart = GetCart(cartId, commerceContext);
                 if (cart == null)
@@ -69,11 +44,6 @@ namespace Plugin.Xcentium.CartProperties.Commands
                     return null;
                 }
 
-                // Set the custom fields on the cart
-                if (cartProperties?.Properties != null && cartProperties.Properties.KeyValues.Any())
-                {
-                    cart.GetComponent<CartComponent>().Properties = cartProperties.Properties;
-                }
 
                 // Set the custom fields on the cartlines
                 if (cart.Lines != null && cart.Lines.Any() && lineProperties != null &&
@@ -105,6 +75,7 @@ namespace Plugin.Xcentium.CartProperties.Commands
             var shopName = commerceContext.CurrentShopName();
             var shopperId = commerceContext.CurrentShopperId();
             var customerId = commerceContext.CurrentCustomerId();
+            var environment = commerceContext.Environment.Name;
 
             var url =
                 $"http://localhost:5000/api/Carts('{cartId}')?$expand=Lines($expand=CartLineComponents($expand=ChildComponents)),Components($expand=ChildComponents)";
@@ -115,22 +86,20 @@ namespace Plugin.Xcentium.CartProperties.Commands
             client.DefaultRequestHeaders.Add("ShopName", shopName);
             client.DefaultRequestHeaders.Add("ShopperId", shopperId);
             client.DefaultRequestHeaders.Add("Language", "en-US");
-            client.DefaultRequestHeaders.Add("Environment", "RileyRoseAuthoring");
+            client.DefaultRequestHeaders.Add("Environment", environment);
             client.DefaultRequestHeaders.Add("CustomerId", customerId);
-            client.DefaultRequestHeaders.Add("Currency", "USD");
+            client.DefaultRequestHeaders.Add("Currency", commerceContext.CurrentCurrency());
             client.DefaultRequestHeaders.Add("Roles", "sitecore\\Pricer Manager|sitecore\\Promotioner Manager");
 
 
             try
             {
                 var cart = new Cart();
-                // var response = client.GetStringAsync(url).Result;
 
                 var response = client.GetAsync(url).Result;
-                //response.EnsureSuccessStatusCode();
+
                 if (response != null)
                 {
-
 
                     var task = response.Content.ReadAsStreamAsync().ContinueWith(t =>
                     {
@@ -154,8 +123,6 @@ namespace Plugin.Xcentium.CartProperties.Commands
                 client.Dispose();
                 return null;
             }
-
-
 
         }
 

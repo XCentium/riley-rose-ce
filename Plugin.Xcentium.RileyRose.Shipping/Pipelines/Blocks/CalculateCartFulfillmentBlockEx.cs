@@ -60,22 +60,14 @@ namespace Plugin.Xcentium.RileyRose.Shipping.Pipelines.Blocks
         public override async Task<Cart> Run(Cart arg, CommercePipelineExecutionContext context)
         {
 
-
-
-
-        var adjustments = arg.Adjustments;
+            var adjustments = arg.Adjustments;
 
             if (adjustments == null || !adjustments.Any()) return await Task.FromResult(arg);
 
 
-            //var postalPrice = PostalChargeHelper.GetRemotePostalCharge(arg, context).Result;
-            var policy = context.GetPolicy<GlobalPhysicalFulfillmentPolicy>();
-            // var postalPrice = policy.DefaultCartFulfillmentFee.Amount;
-
-            var currency = context.CommerceContext.CurrentCurrency();
-
             //Get Shipping Options from Sitecore
-            var shippingOptions = await ShippingOptionsModel.GetData(_getItemByPathPipeline, _getItemChildrenByPathPipeline, context);
+            var shippingOptions =
+                await ShippingOptionsModel.GetData(_getItemByPathPipeline, _getItemChildrenByPathPipeline, context);
 
             //Calculate Custom Shipping Charges
             var shippingAwardedAdjustment = ShippingCalculator.GetShippingAdjustment(arg, shippingOptions, context);

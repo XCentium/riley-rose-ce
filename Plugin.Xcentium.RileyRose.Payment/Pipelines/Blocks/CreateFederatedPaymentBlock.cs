@@ -94,7 +94,11 @@ namespace Plugin.Xcentium.RileyRose.Payment.Pipelines.Blocks
 
                             if (strList.Count > 2)
                             {
-                                payment.PaymentMethodNonce = $"{payment.PaymentMethodNonce}|{strList[2]}";
+                                for (var i = 2; i < strList.Count; i++)
+                                {
+                                    payment.PaymentMethodNonce = $"{payment.PaymentMethodNonce}|{strList[i]}";
+                                }
+                                
                             }
                         }
                     }

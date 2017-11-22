@@ -13,8 +13,6 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Plugin.Xcentium.RileyRose.P
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Plugin.Xcentium.RileyRose.Shipping", "Plugin.Xcentium.RileyRose.Shipping\Plugin.Xcentium.RileyRose.Shipping.xproj", "{DB15884B-EE26-4E5E-9B83-E036F73509EA}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Plugin.Xcentium.CartProperties", "Plugin.Xcentium.CartProperties\Plugin.Xcentium.CartProperties.xproj", "{0052567B-57E6-4D24-B700-34D890F96918}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,10 +39,6 @@ Global
 		{DB15884B-EE26-4E5E-9B83-E036F73509EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB15884B-EE26-4E5E-9B83-E036F73509EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB15884B-EE26-4E5E-9B83-E036F73509EA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0052567B-57E6-4D24-B700-34D890F96918}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0052567B-57E6-4D24-B700-34D890F96918}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0052567B-57E6-4D24-B700-34D890F96918}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0052567B-57E6-4D24-B700-34D890F96918}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

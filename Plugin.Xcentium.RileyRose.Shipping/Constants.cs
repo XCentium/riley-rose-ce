@@ -72,6 +72,11 @@ namespace Plugin.Xcentium.RileyRose.Shipping
             /// 
             /// </summary>
             public const string CartLineNullText = "The cart lines cannot be null.";
+
+            /// <summary>
+            /// 
+            /// </summary>
+            public const string IsElectronic = "IsElectronic";
         }
     }
 }

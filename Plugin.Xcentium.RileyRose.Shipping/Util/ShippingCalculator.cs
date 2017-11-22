@@ -1,4 +1,5 @@
-﻿using Plugin.Xcentium.RileyRose.Shipping.Models;
+﻿using CommerceServer.Core.Catalog;
+using Plugin.Xcentium.RileyRose.Shipping.Models;
 using Sitecore.Commerce.Core;
 using Sitecore.Commerce.Plugin.Carts;
 using Sitecore.Commerce.Plugin.Fulfillment;
@@ -85,10 +86,17 @@ namespace Plugin.Xcentium.RileyRose.Shipping.Util
                     if (cartLineComponent.HasComponent<CartProductComponent>())
                     {
                         var cartProductComponent = cartLineComponent.GetComponent<CartProductComponent>();
-                        if (string.Equals(cartProductComponent.ItemTemplate, "RileyRoseGiftCard",
-                            StringComparison.InvariantCultureIgnoreCase))
+                        var product = context.CommerceContext.Objects.OfType<Product>().FirstOrDefault<Product>((Func<Product, bool>)(p => p.ProductId.Equals(cartProductComponent.Id, StringComparison.OrdinalIgnoreCase)));
+                        if (product != null)
                         {
-                            giftCardProductValue += cartLineComponent.Quantity * cartLineComponent.UnitListPrice.Amount;
+                            if (product.HasProperty(Constants.Shipping.IsElectronic))
+                            {
+                                var isElectronic = product[Constants.Shipping.IsElectronic];
+                                if ((bool)isElectronic)
+                                {
+                                    giftCardProductValue += cartLineComponent.Quantity * cartLineComponent.UnitListPrice.Amount;
+                                }
+                            }
                         }
 
                     }

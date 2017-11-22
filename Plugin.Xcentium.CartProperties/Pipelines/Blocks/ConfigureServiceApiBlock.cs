@@ -24,10 +24,10 @@ namespace Plugin.Xcentium.CartProperties.Pipelines.Blocks
         {
             Condition.Requires(modelBuilder).IsNotNull($"{base.Name}: The argument can not be null");
 
-            var configuration = modelBuilder.Action("SetCartProperties");
-            configuration.Parameter<string>("cartId");
-            configuration.Parameter<Properties>("properties");
-            configuration.ReturnsFromEntitySet<CommerceCommand>("Commands");
+            var cartLineConfiguration = modelBuilder.Action("SetCartLineProperties");
+            cartLineConfiguration.Parameter<string>("cartId");
+            cartLineConfiguration.Parameter<Properties>("properties");
+            cartLineConfiguration.ReturnsFromEntitySet<CommerceCommand>("Commands");
             return Task.FromResult(modelBuilder);
         }
     }

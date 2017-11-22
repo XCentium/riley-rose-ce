@@ -25,98 +25,39 @@ namespace Plugin.Xcentium.CartProperties.Controller
 
         }
 
-
-
+        // 
         [HttpPost]
-        [Route("SetCartProperties()")]
-        public async Task<IActionResult> SetCartProperties([FromBody] ODataActionParameters value)
+        [Route("SetCartLineProperties()")]
+        public async Task<IActionResult> SetCartLineProperties([FromBody] ODataActionParameters value)
         {
-            var cartProperties1 = new Models.CartProperties();
-
-            var newCartProperties = new Properties();
-            var kvList = new List<KeyValue>();
-            var kv1 = new KeyValue
-            {
-                Key = "Key1",
-                Value = "Value1"
-            };
-            kvList.Add(kv1);
-            var kv2 = new KeyValue
-            {
-                Key = "Key2",
-                Value = "Value2"
-            };
-            kvList.Add(kv2);
-            var kv3 = new KeyValue
-            {
-                Key = "Key3",
-                Value = "Value3"
-            };
-            kvList.Add(kv3);
-            newCartProperties.KeyValues = kvList;
-
-            cartProperties1.Properties = newCartProperties;
-
-            var cartLineProperties1 = new CartLineProperties();
-            var cartlinePropertiesList1 = new List<CartLineProperty>();
-
-            var cartLineProperty1 = new CartLineProperty
-            {
-                CartLineId = "842c488b7bc34d4699d5057f983690f8",
-                Properties = newCartProperties
-            };
-
-            cartlinePropertiesList1.Add(cartLineProperty1);
-            cartLineProperties1.CartLineProperty = cartlinePropertiesList1;
-            //string json = JsonConvert.SerializeObject(newCartProperties);
-            //string json1 = JsonConvert.SerializeObject(cartProperties1);
-            //string json2 = JsonConvert.SerializeObject(cartLineProperties1);
 
             if (!this.ModelState.IsValid)
-                return (IActionResult) new BadRequestObjectResult(this.ModelState);
+                return (IActionResult)new BadRequestObjectResult(this.ModelState);
 
-            if (value.ContainsKey("cartId"))
+            if (!value.ContainsKey("cartId")) return (IActionResult) new BadRequestObjectResult((object) value);
+            var id = value["cartId"];
+
+            if (string.IsNullOrEmpty(id?.ToString())) return (IActionResult) new BadRequestObjectResult((object) value);
+
+            var cartId = id.ToString();
+
+            var cartLineProperties = new CartLineProperties();
+            if (value.ContainsKey("cartLineProperties"))
             {
-                object obj1 = value["cartId"];
+                var cartlinePropObj = value["cartLineProperties"];
 
-                if (!string.IsNullOrEmpty(obj1?.ToString()))
+                if (!string.IsNullOrEmpty(cartLineProperties?.ToString()))
                 {
-                    var cartId = obj1.ToString();
-
-                    var cartProperties = new Models.CartProperties();
-                    var cartLineProperties = new CartLineProperties();
-
-                    if (value.ContainsKey("cartProperties"))
-                    {
-                        var obj2 = value["cartProperties"];
-
-                        if (!string.IsNullOrEmpty(obj2?.ToString()))
-                        {
-                            cartProperties = JsonConvert.DeserializeObject<Models.CartProperties>(obj2.ToString());
-                        }
-                    }
-
-                    if (value.ContainsKey("cartLineProperties"))
-                    {
-                        var obj3 = value["cartLineProperties"];
-
-                        if (!string.IsNullOrEmpty(cartLineProperties?.ToString()))
-                        {
-                            cartLineProperties = JsonConvert.DeserializeObject<CartLineProperties>(obj3.ToString());
-                        }
-                    }
-
-                    var command = this.Command<SetCartPropertiesCommand>();
-                    await Task.Delay(1);
-                    var runCommand = await command.Process(this.CurrentContext, cartId, cartProperties,
-                        cartLineProperties);
-
-                    return (IActionResult) new ObjectResult((object) command);
-
+                    cartLineProperties = JsonConvert.DeserializeObject<CartLineProperties>(cartlinePropObj.ToString());
                 }
             }
-            return (IActionResult) new BadRequestObjectResult((object) value);
 
+            var command = this.Command<SetCartLinePropertiesCommand>();
+            await Task.Delay(1);
+            var runCommand = await command.Process(this.CurrentContext, cartId, cartLineProperties);
+
+            return (IActionResult)new ObjectResult((object)runCommand);
         }
+
     }
 }
