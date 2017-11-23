@@ -59,7 +59,7 @@
         "$type": "Sitecore.Commerce.Plugin.Customers.Cs.ProfilesSqlPolicy, Sitecore.Commerce.Plugin.Customers.Cs",
         "Database": "CFSolutionStorefrontSite_profiles",
         "TrustedConnection": true,
-        "Server": "WU2RRSTGSQL01",
+        "Server": "WU2RRPRDSQL01",
         "UserName": "",
         "Password": "",
         "DebugLevel": "Production"
@@ -713,7 +713,7 @@
       {
         "$type": "Sitecore.Commerce.Plugin.SQL.EntityStoreSqlPolicy, Sitecore.Commerce.Plugin.SQL",
         "TrustedConnection": true,
-        "Server": "WU2RRSTGSQL01",
+        "Server": "WU2RRPRDSQL01",
         "UserName": "",
         "Password": "",
         "Database": "SitecoreCommerce_SharedEnvironments",
@@ -724,7 +724,7 @@
       {
         "$type": "Sitecore.Commerce.Plugin.Inventory.Cs.InventoryCatalogSqlPolicy, Sitecore.Commerce.Plugin.Inventory.Cs",
         "TrustedConnection": true,
-        "Server": "WU2RRSTGSQL01",
+        "Server": "WU2RRPRDSQL01",
         "UserName": "",
         "Password": "",
         "Database": "CFSolutionStorefrontSite_productcatalog",
@@ -756,7 +756,7 @@
       },
       {
         "$type": "Sitecore.Commerce.Plugin.Management.SitecoreConnectionPolicy, Sitecore.Commerce.Plugin.Management",
-        "Host": "cm.test.rileyrose.com",
+        "Host": "cm.rileyrose.com",
         "SitecoreDatabase": "master",
         "UserName": "ceadmin",
         "Domain": "sitecore",
@@ -1154,6 +1154,30 @@
 
             ]
           }
+        }
+      },
+      {
+        "$type": "Plugin.Xcentium.RileyRose.Tax.VertexPolicy, Plugin.Xcentium.RileyRose.Tax",
+        "PolicyId": "VertexPolicy",
+        "CompanyCode": "448120",
+        "AccountId": "2000196050",
+        "UserName": "wsapi",
+        "Password": "wsapi@!",
+        "ClassCode": "2002",
+        "CustomerCode": "2002",
+        "InProductionMode": "false",
+        "ShipFromAddressLine1": "3880 N Mission Rd",
+        "ShipFromAddressLine2": "",
+        "ShipFromAddressLine3": "",
+        "ShipFromCity": "Los Angeles",
+        "ShipFromStateOrProvinceCode": "CA",
+        "ShipFromPostalCode": "90031",
+        "ShipFromCountryCode": "US",
+
+        "Models": {
+          "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+          "$values": [
+          ]
         }
       },
       {

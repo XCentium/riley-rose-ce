@@ -1,6 +1,6 @@
 ﻿{
   "$type": "Sitecore.Commerce.Core.CommerceEnvironment, Sitecore.Commerce.Core",
-  "ArtifactStoreId": "78A1EA61-1F37-42A7-AC89-9A3F46D60CA5",
+  "ArtifactStoreId": "78A1EA61-1F37-42A7-AC89-9A3F46D60CA4",
   "Components": {
     "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Component, Sitecore.Commerce.Core]], mscorlib",
     "$values": [
@@ -30,10 +30,10 @@
   },
   "DateCreated": "2016-09-23T18:04:08.1660038Z",
   "DateUpdated": "2016-09-23T18:04:08.1760227Z",
-  "Id": "Entity-CommerceEnvironment-RileyRoseShops",
+  "Id": "Entity-CommerceEnvironment-RileyRoseAuthoring",
   "Version": 1,
   "IsPersisted": false,
-  "Name": "RileyRoseShops",
+  "Name": "RileyRoseAuthoring",
   "Policies": {
     "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Policy, Sitecore.Commerce.Core]], mscorlib",
     "$values": [
@@ -46,7 +46,7 @@
             "Catalog.DefaultSellableItems-1.0",
             "GiftCards.DefaultGiftCard-1.0",
             "GiftCards.TestGiftCards-1.0",
-            "Pricing.DefaultPriceBookShops-1.0",
+            "Pricing.DefaultPriceBook-1.0",
             "Catalog.DefaultSellableItems-1.0",
             "Environment.RileyRose.GiftCards-1.0",
             "Environment.RileyRose.SellableItems-1.0",
@@ -57,11 +57,11 @@
       },
       {
         "$type": "Sitecore.Commerce.Plugin.Customers.Cs.ProfilesSqlPolicy, Sitecore.Commerce.Plugin.Customers.Cs",
-        "Server": "WU2RRSTGSQL01",
-        "UserName": "",
-        "Password": "",
         "Database": "CFSolutionStorefrontSite_profiles",
         "TrustedConnection": true,
+        "Server": "WU2RRPRDSQL01",
+        "UserName": "",
+        "Password": "",
         "DebugLevel": "Production"
       },
       {
@@ -713,7 +713,7 @@
       {
         "$type": "Sitecore.Commerce.Plugin.SQL.EntityStoreSqlPolicy, Sitecore.Commerce.Plugin.SQL",
         "TrustedConnection": true,
-        "Server": "WU2RRSTGSQL01",
+        "Server": "WU2RRPRDSQL01",
         "UserName": "",
         "Password": "",
         "Database": "SitecoreCommerce_SharedEnvironments",
@@ -724,7 +724,7 @@
       {
         "$type": "Sitecore.Commerce.Plugin.Inventory.Cs.InventoryCatalogSqlPolicy, Sitecore.Commerce.Plugin.Inventory.Cs",
         "TrustedConnection": true,
-        "Server": "WU2RRSTGSQL01",
+        "Server": "WU2RRPRDSQL01",
         "UserName": "",
         "Password": "",
         "Database": "CFSolutionStorefrontSite_productcatalog",
@@ -741,8 +741,8 @@
         "ItemRelationshipsCacheTimeout": "10",
         "ItemAssociationsCacheTimeout": "10",
         "CatalogCollectionCacheTimeout": "10",
-        "ServiceUrl": "http://localhost:1004/CFSolutionStorefrontSiteCD_CatalogWebService/CatalogWebService.asmx",
-        "SiteName": "CFSolutionStorefrontSiteCD",
+        "ServiceUrl": "http://localhost:1004/CFSolutionStorefrontSite_CatalogWebService/CatalogWebService.asmx",
+        "SiteName": "CFSolutionStorefrontSite",
         "UseServiceAgent": false,
         "DebugLevel": "Production"
       },
@@ -756,8 +756,8 @@
       },
       {
         "$type": "Sitecore.Commerce.Plugin.Management.SitecoreConnectionPolicy, Sitecore.Commerce.Plugin.Management",
-        "Host": "test.rileyrose.com",
-        "SitecoreDatabase": "web",
+        "Host": "cm.rileyrose.com",
+        "SitecoreDatabase": "master",
         "UserName": "ceadmin",
         "Domain": "sitecore",
         "Password": "SitecoreR0ck$!"
@@ -769,22 +769,12 @@
       {
         "$type": "Sitecore.Commerce.Core.Caching.EntityMemoryCachingPolicy, Sitecore.Commerce.Core",
         "EntityFullName": "Sitecore.Commerce.Core.CommerceEnvironment",
-        "AllowCaching": true,
-        "Priority": "Normal",
-        "Expiration": 60000,
-        "CacheAsEntity": true,
-        "HasNegativeCaching": false,
-        "CacheName": "EntityCache"
+        "AllowCaching": false
       },
       {
         "$type": "Sitecore.Commerce.Core.Caching.EntityMemoryCachingPolicy, Sitecore.Commerce.Core",
         "EntityFullName": "*",
-        "AllowCaching": true,
-        "Priority": "Normal",
-        "Expiration": 60000,
-        "CacheAsEntity": true,
-        "HasNegativeCaching": false,
-        "CacheName": "EntityCache"
+        "AllowCaching": false
       },
       {
         "$type": "Sitecore.Commerce.Core.Caching.EntityMemoryCachingPolicy, Sitecore.Commerce.Core",
@@ -824,72 +814,42 @@
       {
         "$type": "Sitecore.Commerce.Core.Caching.EntityMemoryCachingPolicy, Sitecore.Commerce.Core",
         "EntityFullName": "Sitecore.Commerce.Plugin.ManagedLists.ManagedList",
-        "AllowCaching": true,
-        "Priority": "Normal",
-        "Expiration": 60000,
-        "CacheAsEntity": true,
-        "HasNegativeCaching": true,
-        "CacheName": "EntityCache"
+        "AllowCaching": false
       },
       {
         "$type": "Sitecore.Commerce.Core.Caching.EntityMemoryCachingPolicy, Sitecore.Commerce.Core",
         "EntityFullName": "Sitecore.Commerce.Core.EntityIndex",
-        "AllowCaching": true,
-        "Priority": "Normal",
-        "Expiration": 60000,
-        "CacheAsEntity": true,
-        "HasNegativeCaching": false,
-        "CacheName": "EntityCache"
+        "AllowCaching": false
       },
       {
         "$type": "Sitecore.Commerce.Core.Caching.EntityMemoryCachingPolicy, Sitecore.Commerce.Core",
         "EntityFullName": "Sitecore.Commerce.Plugin.Promotions.Promotion",
-        "AllowCaching": true,
-        "Priority": "Normal",
-        "Expiration": 60000,
-        "CacheAsEntity": true,
-        "HasNegativeCaching": false,
-        "CacheName": "Promotions.All"
+        "AllowCaching": false
+      },
+      {
+        "$type": "Sitecore.Commerce.Core.Caching.EntityMemoryCachingPolicy, Sitecore.Commerce.Core",
+        "EntityFullName": "Sitecore.Commerce.Plugin.Customers.Customer",
+        "AllowCaching": false
       },
       {
         "$type": "Sitecore.Commerce.Core.Caching.EntityMemoryCachingPolicy, Sitecore.Commerce.Core",
         "EntityFullName": "Sitecore.Commerce.Plugin.Coupons.Coupon",
-        "AllowCaching": false,
-        "Priority": "Normal",
-        "Expiration": 60000,
-        "CacheAsEntity": true,
-        "HasNegativeCaching": false,
-        "CacheName": "Coupons"
+        "AllowCaching": false
       },
       {
         "$type": "Sitecore.Commerce.Core.Caching.EntityMemoryCachingPolicy, Sitecore.Commerce.Core",
         "EntityFullName": "Sitecore.Commerce.Plugin.Catalog.SellableItem",
-        "AllowCaching": true,
-        "Priority": "Normal",
-        "Expiration": 60000,
-        "CacheAsEntity": true,
-        "HasNegativeCaching": true,
-        "CacheName": "SellableItems"
+        "AllowCaching": false
       },
       {
         "$type": "Sitecore.Commerce.Core.Caching.EntityMemoryCachingPolicy, Sitecore.Commerce.Core",
         "EntityFullName": "Sitecore.Commerce.Plugin.Pricing.PriceCard",
-        "AllowCaching": true,
-        "Priority": "Normal",
-        "Expiration": 60000,
-        "CacheAsEntity": true,
-        "HasNegativeCaching": false,
-        "CacheName": "EntityCache"
+        "AllowCaching": false
       },
       {
         "$type": "Sitecore.Commerce.Core.Caching.EntityMemoryCachingPolicy, Sitecore.Commerce.Core",
         "EntityFullName": "Sitecore.Commerce.Core.NegativeCache",
-        "AllowCaching": true,
-        "Priority": "Normal",
-        "Expiration": 60000,
-        "CacheAsEntity": true,
-        "HasNegativeCaching": false,
-        "CacheName": "EntityCache"
+        "AllowCaching": false
       },
       {
         "$type": "Sitecore.Commerce.Plugin.Journaling.EntityJournalingPolicy, Sitecore.Commerce.Plugin.Journaling",
@@ -1197,6 +1157,30 @@
         }
       },
       {
+        "$type": "Plugin.Xcentium.RileyRose.Tax.VertexPolicy, Plugin.Xcentium.RileyRose.Tax",
+        "PolicyId": "VertexPolicy",
+        "CompanyCode": "448120",
+        "AccountId": "2000196050",
+        "UserName": "wsapi",
+        "Password": "wsapi@!",
+        "ClassCode": "2002",
+        "CustomerCode": "2002",
+        "InProductionMode": "false",
+        "ShipFromAddressLine1": "3880 N Mission Rd",
+        "ShipFromAddressLine2": "",
+        "ShipFromAddressLine3": "",
+        "ShipFromCity": "Los Angeles",
+        "ShipFromStateOrProvinceCode": "CA",
+        "ShipFromPostalCode": "90031",
+        "ShipFromCountryCode": "US",
+
+        "Models": {
+          "$type": "System.Collections.Generic.List`1[[Sitecore.Commerce.Core.Model, Sitecore.Commerce.Core]], mscorlib",
+          "$values": [
+          ]
+        }
+      },
+      {
         "$type": "Plugin.Xcentium.RileyRose.RemotePricePolicy, Plugin.Xcentium.RileyRose",
         "PostagePriceRequestUrl": "http://rileyrose.xcentium.net/rileyroseapi/checkout/RemoteGetShippingPrice",
         "DefaultPostagePrice": "0",
@@ -1209,7 +1193,7 @@
       },
       {
         "$type": "Sitecore.Commerce.Core.TransactionsPolicy, Sitecore.Commerce.Core",
-        "TransactionalityEnabled": false
+        "TransactionalityEnabled": true
       }
     ]
   }
