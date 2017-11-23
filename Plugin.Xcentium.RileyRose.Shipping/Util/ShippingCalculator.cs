@@ -92,7 +92,7 @@ namespace Plugin.Xcentium.RileyRose.Shipping.Util
                             if (product.HasProperty(Constants.Shipping.IsElectronic))
                             {
                                 var isElectronic = product[Constants.Shipping.IsElectronic];
-                                if ((bool)isElectronic)
+                                if (isElectronic!= null && (bool)isElectronic)
                                 {
                                     giftCardProductValue += cartLineComponent.Quantity * cartLineComponent.UnitListPrice.Amount;
                                 }
