@@ -6,6 +6,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Plugin.Xcentium.RileyRose.Payment.Helper;
+using Plugin.Xcentium.RileyRose.Payment.Models;
 using Sitecore.Commerce.Core;
 using Sitecore.Commerce.Plugin.GiftCards;
 using Sitecore.Commerce.Plugin.Orders;
@@ -60,48 +61,58 @@ namespace Plugin.Xcentium.RileyRose.Payment.Pipelines.Blocks
 
                 try
                 {
-                    if (payment.PaymentMethodNonce.ToLower().Contains("c|") || payment.PaymentMethodNonce.ToLower().Contains("cg|"))
+                    if (!string.IsNullOrEmpty(payment.PaymentMethodNonce))
                     {
-                        var strList = payment.PaymentMethodNonce.Split('|').ToList();
+                        var orderPayment = JsonConvert.DeserializeObject<OrderPayments>(payment.PaymentMethodNonce);
 
-                        var dicQueryString = GetChasePaymentDataList(strList[1]);
-
-                        if (dicQueryString != null)
+                        if (orderPayment != null
+                            && orderPayment.PrimaryPayment.ToLower() == "credit card"
+                            && !string.IsNullOrEmpty(orderPayment.PrimaryToken))
                         {
-                            var txnGuid = dicQueryString.ContainsKey("TxnGUID") ? dicQueryString["TxnGUID"] : string.Empty;
-                            var message = dicQueryString.ContainsKey("message") ? dicQueryString["message"] : string.Empty;
-                            var maskedCreditCardNumber = dicQueryString.ContainsKey("mPAN") ? dicQueryString["mPAN"] : string.Empty;
-                            var expirationDate = dicQueryString.ContainsKey("exp") ? dicQueryString["exp"] : string.Empty;
-                            var type = dicQueryString.ContainsKey("type") ? dicQueryString["type"] : string.Empty;
-                            var uId = dicQueryString.ContainsKey("uID") ? dicQueryString["uID"] : string.Empty;
+                            var dicQueryString = GetChasePaymentDataList(orderPayment.PrimaryToken);
 
-                            payment.TransactionId = txnGuid;
-                            payment.TransactionStatus = message;
-                            payment.MaskedNumber = maskedCreditCardNumber;
 
-                            if (!string.IsNullOrEmpty(expirationDate))
+                            if (dicQueryString != null)
                             {
-                                payment.ExpiresMonth = int.Parse(expirationDate.Substring(0, 2));
-                                payment.ExpiresYear = int.Parse(expirationDate.Substring(expirationDate.Length - 2, 2));
-                            }
+                                var txnGuid = dicQueryString.ContainsKey("TxnGUID")
+                                    ? dicQueryString["TxnGUID"]
+                                    : string.Empty;
+                                var message = dicQueryString.ContainsKey("message")
+                                    ? dicQueryString["message"]
+                                    : string.Empty;
+                                var maskedCreditCardNumber =
+                                    dicQueryString.ContainsKey("mPAN") ? dicQueryString["mPAN"] : string.Empty;
+                                var expirationDate = dicQueryString.ContainsKey("exp")
+                                    ? dicQueryString["exp"]
+                                    : string.Empty;
+                                var type = dicQueryString.ContainsKey("type") ? dicQueryString["type"] : string.Empty;
+                                var uId = dicQueryString.ContainsKey("uID") ? dicQueryString["uID"] : string.Empty;
 
-                            payment.CardType = type;
-                            payment.PaymentMethodNonce = $"{strList[0]}|" +
-                                                         $"{type}|" +
-                                                         $"{maskedCreditCardNumber}|" +
-                                                         $"{expirationDate}|" +
-                                                         $"{uId}";
+                                payment.TransactionId = txnGuid;
+                                payment.TransactionStatus = message;
+                                payment.MaskedNumber = maskedCreditCardNumber;
 
-                            if (strList.Count > 2)
-                            {
-                                for (var i = 2; i < strList.Count; i++)
+                                if (!string.IsNullOrEmpty(expirationDate))
                                 {
-                                    payment.PaymentMethodNonce = $"{payment.PaymentMethodNonce}|{strList[i]}";
+                                    payment.ExpiresMonth = int.Parse(expirationDate.Substring(0, 2));
+                                    payment.ExpiresYear =
+                                        int.Parse(expirationDate.Substring(expirationDate.Length - 2, 2));
                                 }
-                                
+
+                                orderPayment.TxnGuid = txnGuid;
+                                orderPayment.MPan = maskedCreditCardNumber;
+                                orderPayment.Message = message;
+                                orderPayment.Type = type;
+                                orderPayment.Exp = !string.IsNullOrEmpty(expirationDate) ? expirationDate : string.Empty;
+                                orderPayment.UId = uId;
+                                orderPayment.ExpiresMonth = !string.IsNullOrEmpty(expirationDate)? expirationDate.Substring(0, 2): string.Empty;
+                                orderPayment.ExpiresYear = !string.IsNullOrEmpty(expirationDate) ? expirationDate.Substring(expirationDate.Length - 2, 2) : string.Empty;
+
+                                payment.PaymentMethodNonce = JsonConvert.SerializeObject(orderPayment);
                             }
                         }
                     }
+
                     return arg;
                 }
                 catch (Exception ex)
