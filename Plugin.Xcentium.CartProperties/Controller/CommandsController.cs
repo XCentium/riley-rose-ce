@@ -36,17 +36,17 @@ namespace Plugin.Xcentium.CartProperties.Controller
             if (!this.ModelState.IsValid)
                 return (IActionResult)new BadRequestObjectResult(this.ModelState);
 
-            if (!value.ContainsKey("cartId")) return (IActionResult) new BadRequestObjectResult((object) value);
-            var id = value["cartId"];
+            if (!value.ContainsKey(Constants.Settings.CartId)) return (IActionResult) new BadRequestObjectResult((object) value);
+            var id = value[Constants.Settings.CartId];
 
             if (string.IsNullOrEmpty(id?.ToString())) return (IActionResult) new BadRequestObjectResult((object) value);
 
             var cartId = id.ToString();
 
             var cartLineProperties = new CartLineProperties();
-            if (value.ContainsKey("cartLineProperties"))
+            if (value.ContainsKey(Constants.Settings.CartLineProperties))
             {
-                var cartlinePropObj = value["cartLineProperties"];
+                var cartlinePropObj = value[Constants.Settings.CartLineProperties];
 
                 if (!string.IsNullOrEmpty(cartLineProperties?.ToString()))
                 {

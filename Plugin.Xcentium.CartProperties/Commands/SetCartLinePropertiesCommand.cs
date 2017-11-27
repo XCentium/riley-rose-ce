@@ -75,19 +75,18 @@ namespace Plugin.Xcentium.CartProperties.Commands
             var customerId = commerceContext.CurrentCustomerId();
             var environment = commerceContext.Environment.Name;
 
-            var url =
-                $"{baseUrl}/api/Carts('{cartId}')?$expand=Lines($expand=CartLineComponents($expand=ChildComponents)),Components($expand=ChildComponents)";
+            var url = string.Format(Constants.Settings.EndpointUrl, baseUrl, cartId);
 
             var client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Add("ShopName", shopName);
-            client.DefaultRequestHeaders.Add("ShopperId", shopperId);
-            client.DefaultRequestHeaders.Add("Language", "en-US");
-            client.DefaultRequestHeaders.Add("Environment", environment);
-            client.DefaultRequestHeaders.Add("CustomerId", customerId);
-            client.DefaultRequestHeaders.Add("Currency", commerceContext.CurrentCurrency());
-            client.DefaultRequestHeaders.Add("Roles", "sitecore\\Pricer Manager|sitecore\\Promotioner Manager");
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(Constants.Settings.AppJson));
+            client.DefaultRequestHeaders.Add(Constants.Settings.ShopName, shopName);
+            client.DefaultRequestHeaders.Add(Constants.Settings.ShopperId, shopperId);
+            client.DefaultRequestHeaders.Add(Constants.Settings.Language, "en-US");
+            client.DefaultRequestHeaders.Add(Constants.Settings.Environment, environment);
+            client.DefaultRequestHeaders.Add(Constants.Settings.CustomerId, customerId);
+            client.DefaultRequestHeaders.Add(Constants.Settings.Currency, commerceContext.CurrentCurrency());
+            client.DefaultRequestHeaders.Add(Constants.Settings.Roles, Constants.Settings.CartRoles);
 
 
             try
