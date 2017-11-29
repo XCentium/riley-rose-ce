@@ -342,8 +342,13 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
                                         continue;
                                     }
                                     vtax.Tax = kvp.Value;
+                                    cartLineComponent.GetComponent<VertexTax>().Tax = kvp.Value;
                                 }
-                                cartLineComponent.GetComponent<VertexTax>().Tax = kvp.Value;
+                                else
+                                {
+                                    cartLineComponent.SetComponent(new VertexTax { Tax = kvp.Value });
+                                }
+
 
                                 context.Logger.LogInformation($"{(object)this.Name} - No Vertex Line Tax Found for: {(object)cartLineComponent.ItemId} Amount:{(object)kvp.Value}", Array.Empty<object>());
 
