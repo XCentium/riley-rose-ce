@@ -20,6 +20,7 @@ using Sitecore.Framework.Conditions;
 using Sitecore.Framework.Pipelines;
 using Sitecore.Framework.Rules;
 using F21Vertax.VertexO;
+using Plugin.Xcentium.RileyRose.Tax.Components;
 
 namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
 {
@@ -111,6 +112,8 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
             var vertexTaxPolicy = context.GetPolicy<VertexPolicy>();
             var isCm = false;
             var isCd = false;
+
+            var productTaxList = new List<KeyValuePair<string, decimal>>();
 
             var localIPs = Dns.GetHostAddresses(Dns.GetHostName()).ToList();
             if (localIPs.Any())
@@ -204,6 +207,7 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
 
                     foreach (var cartLineComponent in arg.Lines)
                     {
+                        
 
                         var product = new Product {productClass = cartLineComponent.ItemId};
 
@@ -290,22 +294,70 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
 
                             resInvoice = (InvoiceResponseType)envelope.Item;
 
+                            var resLineItems = resInvoice.LineItem;
 
                             taxRate = resInvoice.TotalTax.Value;
 
+                            foreach (var resLineItem in resLineItems)
+                            {
+                                var productClass = resLineItem.Product.productClass;
+                                var kvp = new KeyValuePair<string,decimal>(resLineItem.Product.productClass, resLineItem.TotalTax.Value);
+                                productTaxList.Add(kvp);
+                            }
+
                             client.Close();
 
-                            context.Logger.LogInformation($"{(object)this.Name} - Vertex Item Tax Rate2: {(object)taxRate}", Array.Empty<object>());
+                            var pct = (taxRate / arg.Totals.GrandTotal.Amount) * 100;
+
+                            context.Logger.LogInformation($"{(object)this.Name} - Vertex Item Tax Rate2: {(object)taxRate} PCT:{(object)pct}", Array.Empty<object>());
 
                         }
                     }
                     catch (Exception ex)
                     {
                         context.Logger.LogDebug(
-                            string.Format("{0} - Vertex Tax Error: {1}", (object)this.Name, (object)ex.Message),
+                            $"{(object) this.Name} - Vertex Tax Error: {(object) ex.Message}",
                             Array.Empty<object>());
 
                         context.Logger.LogInformation($"{(object)this.Name} - Vertex Failed! : {(object)ex.Message}", Array.Empty<object>());
+
+
+                    }
+
+                    if (productTaxList.Any())
+                    {
+                        context.Logger.LogInformation($"{(object)this.Name} - Vertex Lines Tax Exists: {(object)productTaxList.Count}", Array.Empty<object>());
+
+                        foreach (var cartLineComponent in arg.Lines)
+                        {
+                            var kvp = productTaxList.FirstOrDefault(x => x.Key == cartLineComponent.ItemId);
+                            if (!kvp.Equals(default(KeyValuePair<string, decimal>)))
+                            {
+                                if (cartLineComponent.HasComponent<VertexTax>())
+                                {
+                                    var vtax = cartLineComponent.GetComponent<VertexTax>();
+
+                                    if (kvp.Value == vtax.Tax)
+                                    {
+                                        continue;
+                                    }
+                                    vtax.Tax = kvp.Value;
+                                }
+                                cartLineComponent.GetComponent<VertexTax>().Tax = kvp.Value;
+
+                                context.Logger.LogInformation($"{(object)this.Name} - No Vertex Line Tax Found for: {(object)cartLineComponent.ItemId} Amount:{(object)kvp.Value}", Array.Empty<object>());
+
+                            }
+                            else
+                            {
+                                context.Logger.LogInformation($"{(object)this.Name} - No Vertex Line Tax Missing for: {(object)cartLineComponent.ItemId}", Array.Empty<object>());
+                            }
+
+                        }
+                    }
+                    else
+                    {
+                        context.Logger.LogInformation($"{(object)this.Name} - No Vertex Lines Tax: {(object)0}", Array.Empty<object>());
 
 
                     }
@@ -328,17 +380,22 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
 
             var currencyCode = context.CommerceContext.CurrentCurrency();
 
-            context.Logger.LogDebug(
-                string.Format("{0} - Policy: {1}", (object) this.Name, (object) globalTaxPolicy.TaxCalculationEnabled),
-                Array.Empty<object>());
+            context.Logger.LogDebug($"{(object) this.Name} - Policy: {(object) globalTaxPolicy.TaxCalculationEnabled}",Array.Empty<object>());
+
             var defaultCartTaxRate = globalTaxPolicy.DefaultCartTaxRate;
+
+            if (taxRate > Decimal.Zero)
+            {
+                defaultCartTaxRate = taxRate;
+            }
+
             var num1 = arg.Adjustments.Where<AwardedAdjustment>((Func<AwardedAdjustment, bool>) (p => p.IsTaxable))
                 .Aggregate<AwardedAdjustment, Decimal>(Decimal.Zero,
                     (Func<Decimal, AwardedAdjustment, Decimal>)
                     ((current, adjustment) => current + adjustment.Adjustment.Amount));
-            context.Logger.LogDebug(
-                string.Format("{0} - Tax Rate: {1} Adjustments Total:{2}", (object) this.Name,
-                    (object) defaultCartTaxRate, (object) num1), Array.Empty<object>());
+
+            context.Logger.LogDebug($"{(object) this.Name} - Tax Rate: {(object) defaultCartTaxRate} Adjustments Total:{(object) num1}", Array.Empty<object>());
+
             var source = arg.Lines.Where<CartLineComponent>((Func<CartLineComponent, bool>) (line =>
             {
                 if (globalTaxPolicy.TaxExemptTagsEnabled && line.HasComponent<CartProductComponent>())
@@ -348,18 +405,23 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
                             (IEqualityComparer<string>) StringComparer.InvariantCultureIgnoreCase);
                 return false;
             }));
+
             var adjustmentLinesTotal = new Decimal();
+
             var action = (Action<CartLineComponent>) (l => adjustmentLinesTotal += l.Totals.SubTotal.Amount);
             source.ForEach<CartLineComponent>(action);
             var amount = (arg.Totals.SubTotal.Amount + num1 - adjustmentLinesTotal) * defaultCartTaxRate;
+
             if (taxRate > Decimal.Zero)
             {
 
-                var awardedAdjustment1 = new CartLevelAwardedAdjustment();
-                var str1 = "TaxFee";
-                awardedAdjustment1.Name = str1;
-                var str2 = "TaxFee";
-                awardedAdjustment1.DisplayName = str2;
+                var awardedAdjustment1 = new CartLevelAwardedAdjustment
+                {
+                    Name = "TaxFee",
+                    DisplayName = "TaxFee"
+                };
+
+
                 var money = new Money(currencyCode, amount);
                 awardedAdjustment1.Adjustment = money;
                 var tax = context.GetPolicy<KnownCartAdjustmentTypesPolicy>().Tax;
