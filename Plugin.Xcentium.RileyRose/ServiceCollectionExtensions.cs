@@ -78,10 +78,10 @@ namespace Plugin.Xcentium.RileyRose
                 .ConfigurePipeline<ICalculateVariationsSellPricePipeline>(builder => builder
                     .Add<Plugin.Xcentium.RileyRose.Pipelines.Blocks.SetVariantSalePriceBlock>().After<CalculateVariationsSellPriceBlock>())
 
-                .ConfigurePipeline<ICreateOrderPipeline>(d =>
-                {
-                    d.Add<CreateFederatedPaymentBlock>().Before<CreateOrderBlock>();
-                })
+                //.ConfigurePipeline<ICreateOrderPipeline>(d =>
+                //{
+                //    d.Add<CreateFederatedPaymentBlock>().Before<CreateOrderBlock>();
+                //})
 
                               //-----------------
 
