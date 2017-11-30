@@ -152,7 +152,7 @@
       },
       {
         "$type": "Sitecore.Commerce.Plugin.Management.SitecoreConnectionPolicy, Sitecore.Commerce.Plugin.Management",
-        "Host": "cf.reference.storefront.com",
+        "Host": "cm.rileyrose.com",
         "SitecoreDatabase": "master",
         "UserName": "ceadmin",
         "Domain": "sitecore",
