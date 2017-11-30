@@ -23,11 +23,7 @@ namespace Plugin.Xcentium.RileyRose.Payment
             services.RegisterAllPipelineBlocks(assembly);
 
             services.Sitecore().Pipelines(
-                //config => config
-                //.ConfigurePipeline<ICreateOrderPipeline>(d =>
-                //{
-                //    d.Add<CreateFederatedPaymentBlock>().Before<CreateOrderBlock>();
-                //})
+
             );
             services.RegisterAllCommands(assembly);
 
