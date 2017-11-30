@@ -70,7 +70,7 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
         public override Task<Cart> Run(Cart arg, CommercePipelineExecutionContext context)
         {
             Condition.Requires<Cart>(arg)
-                .IsNotNull<Cart>(string.Format("{0}: The cart can not be null", (object) this.Name));
+                .IsNotNull<Cart>($"{(object) this.Name}: The cart can not be null");
             if (!arg.HasComponent<FulfillmentComponent>()) return Task.FromResult<Cart>(arg);
 
             if (arg.GetComponent<FulfillmentComponent>() is SplitFulfillmentComponent)
@@ -108,7 +108,7 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
 
             var globalTaxPolicy = context.GetPolicy<GlobalTaxPolicy>();
             var defaultTaxRate = globalTaxPolicy.DefaultCartTaxRate;
-            var taxRate = defaultTaxRate;
+            var taxRate = 0.00M;
             var vertexTaxPolicy = context.GetPolicy<VertexPolicy>();
             var isCm = false;
             var isCd = false;
@@ -240,7 +240,7 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
 
                     var shipMeasure = new MeasureType {Value = 1};
 
-                    decimal shippingAmt = 0.0M;
+                    var shippingAmt = 0.0M;
 
                     if (arg.HasComponent<FulfillmentComponent>())
                     {
@@ -283,7 +283,7 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
 
                     envelope.Login = login;
                     envelope.Item = reqInvoice;
-                    InvoiceResponseType resInvoice = new InvoiceResponseType();
+                    var resInvoice = new InvoiceResponseType();
                     try
                     {
                         var remoteAddress = new System.ServiceModel.EndpointAddress("http://10.110.10.68:8095/vertex-ws/services/CalculateTax60");
@@ -307,9 +307,8 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
 
                             client.Close();
 
-                            var pct = (taxRate / arg.Totals.GrandTotal.Amount) * 100;
 
-                            context.Logger.LogInformation($"{(object)this.Name} - Vertex Item Tax Rate2: {(object)taxRate} PCT:{(object)pct}", Array.Empty<object>());
+                            context.Logger.LogInformation($"{(object)this.Name} - Vertex Item Tax Rate2: {(object)taxRate}", Array.Empty<object>());
 
                         }
                     }
@@ -389,10 +388,6 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
 
             var defaultCartTaxRate = globalTaxPolicy.DefaultCartTaxRate;
 
-            if (taxRate > Decimal.Zero)
-            {
-                defaultCartTaxRate = taxRate;
-            }
 
             var num1 = arg.Adjustments.Where<AwardedAdjustment>((Func<AwardedAdjustment, bool>) (p => p.IsTaxable))
                 .Aggregate<AwardedAdjustment, Decimal>(Decimal.Zero,
@@ -417,27 +412,24 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
             source.ForEach<CartLineComponent>(action);
             var amount = (arg.Totals.SubTotal.Amount + num1 - adjustmentLinesTotal) * defaultCartTaxRate;
 
-            if (taxRate > Decimal.Zero)
+            if (taxRate > decimal.Zero){amount = taxRate;}
+
+            var awardedAdjustment1 = new CartLevelAwardedAdjustment
             {
-
-                var awardedAdjustment1 = new CartLevelAwardedAdjustment
-                {
-                    Name = "TaxFee",
-                    DisplayName = "TaxFee"
-                };
+                Name = "TaxFee",
+                DisplayName = "TaxFee"
+            };
 
 
-                var money = new Money(currencyCode, amount);
-                awardedAdjustment1.Adjustment = money;
-                var tax = context.GetPolicy<KnownCartAdjustmentTypesPolicy>().Tax;
-                awardedAdjustment1.AdjustmentType = tax;
-                var name = this.Name;
-                awardedAdjustment1.AwardingBlock = name;
-                var num2 = 0;
-                awardedAdjustment1.IsTaxable = num2 != 0;
-                var awardedAdjustment2 = awardedAdjustment1;
-                arg.Adjustments.Add((AwardedAdjustment) awardedAdjustment2);
-            }
+            var money = new Money(currencyCode, amount);
+            awardedAdjustment1.Adjustment = money;
+            var tax = context.GetPolicy<KnownCartAdjustmentTypesPolicy>().Tax;
+            awardedAdjustment1.AdjustmentType = tax;
+            awardedAdjustment1.AwardingBlock = this.Name;
+            awardedAdjustment1.IsTaxable = false;
+            var awardedAdjustment2 = awardedAdjustment1;
+            arg.Adjustments.Add((AwardedAdjustment) awardedAdjustment2);
+            
 
             return Task.FromResult<Cart>(arg);
         }
