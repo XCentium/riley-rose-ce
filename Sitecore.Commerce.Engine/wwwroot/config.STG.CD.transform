@@ -3,7 +3,6 @@
     "SiteTitle": "Sitecore Commerce Engine",
     "BootStrapFile": "Global",
     "DeploymentId": "Deployment01",
-    "VertexAccess": "",
     "EnvironmentName": "",
     "EncryptionProtectionType": "Machine",
     "EncryptionCertificateHash": "Enter a valid certificate thumbprint for a PXF file. X-509 not supported yet",
@@ -11,6 +10,23 @@
     "EncryptionKeyStorageLocation": "c:\\Encryption-Keys\\",
     "InitialOrderStatusCode": "0002",
     "RileyRoseInterface": "Data Source=WU2RRSTGSQL01;Initial Catalog=STAGE_Sitecore_Core;Trusted_Connection=True;"
+  },
+  "VertexTax": {
+    "Endpoint": "http://10.110.10.68:8095/-ws/services/CalculateTax60",
+    "CompanyCode": "448120",
+    "AccountId": "2000196050",
+    "UserName": "wsapi_xc",
+    "Password": "wsapi_xc@!",
+    "ClassCode": "2002",
+    "CustomerCode": "2002",
+    "InProductionMode": "false",
+    "ShipFromAddressLine1": "3880 N Mission Rd",
+    "ShipFromAddressLine2": "",
+    "ShipFromAddressLine3": "",
+    "ShipFromCity": "Los Angeles",
+    "ShipFromStateOrProvinceCode": "CA",
+    "ShipFromPostalCode": "90031",
+    "ShipFromCountryCode": "US"
   },
   "ApplicationInsights": {
     "InstrumentationKey": "",
@@ -37,6 +53,6 @@
         "Thumbprint": "[your certificate Thumbprint here, all caps, no spaces, no unicode]"
       }
     ],
-    "ValidationEnabled": false 
-  } 
+    "ValidationEnabled": false
+  }
 }

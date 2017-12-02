@@ -20,6 +20,7 @@ using Sitecore.Framework.Conditions;
 using Sitecore.Framework.Pipelines;
 using Sitecore.Framework.Rules;
 using F21Vertax.VertexO;
+using Microsoft.Extensions.Configuration;
 using Plugin.Xcentium.RileyRose.Tax.Components;
 
 namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
@@ -29,7 +30,7 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
     /// </summary>
     public class UpdateCalculateCartTaxBlock : PipelineBlock<Cart, Cart, CommercePipelineExecutionContext>
     {
-
+        private readonly IConfiguration _configuration;
 
         /// <summary>
         /// 
@@ -39,9 +40,9 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
         /// <summary>
         /// 
         /// </summary>
-        public UpdateCalculateCartTaxBlock() : base((string) null)
+        public UpdateCalculateCartTaxBlock(IConfiguration configuration) : base((string) null)
         {
-
+            _configuration = configuration;
         }
 
         private JsonSerializerSettings _serializerSettings = null;
@@ -109,26 +110,18 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
             var globalTaxPolicy = context.GetPolicy<GlobalTaxPolicy>();
             var defaultTaxRate = globalTaxPolicy.DefaultCartTaxRate;
             var taxRate = 0.00M;
-            var vertexTaxPolicy = context.GetPolicy<VertexPolicy>();
-            var isCm = false;
-            var isCd = false;
+            
+            var vertexConfig = _configuration.GetSection("VertexTax"); 
+
+            var endpoint = vertexConfig["Endpoint"];
+
+            var useVertexEndpoint = false || !string.IsNullOrEmpty(endpoint);
 
             var productTaxList = new List<KeyValuePair<string, decimal>>();
 
-            var localIPs = Dns.GetHostAddresses(Dns.GetHostName()).ToList();
-            if (localIPs.Any())
-            {
-                foreach (IPAddress addr in localIPs)
-                {
-                    if (addr.AddressFamily == AddressFamily.InterNetwork)
-                    {
-                        if (addr.ToString() == "10.203.50.5") { isCm = true; }
-                        if (addr.ToString() == "10.203.60.5") { isCd = true; }
-                    }
-                }
-            }
+            var prodList = new List<string>();
 
-            if (arg.Lines.Any() && arg.HasComponent<PhysicalFulfillmentComponent>() && (isCm || isCd))
+            if (arg.Lines.Any() && arg.HasComponent<PhysicalFulfillmentComponent>() && (useVertexEndpoint))
             {
                 var cartComponent = arg.GetComponent<PhysicalFulfillmentComponent>();
                 ShippingParty = cartComponent?.ShippingParty;
@@ -143,17 +136,17 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
                     //Seller
                     var sellerLocation = new LocationType
                     {
-                        StreetAddress1 = vertexTaxPolicy.ShipFromAddressLine1,
-                        StreetAddress2 = vertexTaxPolicy.ShipFromAddressLine2,
-                        City = vertexTaxPolicy.ShipFromCity,
-                        MainDivision = vertexTaxPolicy.ShipFromStateOrProvinceCode,
-                        PostalCode = vertexTaxPolicy.ShipFromPostalCode,
-                        Country = vertexTaxPolicy.ShipFromCountryCode
+                        StreetAddress1 = vertexConfig["ShipFromAddressLine1"],
+                        StreetAddress2 = vertexConfig["ShipFromAddressLine2"],
+                        City = vertexConfig["ShipFromCity"],
+                        MainDivision = vertexConfig["ShipFromStateOrProvinceCode"],
+                        PostalCode = vertexConfig["ShipFromPostalCode"],
+                        Country = vertexConfig["ShipFromCountryCode"]
                     };
 
                     var seller = new SellerType
                     {
-                        Company = vertexTaxPolicy.CompanyCode,
+                        Company = vertexConfig["CompanyCode"],
                         PhysicalOrigin = sellerLocation
                     };
 
@@ -161,17 +154,16 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
                     //Login
                     var login = new LoginType
                     {
-                        UserName = "wsapi_xc", //vertexTaxPolicy.UserName,
-                        Password = "wsapi_xc@!", //vertexTaxPolicy.Password
+                        UserName = vertexConfig["UserName"], 
+                        Password = vertexConfig["Password"],
                     };
-
-                    context.Logger.LogInformation("Vertex Pass:" + login.Password);
+                
 
                     //Customer
                     var customerCode =
                         new CustomerCodeType
                         {
-                            classCode = vertexTaxPolicy.ClassCode
+                            classCode = vertexConfig["ClassCode"]
                         };
 
                     var customer = new CustomerType {CustomerCode = customerCode};
@@ -200,16 +192,39 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
 
                     //Items
 
-                    int itemsPlusShippingCnt = arg.Lines.Count + 1;
+                    var itemsPlusShippingCnt = arg.Lines.Count + 1;
                     var reqLineItems = new LineItemISIType[itemsPlusShippingCnt];
 
                     var nItemCount = 0;
 
+                    
+
                     foreach (var cartLineComponent in arg.Lines)
                     {
-                        
+                        var whCategoryCode = cartLineComponent.ItemId; 
+                        var cartProductComponent = cartLineComponent.GetComponent<CartProductComponent>();
+                        var cartproduct = context.CommerceContext.Objects.OfType<CommerceServer.Core.Catalog.Product>().FirstOrDefault<CommerceServer.Core.Catalog.Product>((Func<CommerceServer.Core.Catalog.Product, bool>)(p => p.ProductId.Equals(cartProductComponent.Id, StringComparison.OrdinalIgnoreCase)));
+                        if (cartproduct != null)
+                        {
+                            if (cartproduct.HasProperty(Constants.Tax.WhCategoryCode))
+                            {
+                                whCategoryCode = cartproduct[Constants.Tax.WhCategoryCode].ToString();
+                                if (!string.IsNullOrEmpty(whCategoryCode))
+                                {
+                                    if (whCategoryCode.Length > 4)
+                                    {
+                                        whCategoryCode = whCategoryCode.Substring(0, 4);
 
-                        var product = new Product {productClass = cartLineComponent.ItemId};
+                                        prodList.Add(cartLineComponent.ItemId);
+
+                                        context.Logger.LogInformation($"{(object)this.Name} - Vertex whCategoryCode: {(object)whCategoryCode}", Array.Empty<object>());
+                                    }
+                                }
+                            }
+                        }
+
+
+                        var product = new Product {productClass = whCategoryCode};
 
                         var measure = new MeasureType {Value = cartLineComponent.Quantity};
 
@@ -227,7 +242,7 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
 
                         reqLineItems[nItemCount] = lineitem;
 
-                        product = null;
+                        cartproduct = null;
                         measure = null;
                         prodAmount = null;
                         lineitem = null;
@@ -298,11 +313,13 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
 
                             taxRate = resInvoice.TotalTax.Value;
 
+                            var cnt = 0;
                             foreach (var resLineItem in resLineItems)
                             {
-                                var productClass = resLineItem.Product.productClass;
-                                var kvp = new KeyValuePair<string,decimal>(resLineItem.Product.productClass, resLineItem.TotalTax.Value);
+                                var productId = prodList[cnt];
+                                var kvp = new KeyValuePair<string,decimal>(productId, resLineItem.TotalTax.Value);
                                 productTaxList.Add(kvp);
+                                cnt++;
                             }
 
                             client.Close();

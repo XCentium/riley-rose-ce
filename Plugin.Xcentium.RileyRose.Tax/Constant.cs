@@ -47,6 +47,11 @@
             /// 
             /// </summary>
             public const string CartLineNullText = "The cart lines cannot be null.";
+
+            /// <summary>
+            /// WHCategoryCode
+            /// </summary>
+            public const string WhCategoryCode = "WHCategoryCode";
         }
     }
 }

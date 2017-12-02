@@ -25,7 +25,9 @@
   "dependencies": {
     "Sitecore.Commerce.Plugin.Fulfillment": "1.2.159",
     "Sitecore.Commerce.Plugin.Management": "1.2.159",
-    "Sitecore.Commerce.Plugin.Tax": "1.2.159"
+    "Sitecore.Commerce.Plugin.Tax": "1.2.159",
+    "Sitecore.Commerce.Plugin.Catalog": "1.2.159",
+    "Sitecore.Commerce.Plugin.Catalog.Cs": "1.2.159"
   },
   "frameworks": {
     "net461": {
