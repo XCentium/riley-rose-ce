@@ -33,33 +33,52 @@ namespace Plugin.Xcentium.CartProperties.Commands
             _persistEntityPipeline = persistEntityPipeline;
         }
 
-        public async Task<Cart> Process(CommerceContext commerceContext, string cartId, CartLineProperties lineProperties)
+        public async Task<Cart> Process(CommerceContext commerceContext, string cartId, CartLineProperties lineProperties, string baseUrl)
         {
             try
             {
 
-                var cart = GetCart(cartId, commerceContext);
+                var cart = GetCart(cartId, commerceContext, baseUrl);
                 if (cart == null)
                 {
                     return null;
                 }
 
-
-                // Set the custom fields on the cartlines
                 if (cart.Lines != null && cart.Lines.Any() && lineProperties != null &&
                     lineProperties.CartLineProperty.Any())
                 {
+
                     foreach (var cartLineProperty in lineProperties.CartLineProperty)
                     {
-                        var cartLineComponent = cart.Lines.FirstOrDefault(x => x.Id == cartLineProperty.CartLineId);
+
+                        var cartLineComponent = cart.Lines.FirstOrDefault(x => x.ItemId == cartLineProperty.CartLineId);
                         if (cartLineComponent != null)
-                            cartLineComponent
-                                .GetComponent<CartComponent>().Properties = cartLineProperty.Properties;
+                        {
+
+                            var giftCardData =
+                                cartLineProperty.Properties.KeyValues.FirstOrDefault(
+                                    x => x.Key.ToLower() == Constants.Settings.Giftcarddata.ToLower());
+
+                            if (giftCardData != null)
+                            {
+                                try
+                                {
+                                    var giftCardMessageComponent = JsonConvert.DeserializeObject<GiftCardMessageComponent>(giftCardData.Value.ToString());
+                                    giftCardMessageComponent.Name = Constants.Settings.GiftCardMessageComponent;
+                                    cartLineComponent.SetComponent(giftCardMessageComponent);
+
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine(ex.Message);
+                                }
+                            }
+
+                        }
+
                     }
                 }
 
-
-                // Save the cart here to make sure the new flag is set
                 var result = await this._persistEntityPipeline.Run(new PersistEntityArgument(cart), commerceContext.GetPipelineContextOptions());
 
                 return result.Entity as Cart;
@@ -70,27 +89,20 @@ namespace Plugin.Xcentium.CartProperties.Commands
             }
         }
 
-        private Cart GetCart(string cartId, CommerceContext commerceContext)
+        private Cart GetCart(string cartId, CommerceContext commerceContext, string baseUrl)
         {
-            var shopName = commerceContext.CurrentShopName();
-            var shopperId = commerceContext.CurrentShopperId();
-            var customerId = commerceContext.CurrentCustomerId();
-            var environment = commerceContext.Environment.Name;
-
-            var url =
-                $"http://localhost:5000/api/Carts('{cartId}')?$expand=Lines($expand=CartLineComponents($expand=ChildComponents)),Components($expand=ChildComponents)";
+            var url = string.Format(Constants.Settings.EndpointUrl, baseUrl, cartId);
 
             var client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Add("ShopName", shopName);
-            client.DefaultRequestHeaders.Add("ShopperId", shopperId);
-            client.DefaultRequestHeaders.Add("Language", "en-US");
-            client.DefaultRequestHeaders.Add("Environment", environment);
-            client.DefaultRequestHeaders.Add("CustomerId", customerId);
-            client.DefaultRequestHeaders.Add("Currency", commerceContext.CurrentCurrency());
-            client.DefaultRequestHeaders.Add("Roles", "sitecore\\Pricer Manager|sitecore\\Promotioner Manager");
-
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(Constants.Settings.AppJson));
+            client.DefaultRequestHeaders.Add(Constants.Settings.ShopName, commerceContext.CurrentShopName());
+            client.DefaultRequestHeaders.Add(Constants.Settings.ShopperId, commerceContext.CurrentShopperId());
+            client.DefaultRequestHeaders.Add(Constants.Settings.Language, commerceContext.CurrentLanguage());
+            client.DefaultRequestHeaders.Add(Constants.Settings.Environment, commerceContext.Environment.Name);
+            client.DefaultRequestHeaders.Add(Constants.Settings.CustomerId, commerceContext.CurrentCustomerId());
+            client.DefaultRequestHeaders.Add(Constants.Settings.Currency, commerceContext.CurrentCurrency());
+            client.DefaultRequestHeaders.Add(Constants.Settings.Roles, Constants.Settings.CartRoles);
 
             try
             {

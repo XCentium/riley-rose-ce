@@ -43,9 +43,9 @@
     "Sitecore.Commerce.Plugin.Tax": "1.2.159",
     "Plugin.Xcentium.RileyRose.Shipping": "0.0.1",
     "Plugin.Xcentium.RileyRose.Tax": "1.2.159",
-    "Plugin.Xcentium.RileyRose.Payment": "1.2.159"
-    //"Plugin.Xcentium.CartProperties":  "1.0.0" 
-    //  "OctoPack": "3.6.1"
+    "Plugin.Xcentium.RileyRose.Payment": "1.2.159",
+    "Plugin.Xcentium.CartProperties": "1.0.0"
+
   },
   "frameworks": {
     "net461": {
