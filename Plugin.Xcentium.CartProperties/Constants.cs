@@ -23,7 +23,19 @@ namespace Plugin.Xcentium.CartProperties
             public const string CustomerId = "CustomerId";
             public const string Currency = "Currency";
             public const string Roles = "Roles";
+            public const string Giftcarddata = "giftcarddata";
+            public const string GiftCardMessageComponent = "GiftCardMessageComponent";
 
+        }
+
+        public struct Fields
+        {
+            public const string RecipientEmail = "recipientEmail";
+            public const string ConfirmRecipientEmail = "confirmRecipientEmail";
+            public const string RecipientName = "recipientName";
+            public const string SenderEmail = "senderEmail";
+            public const string SenderName = "senderName";
+            public const string Message = "message";
         }
     }
 }

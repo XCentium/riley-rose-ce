@@ -58,7 +58,7 @@ namespace Plugin.Xcentium.CartProperties.Controller
             await Task.Delay(1);
             var runCommand = await command.Process(this.CurrentContext, cartId, cartLineProperties, $"{this.Request.Scheme}://{this.Request.Host}{this.Request.PathBase}");
 
-            return (IActionResult)new ObjectResult((object)runCommand);
+            return (IActionResult)new ObjectResult((object)string.Empty);
         }
 
     }

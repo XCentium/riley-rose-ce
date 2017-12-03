@@ -44,17 +44,38 @@ namespace Plugin.Xcentium.CartProperties.Commands
                     return null;
                 }
 
-
-                // Set the custom fields on the cartlines
                 if (cart.Lines != null && cart.Lines.Any() && lineProperties != null &&
                     lineProperties.CartLineProperty.Any())
                 {
+
                     foreach (var cartLineProperty in lineProperties.CartLineProperty)
                     {
-                        var cartLineComponent = cart.Lines.FirstOrDefault(x => x.Id == cartLineProperty.CartLineId);
+
+                        var cartLineComponent = cart.Lines.FirstOrDefault(x => x.ItemId == cartLineProperty.CartLineId);
                         if (cartLineComponent != null)
-                            cartLineComponent
-                                .GetComponent<CartComponent>().Properties = cartLineProperty.Properties;
+                        {
+
+                            var giftCardData =
+                                cartLineProperty.Properties.KeyValues.FirstOrDefault(
+                                    x => x.Key.ToLower() == Constants.Settings.Giftcarddata.ToLower());
+
+                            if (giftCardData != null)
+                            {
+                                try
+                                {
+                                    var giftCardMessageComponent = JsonConvert.DeserializeObject<GiftCardMessageComponent>(giftCardData.Value.ToString());
+                                    giftCardMessageComponent.Name = Constants.Settings.GiftCardMessageComponent;
+                                    cartLineComponent.SetComponent(giftCardMessageComponent);
+
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine(ex.Message);
+                                }
+                            }
+
+                        }
+
                     }
                 }
 
@@ -70,24 +91,18 @@ namespace Plugin.Xcentium.CartProperties.Commands
 
         private Cart GetCart(string cartId, CommerceContext commerceContext, string baseUrl)
         {
-            var shopName = commerceContext.CurrentShopName();
-            var shopperId = commerceContext.CurrentShopperId();
-            var customerId = commerceContext.CurrentCustomerId();
-            var environment = commerceContext.Environment.Name;
-
             var url = string.Format(Constants.Settings.EndpointUrl, baseUrl, cartId);
 
             var client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(Constants.Settings.AppJson));
-            client.DefaultRequestHeaders.Add(Constants.Settings.ShopName, shopName);
-            client.DefaultRequestHeaders.Add(Constants.Settings.ShopperId, shopperId);
-            client.DefaultRequestHeaders.Add(Constants.Settings.Language, "en-US");
-            client.DefaultRequestHeaders.Add(Constants.Settings.Environment, environment);
-            client.DefaultRequestHeaders.Add(Constants.Settings.CustomerId, customerId);
+            client.DefaultRequestHeaders.Add(Constants.Settings.ShopName, commerceContext.CurrentShopName());
+            client.DefaultRequestHeaders.Add(Constants.Settings.ShopperId, commerceContext.CurrentShopperId());
+            client.DefaultRequestHeaders.Add(Constants.Settings.Language, commerceContext.CurrentLanguage());
+            client.DefaultRequestHeaders.Add(Constants.Settings.Environment, commerceContext.Environment.Name);
+            client.DefaultRequestHeaders.Add(Constants.Settings.CustomerId, commerceContext.CurrentCustomerId());
             client.DefaultRequestHeaders.Add(Constants.Settings.Currency, commerceContext.CurrentCurrency());
             client.DefaultRequestHeaders.Add(Constants.Settings.Roles, Constants.Settings.CartRoles);
-
 
             try
             {

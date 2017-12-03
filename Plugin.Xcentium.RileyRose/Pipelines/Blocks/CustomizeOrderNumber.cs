@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -10,6 +11,7 @@ using Sitecore.Commerce.Core;
 using Sitecore.Commerce.Plugin.Orders;
 using Sitecore.Framework.Pipelines;
 using Sitecore.Framework.Conditions;
+using Sitecore.Commerce.Core.Commands;
 
 
 namespace Plugin.Xcentium.RileyRose.Pipelines.Blocks
@@ -20,10 +22,12 @@ namespace Plugin.Xcentium.RileyRose.Pipelines.Blocks
     public class CustomizeOrderNumber : PipelineBlock<Order, Order, CommercePipelineExecutionContext>
     {
         private IConfiguration configuration;
+        private readonly FindEntitiesInListCommand _findEntitiesInListCommand;
 
-        public CustomizeOrderNumber(IConfiguration configuration)
+        public CustomizeOrderNumber(IConfiguration configuration, FindEntitiesInListCommand findEntitiesInListCommand)
         {
             this.configuration = configuration;
+            _findEntitiesInListCommand = findEntitiesInListCommand;
         }
 
         /// <summary>
@@ -80,6 +84,7 @@ namespace Plugin.Xcentium.RileyRose.Pipelines.Blocks
                     catch (Exception ex)
                     {
                         context.Logger.LogError($"Plugin.Xcentium.RileyRose.Pipelines.Blocks.CustomizeOrderNumber encountered an exception while generating orderConfirmationId. Exception Message: {ex.Message}, Details: {ex.StackTrace}");
+                        uniqueCode = GetCustomOrderNumber(order, context, _findEntitiesInListCommand);
                     }
                 }
             }
@@ -88,5 +93,38 @@ namespace Plugin.Xcentium.RileyRose.Pipelines.Blocks
 
             return Task.FromResult<Order>(order);
         }
+
+        /// <summary>
+        /// You may customized what is returned here based on number od existing orders or date or get number from external system
+        /// </summary>
+        /// <param name="order"></param>
+        /// <param name="context"></param>
+        /// <param name="findEntitiesInListCommand"></param>
+        /// <returns></returns>
+        private string GetCustomOrderNumber(Order order, CommercePipelineExecutionContext context, FindEntitiesInListCommand findEntitiesInListCommand)
+        {
+            //Get Contact Component which contains customer information
+            var contactComponent = order.GetComponent<ContactComponent>();
+
+            // get all existing orders.
+            var orders = (IEnumerable<Order>)findEntitiesInListCommand.Process<Order>(context.CommerceContext, CommerceEntity.ListName<Order>(), 0, int.MaxValue).Result.Items;
+
+            // Total orders
+            var orderCount = orders.Count();
+
+            // use the info you have to generate an appropriate order number. You may also use the data you have to call an external system.
+            // in this instance we will just return the number of existing orders incremented by 1
+            // Return order count and increment by 1 as the new order number.
+            if (orders.Any())
+            {
+                var nextOrderNumber = 2000000000 + orderCount + 1;
+                return nextOrderNumber.ToString();
+            }
+
+            // return a random guid if ther was an isssue retriving existing orders or all else failed.
+            return Guid.NewGuid().ToString("B");
+        }
+
+
     }
 }
