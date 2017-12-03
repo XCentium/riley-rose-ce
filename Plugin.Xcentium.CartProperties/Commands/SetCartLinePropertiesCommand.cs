@@ -37,6 +37,7 @@ namespace Plugin.Xcentium.CartProperties.Commands
         {
             try
             {
+                var gitfCardComponentSet = false;
 
                 var cart = GetCart(cartId, commerceContext, baseUrl);
                 if (cart == null)
@@ -66,6 +67,7 @@ namespace Plugin.Xcentium.CartProperties.Commands
                                     var giftCardMessageComponent = JsonConvert.DeserializeObject<GiftCardMessageComponent>(giftCardData.Value.ToString());
                                     giftCardMessageComponent.Name = Constants.Settings.GiftCardMessageComponent;
                                     cartLineComponent.SetComponent(giftCardMessageComponent);
+                                    gitfCardComponentSet = true;
 
                                 }
                                 catch (Exception ex)
@@ -79,9 +81,16 @@ namespace Plugin.Xcentium.CartProperties.Commands
                     }
                 }
 
-                var result = await this._persistEntityPipeline.Run(new PersistEntityArgument(cart), commerceContext.GetPipelineContextOptions());
+                if (gitfCardComponentSet)
+                {
+                    var result = await this._persistEntityPipeline
+                        .Run(new PersistEntityArgument(cart),
+                        commerceContext.GetPipelineContextOptions());
 
-                return result.Entity as Cart;
+                    return result.Entity as Cart;
+                }
+
+                return null;
             }
             catch (Exception e)
             {
