@@ -214,11 +214,13 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
                                     if (whCategoryCode.Length > 4)
                                     {
                                         whCategoryCode = whCategoryCode.Substring(0, 4);
-
-                                        prodList.Add(cartLineComponent.ItemId);
-
-                                        context.Logger.LogInformation($"{(object)this.Name} - Vertex whCategoryCode: {(object)whCategoryCode}", Array.Empty<object>());
                                     }
+                                    prodList.Add(cartLineComponent.ItemId);
+
+                                    context.Logger.LogInformation(
+                                        $"{(object) this.Name} - Vertex whCategoryCode: {(object) whCategoryCode}",
+                                        Array.Empty<object>());
+
                                 }
                             }
                         }
@@ -229,7 +231,7 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
                         var measure = new MeasureType {Value = cartLineComponent.Quantity};
 
                         var prodAmount =
-                            new AmountType {Value = Convert.ToDecimal(cartLineComponent.UnitListPrice.Amount)};
+                            new AmountType {Value = Convert.ToDecimal(cartLineComponent.Totals.GrandTotal.Amount)};
 
                         var lineitem = new LineItemISIType
                         {
