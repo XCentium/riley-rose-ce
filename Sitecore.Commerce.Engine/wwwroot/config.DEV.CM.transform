@@ -12,7 +12,7 @@
     "RileyRoseInterface": "Data Source=localhost;Initial Catalog=StorefrontSitecore_Core;Integrated Security=False;User ID=sa;Password=Za!xscdvfbg"
   },
   "VertexTax": {
-    "Endpoint": "http://10.110.10.68:8095/-ws/services/CalculateTax60",
+    "Endpoint": "http://10.110.10.68:8095/vertex-ws/services/CalculateTax60",
     "CompanyCode": "448120",
     "AccountId": "2000196050",
     "UserName": "wsapi_xc",

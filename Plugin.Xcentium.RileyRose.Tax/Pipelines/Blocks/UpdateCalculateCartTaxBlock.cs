@@ -228,7 +228,8 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
 
                         var product = new Product {productClass = whCategoryCode};
 
-                        var measure = new MeasureType {Value = cartLineComponent.Quantity};
+                        //var measure = new MeasureType {Value = cartLineComponent.Quantity};
+                        var measure = new MeasureType {Value = 1.0M};
 
                         var prodAmount =
                             new AmountType {Value = Convert.ToDecimal(cartLineComponent.Totals.GrandTotal.Amount)};
