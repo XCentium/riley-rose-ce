@@ -121,6 +121,8 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
 
             var prodList = new List<string>();
 
+            var useTaxrate = false;
+
             if (arg.Lines.Any() && arg.HasComponent<PhysicalFulfillmentComponent>() && (useVertexEndpoint))
             {
                 var cartComponent = arg.GetComponent<PhysicalFulfillmentComponent>();
@@ -304,7 +306,7 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
                     var resInvoice = new InvoiceResponseType();
                     try
                     {
-                        var remoteAddress = new System.ServiceModel.EndpointAddress("http://10.110.10.68:8095/vertex-ws/services/CalculateTax60");
+                        var remoteAddress = new System.ServiceModel.EndpointAddress(vertexConfig["Endpoint"]);
 
                         using (CalculateTaxWS60Client client = new CalculateTaxWS60Client(new System.ServiceModel.BasicHttpBinding(), remoteAddress))
                         {
@@ -356,7 +358,7 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
 
 
                             context.Logger.LogInformation($"{(object)this.Name} - Vertex Item Tax Rate2: {(object)taxRate}", Array.Empty<object>());
-
+                            useTaxrate = true;
                         }
                     }
                     catch (Exception ex)
@@ -459,7 +461,7 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
             source.ForEach<CartLineComponent>(action);
             var amount = (arg.Totals.SubTotal.Amount + num1 - adjustmentLinesTotal) * defaultCartTaxRate;
 
-            if (taxRate > decimal.Zero){amount = taxRate;}
+            if (taxRate > decimal.Zero || useTaxrate) {amount = taxRate;}
 
             var awardedAdjustment1 = new CartLevelAwardedAdjustment
             {
