@@ -218,7 +218,7 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
                                     prodList.Add(cartLineComponent.ItemId);
 
                                     context.Logger.LogInformation(
-                                        $"{(object) this.Name} - Vertex whCategoryCode: {(object) whCategoryCode}",
+                                        $"{(object) this.Name} - Vertex ADDED Product with whCategoryCode: {(object) whCategoryCode}",
                                         Array.Empty<object>());
 
                                 }
@@ -316,14 +316,41 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
 
                             taxRate = resInvoice.TotalTax.Value;
 
-                            var cnt = 0;
-                            foreach (var resLineItem in resLineItems)
+
+                            if (resLineItems != null && resLineItems.Length > 0)
                             {
-                                var productId = prodList[cnt];
-                                var kvp = new KeyValuePair<string,decimal>(productId, resLineItem.TotalTax.Value);
-                                productTaxList.Add(kvp);
-                                cnt++;
+                                context.Logger.LogInformation(
+                                    $"{(object)this.Name} - Vertex ResLineItems Lines: {(object)resLineItems.Length}",
+                                    Array.Empty<object>());
+
+                                var cnt = 0;
+                                foreach (var resLineItem in resLineItems)
+                                {
+                                    if (cnt < prodList.Count)
+                                    {
+                                        context.Logger.LogInformation(
+                                            $"{(object) this.Name} - Vertex Line Adding Started For: {(object) prodList[cnt]}",
+                                            Array.Empty<object>());
+
+                                        var productId = prodList[cnt];
+                                        var kvp = new KeyValuePair<string, decimal>(productId,
+                                            resLineItem.TotalTax.Value);
+                                        productTaxList.Add(kvp);
+
+                                        context.Logger.LogInformation(
+                                            $"{(object) this.Name} - Vertex Line Adding Ended For: {(object) prodList[cnt]}",
+                                            Array.Empty<object>());
+                                        cnt++;
+                                    }
+                                }
                             }
+                            else
+                            {
+                                context.Logger.LogInformation(
+                                    $"{(object)this.Name} - Vertex ResLineItems Lines: {(object)0}",
+                                    Array.Empty<object>());
+                            }
+
 
                             client.Close();
 
