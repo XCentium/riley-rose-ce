@@ -14,6 +14,7 @@
   "VertexTax": {
     "Endpoint": "http://10.110.10.68:8095/vertex-ws/services/CalculateTax60",
     "CompanyCode": "448120",
+    "DivisionCode": "448121",
     "AccountId": "2000196050",
     "UserName": "wsapi_xc",
     "Password": "wsapi_xc@!",

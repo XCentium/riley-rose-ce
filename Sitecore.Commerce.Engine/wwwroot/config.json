@@ -14,6 +14,7 @@
   "VertexTax": {
     "Endpoint": "",
     "CompanyCode": "448120",
+    "DivisionCode": "448121",
     "AccountId": "2000196050",
     "UserName": "wsapi_xc",
     "Password": "wsapi_xc@!",

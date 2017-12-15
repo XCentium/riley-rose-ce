@@ -32,7 +32,7 @@ namespace Plugin.Xcentium.RileyRose.Tax.Components
         /// <summary>
         /// Grand total for tax purposes
         /// </summary>
-        public decimal GrandPricePrice { get; set; }
+        public decimal GrandPrice { get; set; }
 
 
         /// <summary>

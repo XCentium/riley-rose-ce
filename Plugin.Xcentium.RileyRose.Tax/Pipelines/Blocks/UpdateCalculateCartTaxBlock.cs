@@ -1,12 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Net;
-using System.Net.Http;
-using System.Net.Sockets;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -18,7 +12,6 @@ using Sitecore.Commerce.Plugin.Pricing;
 using Sitecore.Commerce.Plugin.Tax;
 using Sitecore.Framework.Conditions;
 using Sitecore.Framework.Pipelines;
-using Sitecore.Framework.Rules;
 using F21Vertax.VertexO;
 using Microsoft.Extensions.Configuration;
 using Plugin.Xcentium.RileyRose.Tax.Components;
@@ -71,7 +64,7 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
         public override Task<Cart> Run(Cart arg, CommercePipelineExecutionContext context)
         {
             Condition.Requires<Cart>(arg)
-                .IsNotNull<Cart>($"{(object) this.Name}: The cart can not be null");
+                .IsNotNull<Cart>($"{(object) this.Name}: {Constants.Tax.CartNullText}");
             if (!arg.HasComponent<FulfillmentComponent>()) return Task.FromResult<Cart>(arg);
 
             if (arg.GetComponent<FulfillmentComponent>() is SplitFulfillmentComponent)
@@ -111,9 +104,9 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
             var defaultTaxRate = globalTaxPolicy.DefaultCartTaxRate;
             var taxRate = 0.00M;
             
-            var vertexConfig = _configuration.GetSection("VertexTax"); 
+            var vertexConfig = _configuration.GetSection(Constants.Tax.VertexTax); 
 
-            var endpoint = vertexConfig["Endpoint"];
+            var endpoint = vertexConfig[Constants.Tax.Endpoint];
 
             var useVertexEndpoint = false || !string.IsNullOrEmpty(endpoint);
 
@@ -138,17 +131,18 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
                     //Seller
                     var sellerLocation = new LocationType
                     {
-                        StreetAddress1 = vertexConfig["ShipFromAddressLine1"],
-                        StreetAddress2 = vertexConfig["ShipFromAddressLine2"],
-                        City = vertexConfig["ShipFromCity"],
-                        MainDivision = vertexConfig["ShipFromStateOrProvinceCode"],
-                        PostalCode = vertexConfig["ShipFromPostalCode"],
-                        Country = vertexConfig["ShipFromCountryCode"]
+                        StreetAddress1 = vertexConfig[Constants.Tax.ShipFromAddressLine1],
+                        StreetAddress2 = vertexConfig[Constants.Tax.ShipFromAddressLine2],
+                        City = vertexConfig[Constants.Tax.ShipFromCity],
+                        MainDivision = vertexConfig[Constants.Tax.ShipFromStateOrProvinceCode],
+                        PostalCode = vertexConfig[Constants.Tax.ShipFromPostalCode],
+                        Country = vertexConfig[Constants.Tax.ShipFromCountryCode]
                     };
 
                     var seller = new SellerType
                     {
-                        Company = vertexConfig["CompanyCode"],
+                        Company = vertexConfig[Constants.Tax.CompanyCode],
+                        Division = vertexConfig[Constants.Tax.DivisionCode],
                         PhysicalOrigin = sellerLocation
                     };
 
@@ -156,8 +150,8 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
                     //Login
                     var login = new LoginType
                     {
-                        UserName = vertexConfig["UserName"], 
-                        Password = vertexConfig["Password"],
+                        UserName = vertexConfig[Constants.Tax.UserName], 
+                        Password = vertexConfig[Constants.Tax.Password],
                     };
                 
 
@@ -165,7 +159,7 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
                     var customerCode =
                         new CustomerCodeType
                         {
-                            classCode = vertexConfig["ClassCode"]
+                            classCode = vertexConfig[Constants.Tax.ClassCode]
                         };
 
                     var customer = new CustomerType {CustomerCode = customerCode};
@@ -268,7 +262,7 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
 
                         if (fulfillmentComponent is PhysicalFulfillmentComponent)
                         {
-                            var adjustment = arg.Adjustments.FirstOrDefault(x => x.Name == "FulfillmentFee");
+                            var adjustment = arg.Adjustments.FirstOrDefault(x => x.Name == Constants.Tax.FulfillmentFee);
                             if (adjustment != null && adjustment.IsTaxable)
                             {
                                 shippingAmt = adjustment.Adjustment.Amount;
@@ -306,7 +300,7 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
                     var resInvoice = new InvoiceResponseType();
                     try
                     {
-                        var remoteAddress = new System.ServiceModel.EndpointAddress(vertexConfig["Endpoint"]);
+                        var remoteAddress = new System.ServiceModel.EndpointAddress(vertexConfig[Constants.Tax.Endpoint]);
 
                         using (CalculateTaxWS60Client client = new CalculateTaxWS60Client(new System.ServiceModel.BasicHttpBinding(), remoteAddress))
                         {
@@ -439,11 +433,11 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
 
 
             var num1 = arg.Adjustments.Where<AwardedAdjustment>((Func<AwardedAdjustment, bool>) (p => p.IsTaxable))
-                .Aggregate<AwardedAdjustment, Decimal>(Decimal.Zero,
-                    (Func<Decimal, AwardedAdjustment, Decimal>)
+                .Aggregate<AwardedAdjustment, decimal>(decimal.Zero,
+                    (Func<decimal, AwardedAdjustment, decimal>)
                     ((current, adjustment) => current + adjustment.Adjustment.Amount));
 
-            context.Logger.LogDebug($"{(object) this.Name} - Tax Rate: {(object) defaultCartTaxRate} Adjustments Total:{(object) num1}", Array.Empty<object>());
+            context.Logger.LogDebug($"{(object) this.Name} - {Constants.Tax.TaxRate}: {(object) defaultCartTaxRate} Adjustments Total:{(object) num1}", Array.Empty<object>());
 
             var source = arg.Lines.Where<CartLineComponent>((Func<CartLineComponent, bool>) (line =>
             {
@@ -455,7 +449,7 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
                 return false;
             }));
 
-            var adjustmentLinesTotal = new Decimal();
+            var adjustmentLinesTotal = new decimal();
 
             var action = (Action<CartLineComponent>) (l => adjustmentLinesTotal += l.Totals.SubTotal.Amount);
             source.ForEach<CartLineComponent>(action);
@@ -465,8 +459,8 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
 
             var awardedAdjustment1 = new CartLevelAwardedAdjustment
             {
-                Name = "TaxFee",
-                DisplayName = "TaxFee"
+                Name = Constants.Tax.TaxFee,
+                DisplayName = Constants.Tax.TaxFee
             };
 
 
