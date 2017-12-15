@@ -9,7 +9,7 @@
     "EncryptionSID": "Enter a valid SID for a domain registered user",
     "EncryptionKeyStorageLocation": "c:\\Encryption-Keys\\",
     "InitialOrderStatusCode": "0002",
-    "RileyRoseInterface": "Data Source=WU2RRPRDSQL01;Initial Catalog=Sitecore_Core;Trusted_Connection=True;"
+    "RileyRoseInterface": "Data Source=WU2RRPRDSQL1AG;Initial Catalog=Sitecore_Core;Trusted_Connection=True;"
   },
   "VertexTax": {
     "Endpoint": "http://10.110.10.68:8095/vertex-ws/services/CalculateTax60",

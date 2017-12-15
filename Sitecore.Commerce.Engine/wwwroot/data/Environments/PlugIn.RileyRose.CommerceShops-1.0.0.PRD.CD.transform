@@ -57,7 +57,7 @@
       },
       {
         "$type": "Sitecore.Commerce.Plugin.Customers.Cs.ProfilesSqlPolicy, Sitecore.Commerce.Plugin.Customers.Cs",
-        "Server": "WU2RRPRDSQL01",
+        "Server": "WU2RRPRDSQL1AG",
         "UserName": "",
         "Password": "",
         "Database": "CFSolutionStorefrontSite_profiles",
@@ -713,7 +713,7 @@
       {
         "$type": "Sitecore.Commerce.Plugin.SQL.EntityStoreSqlPolicy, Sitecore.Commerce.Plugin.SQL",
         "TrustedConnection": true,
-        "Server": "WU2RRPRDSQL01",
+        "Server": "WU2RRPRDSQL1AG",
         "UserName": "",
         "Password": "",
         "Database": "SitecoreCommerce_SharedEnvironments",
@@ -724,7 +724,7 @@
       {
         "$type": "Sitecore.Commerce.Plugin.Inventory.Cs.InventoryCatalogSqlPolicy, Sitecore.Commerce.Plugin.Inventory.Cs",
         "TrustedConnection": true,
-        "Server": "WU2RRPRDSQL01",
+        "Server": "WU2RRPRDSQL1AG",
         "UserName": "",
         "Password": "",
         "Database": "CFSolutionStorefrontSite_productcatalog",

@@ -39,7 +39,7 @@
     "$values": [
       {
         "$type": "Sitecore.Commerce.Plugin.Customers.Cs.ProfilesSqlPolicy, Sitecore.Commerce.Plugin.Customers.Cs",
-        "Server": "WU2RRPRDSQL01",
+        "Server": ".",
         "Database": "CFSolutionStorefrontSite_profiles",
         "TrustedConnection": true,
         "UserName": "",
@@ -111,7 +111,7 @@
         "TrustedConnection": true,
         "UserName": "",
         "Password": "",
-        "Server": "WU2RRPRDSQL01",
+        "Server": ".",
         "Database": "SitecoreCommerce_SharedEnvironments",
         "AdditionalParameters": "",
         "ConnectTimeout": 120000,
@@ -122,7 +122,7 @@
         "TrustedConnection": true,
         "UserName": "",
         "Password": "",
-        "Server": "WU2RRPRDSQL01",
+        "Server": ".",
         "Database": "CFSolutionStorefrontSite_productcatalog",
         "AdditionalParameters": "",
         "ConnectTimeout": 120000
