@@ -362,6 +362,15 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
                             Array.Empty<object>());
 
                         context.Logger.LogInformation($"{(object)this.Name} - Vertex Failed! : {(object)ex.Message}", Array.Empty<object>());
+                        context.Abort(context.CommerceContext.AddMessage(
+                                context.GetPolicy<KnownResultCodes>().Error,
+                                "InvalidOrMissingPropertyValue",
+                                new object[] { "VertexTax" },
+                                "An error occured. Please contact admin.").ToString(),
+                            context
+                        );
+
+                        return Task.FromResult<Cart>(arg);
 
 
                     }
