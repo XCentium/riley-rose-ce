@@ -4,15 +4,11 @@ namespace Plugin.Xcentium.RileyRose.Tax.Components
 {
     public class VertexTax : Component
     {
-        /// <summary>
-        /// Unit Price tax based off
-        /// </summary>
-        public decimal UnitPrice { get; set; }
 
         /// <summary>
-        /// Quantity applied to the unit price
+        /// Subtotal before any discount
         /// </summary>
-        public int Quantity { get; set; }
+        public decimal AmountBeforeDiscount { get; set; }
 
         /// <summary>
         /// Line level discount
@@ -25,14 +21,9 @@ namespace Plugin.Xcentium.RileyRose.Tax.Components
         public decimal CartLevelDiscount { get; set; }
 
         /// <summary>
-        /// Total discount applied to the cart line
-        /// </summary>
-        public decimal TotalDiscount { get; set; }
-
-        /// <summary>
         /// Grand total for tax purposes
         /// </summary>
-        public decimal GrandPrice { get; set; }
+        public decimal AmountToTaxAfterDiscounts { get; set; }
 
 
         /// <summary>

@@ -33,7 +33,7 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
         /// <summary>
         /// 
         /// </summary>
-        public UpdateCalculateCartTaxBlock(IConfiguration configuration) : base((string) null)
+        public UpdateCalculateCartTaxBlock(IConfiguration configuration) : base((string)null)
         {
             _configuration = configuration;
         }
@@ -64,7 +64,7 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
         public override Task<Cart> Run(Cart arg, CommercePipelineExecutionContext context)
         {
             Condition.Requires<Cart>(arg)
-                .IsNotNull<Cart>($"{(object) this.Name}: {Constants.Tax.CartNullText}");
+                .IsNotNull<Cart>($"{(object)this.Name}: {Constants.Tax.CartNullText}");
             if (!arg.HasComponent<FulfillmentComponent>()) return Task.FromResult<Cart>(arg);
 
             if (arg.GetComponent<FulfillmentComponent>() is SplitFulfillmentComponent)
@@ -98,13 +98,11 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
 
             }
 
-            var language = context.CommerceContext.CurrentLanguage();
 
             var globalTaxPolicy = context.GetPolicy<GlobalTaxPolicy>();
-            var defaultTaxRate = globalTaxPolicy.DefaultCartTaxRate;
             var taxRate = 0.00M;
-            
-            var vertexConfig = _configuration.GetSection(Constants.Tax.VertexTax); 
+
+            var vertexConfig = _configuration.GetSection(Constants.Tax.VertexTax);
 
             var endpoint = vertexConfig[Constants.Tax.Endpoint];
 
@@ -115,6 +113,13 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
             var prodList = new List<string>();
 
             var useTaxrate = false;
+
+            var cartLeverDiscount = 0.00M;
+            var cartLevelDiscountAdjustment = arg.Adjustments.FirstOrDefault(x => x.AdjustmentType.ToLower() == "discount");
+            if (cartLevelDiscountAdjustment != null)
+            {
+                cartLeverDiscount = cartLevelDiscountAdjustment.Adjustment.Amount;
+            }
 
             if (arg.Lines.Any() && arg.HasComponent<PhysicalFulfillmentComponent>() && (useVertexEndpoint))
             {
@@ -150,10 +155,10 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
                     //Login
                     var login = new LoginType
                     {
-                        UserName = vertexConfig[Constants.Tax.UserName], 
+                        UserName = vertexConfig[Constants.Tax.UserName],
                         Password = vertexConfig[Constants.Tax.Password],
                     };
-                
+
 
                     //Customer
                     var customerCode =
@@ -162,7 +167,7 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
                             classCode = vertexConfig[Constants.Tax.ClassCode]
                         };
 
-                    var customer = new CustomerType {CustomerCode = customerCode};
+                    var customer = new CustomerType { CustomerCode = customerCode };
 
                     var buyerLocation = new LocationType
                     {
@@ -193,11 +198,11 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
 
                     var nItemCount = 0;
 
-                    
+
 
                     foreach (var cartLineComponent in arg.Lines)
                     {
-                        var whCategoryCode = cartLineComponent.ItemId; 
+                        var whCategoryCode = cartLineComponent.ItemId;
                         var cartProductComponent = cartLineComponent.GetComponent<CartProductComponent>();
                         var cartproduct = context.CommerceContext.Objects.OfType<CommerceServer.Core.Catalog.Product>().FirstOrDefault<CommerceServer.Core.Catalog.Product>((Func<CommerceServer.Core.Catalog.Product, bool>)(p => p.ProductId.Equals(cartProductComponent.Id, StringComparison.OrdinalIgnoreCase)));
                         if (cartproduct != null)
@@ -214,7 +219,7 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
                                     prodList.Add(cartLineComponent.ItemId);
 
                                     context.Logger.LogInformation(
-                                        $"{(object) this.Name} - Vertex ADDED Product with whCategoryCode: {(object) whCategoryCode}",
+                                        $"{(object)this.Name} - Vertex ADDED Product with whCategoryCode: {(object)whCategoryCode}",
                                         Array.Empty<object>());
 
                                 }
@@ -222,13 +227,22 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
                         }
 
 
-                        var product = new Product {productClass = whCategoryCode};
+                        var product = new Product { productClass = whCategoryCode };
 
                         //var measure = new MeasureType {Value = cartLineComponent.Quantity};
-                        var measure = new MeasureType {Value = 1.0M};
+                        var measure = new MeasureType { Value = 1.0M };
+
+                        var productAmountBeforeDiscounts = cartLineComponent.Totals.SubTotal.Amount;
+
+                        var productCartLevelDiscount = cartLeverDiscount *
+                                                       (productAmountBeforeDiscounts /
+                                                        arg.Totals.SubTotal.Amount);
+
+
+                        var amountToTax = cartLineComponent.Totals.GrandTotal.Amount + productCartLevelDiscount;
 
                         var prodAmount =
-                            new AmountType {Value = Convert.ToDecimal(cartLineComponent.Totals.GrandTotal.Amount)};
+                            new AmountType { Value = Convert.ToDecimal(amountToTax) };
 
                         var lineitem = new LineItemISIType
                         {
@@ -250,9 +264,9 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
                     }
 
 
-                    var shipProduct = new Product {productClass = "SH"};
+                    var shipProduct = new Product { productClass = "SH" };
 
-                    var shipMeasure = new MeasureType {Value = 1};
+                    var shipMeasure = new MeasureType { Value = 1 };
 
                     var shippingAmt = 0.0M;
 
@@ -270,7 +284,7 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
                         }
 
                     }
-                    var shipAmount = new AmountType {Value = Convert.ToDecimal(shippingAmt)};
+                    var shipAmount = new AmountType { Value = Convert.ToDecimal(shippingAmt) };
 
 
                     var shipLineitem = new LineItemISIType
@@ -325,7 +339,7 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
                                     if (cnt < prodList.Count)
                                     {
                                         context.Logger.LogInformation(
-                                            $"{(object) this.Name} - Vertex Line Adding Started For: {(object) prodList[cnt]}",
+                                            $"{(object)this.Name} - Vertex Line Adding Started For: {(object)prodList[cnt]}",
                                             Array.Empty<object>());
 
                                         var productId = prodList[cnt];
@@ -334,7 +348,7 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
                                         productTaxList.Add(kvp);
 
                                         context.Logger.LogInformation(
-                                            $"{(object) this.Name} - Vertex Line Adding Ended For: {(object) prodList[cnt]}",
+                                            $"{(object)this.Name} - Vertex Line Adding Ended For: {(object)prodList[cnt]}",
                                             Array.Empty<object>());
                                         cnt++;
                                     }
@@ -358,7 +372,7 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
                     catch (Exception ex)
                     {
                         context.Logger.LogDebug(
-                            $"{(object) this.Name} - Vertex Tax Error: {(object) ex.Message}",
+                            $"{(object)this.Name} - Vertex Tax Error: {(object)ex.Message}",
                             Array.Empty<object>());
 
                         context.Logger.LogInformation($"{(object)this.Name} - Vertex Failed! : {(object)ex.Message}", Array.Empty<object>());
@@ -366,12 +380,11 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
                                 context.GetPolicy<KnownResultCodes>().Error,
                                 "InvalidOrMissingPropertyValue",
                                 new object[] { "VertexTax" },
-                                "An error occured. Please contact admin.").ToString(),
+                                "Invalid or missing connection for server 'VertexTax'.").ToString(),
                             context
                         );
 
                         return Task.FromResult<Cart>(arg);
-
 
                     }
 
@@ -381,6 +394,23 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
 
                         foreach (var cartLineComponent in arg.Lines)
                         {
+                            var lineLevelDiscount = 0M;
+
+                            var lineLevelDiscountAdjustment = cartLineComponent.Adjustments.FirstOrDefault(x => x.AdjustmentType.ToLower() == "discount");
+                            if (lineLevelDiscountAdjustment != null)
+                            {
+                                lineLevelDiscount = lineLevelDiscountAdjustment.Adjustment.Amount;
+                            }
+
+                            var productAmountBeforeDiscounts = cartLineComponent.Totals.SubTotal.Amount;
+
+                            var productCartLevelDiscount = cartLeverDiscount *
+                                                           (productAmountBeforeDiscounts /
+                                                            arg.Totals.SubTotal.Amount);
+
+
+                            var amountToTax = cartLineComponent.Totals.GrandTotal.Amount + productCartLevelDiscount;
+
                             var kvp = productTaxList.FirstOrDefault(x => x.Key == cartLineComponent.ItemId);
                             if (!kvp.Equals(default(KeyValuePair<string, decimal>)))
                             {
@@ -393,11 +423,15 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
                                         continue;
                                     }
                                     vtax.Tax = kvp.Value;
+                                    cartLineComponent.GetComponent<VertexTax>().AmountBeforeDiscount = Math.Round(productAmountBeforeDiscounts,2);
+                                    cartLineComponent.GetComponent<VertexTax>().LineDiscount = Math.Round(Math.Abs(lineLevelDiscount),2);
+                                    cartLineComponent.GetComponent<VertexTax>().CartLevelDiscount = Math.Round(Math.Abs(productCartLevelDiscount),2);
+                                    cartLineComponent.GetComponent<VertexTax>().AmountToTaxAfterDiscounts = Math.Round(amountToTax,2);
                                     cartLineComponent.GetComponent<VertexTax>().Tax = kvp.Value;
                                 }
                                 else
                                 {
-                                    cartLineComponent.SetComponent(new VertexTax { Tax = kvp.Value });
+                                    cartLineComponent.SetComponent(new VertexTax { Tax = kvp.Value, AmountBeforeDiscount = productAmountBeforeDiscounts, LineDiscount = Math.Round(Math.Abs(lineLevelDiscount),2), CartLevelDiscount = Math.Round(Math.Abs(productCartLevelDiscount),2), AmountToTaxAfterDiscounts = Math.Round(amountToTax,2) });
                                 }
 
 
@@ -436,35 +470,35 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
 
             var currencyCode = context.CommerceContext.CurrentCurrency();
 
-            context.Logger.LogDebug($"{(object) this.Name} - Policy: {(object) globalTaxPolicy.TaxCalculationEnabled}",Array.Empty<object>());
+            context.Logger.LogDebug($"{(object)this.Name} - Policy: {(object)globalTaxPolicy.TaxCalculationEnabled}", Array.Empty<object>());
 
             var defaultCartTaxRate = globalTaxPolicy.DefaultCartTaxRate;
 
 
-            var num1 = arg.Adjustments.Where<AwardedAdjustment>((Func<AwardedAdjustment, bool>) (p => p.IsTaxable))
+            var num1 = arg.Adjustments.Where<AwardedAdjustment>((Func<AwardedAdjustment, bool>)(p => p.IsTaxable))
                 .Aggregate<AwardedAdjustment, decimal>(decimal.Zero,
                     (Func<decimal, AwardedAdjustment, decimal>)
                     ((current, adjustment) => current + adjustment.Adjustment.Amount));
 
-            context.Logger.LogDebug($"{(object) this.Name} - {Constants.Tax.TaxRate}: {(object) defaultCartTaxRate} Adjustments Total:{(object) num1}", Array.Empty<object>());
+            context.Logger.LogDebug($"{(object)this.Name} - {Constants.Tax.TaxRate}: {(object)defaultCartTaxRate} Adjustments Total:{(object)num1}", Array.Empty<object>());
 
-            var source = arg.Lines.Where<CartLineComponent>((Func<CartLineComponent, bool>) (line =>
+            var source = arg.Lines.Where<CartLineComponent>((Func<CartLineComponent, bool>)(line =>
             {
                 if (globalTaxPolicy.TaxExemptTagsEnabled && line.HasComponent<CartProductComponent>())
                     return line.GetComponent<CartProductComponent>().Tags
-                        .Select<Tag, string>((Func<Tag, string>) (t => t.Name))
+                        .Select<Tag, string>((Func<Tag, string>)(t => t.Name))
                         .Contains<string>(globalTaxPolicy.TaxExemptTag,
-                            (IEqualityComparer<string>) StringComparer.InvariantCultureIgnoreCase);
+                            (IEqualityComparer<string>)StringComparer.InvariantCultureIgnoreCase);
                 return false;
             }));
 
             var adjustmentLinesTotal = new decimal();
 
-            var action = (Action<CartLineComponent>) (l => adjustmentLinesTotal += l.Totals.SubTotal.Amount);
+            var action = (Action<CartLineComponent>)(l => adjustmentLinesTotal += l.Totals.SubTotal.Amount);
             source.ForEach<CartLineComponent>(action);
             var amount = (arg.Totals.SubTotal.Amount + num1 - adjustmentLinesTotal) * defaultCartTaxRate;
 
-            if (taxRate > decimal.Zero || useTaxrate) {amount = taxRate;}
+            if (taxRate > decimal.Zero || useTaxrate) { amount = taxRate; }
 
             var awardedAdjustment1 = new CartLevelAwardedAdjustment
             {
@@ -480,8 +514,8 @@ namespace Plugin.Xcentium.RileyRose.Tax.Pipelines.Blocks
             awardedAdjustment1.AwardingBlock = this.Name;
             awardedAdjustment1.IsTaxable = false;
             var awardedAdjustment2 = awardedAdjustment1;
-            arg.Adjustments.Add((AwardedAdjustment) awardedAdjustment2);
-            
+            arg.Adjustments.Add((AwardedAdjustment)awardedAdjustment2);
+
 
             return Task.FromResult<Cart>(arg);
         }
